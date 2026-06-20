@@ -1,0 +1,19 @@
+{
+  "name": "Logic Quest",
+  "short_name": "Logic Quest",
+  "description": "Plataforma gamificada para aprender lógica de programação.",
+  "start_url": "/Logic-quest/",
+  "scope": "/Logic-quest/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0c18",
+  "theme_color": "#0a0c18",
+  "icons": [
+    {
+      "src": "/Logic-quest/favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
