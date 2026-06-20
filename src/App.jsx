@@ -263,6 +263,19 @@ function formatPercent(value) {
   return Number.isFinite(value) ? Math.round(value) : 0;
 }
 
+function formatDateTime(value) {
+  if (!value) {
+    return "Ainda sem conclusão";
+  }
+
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
 function groupLessonsByModule(modules, query) {
   if (!query.trim()) {
     return modules;
@@ -406,6 +419,25 @@ export default function App() {
     module.lessons.every((lesson) => progress[lesson.id]?.completed),
   ).length;
   const remainingLessons = Math.max(lessons.length - completedCount, 0);
+  const completionEntries = lessons
+    .filter((lesson) => progress[lesson.id]?.completedAt)
+    .map((lesson) => ({
+      id: lesson.id,
+      title: lesson.title,
+      completedAt: progress[lesson.id]?.completedAt,
+    }))
+    .sort((left, right) => new Date(right.completedAt).getTime() - new Date(left.completedAt).getTime());
+  const lastCompletedEntry = completionEntries[0] ?? null;
+  const completedToday = completionEntries.filter((entry) => {
+    const completedAt = new Date(entry.completedAt);
+    const today = new Date();
+
+    return (
+      completedAt.getFullYear() === today.getFullYear() &&
+      completedAt.getMonth() === today.getMonth() &&
+      completedAt.getDate() === today.getDate()
+    );
+  }).length;
   const nextLockedLesson = lessons.find((lesson) => !isLessonUnlocked(lesson.id, lessons, progress));
   const lessonState = progress[activeLesson.id] ?? {
     readingDone: false,
@@ -544,6 +576,7 @@ export default function App() {
       attempts: (previous.attempts ?? 0) + 1,
       bestScore: Math.max(previous.bestScore ?? 0, score),
       completed: previous.completed || passed,
+      completedAt: passed ? new Date().toISOString() : previous.completedAt,
       xpEarned: Math.max(previous.xpEarned ?? 0, xpEarned),
     }));
 
@@ -1031,6 +1064,25 @@ export default function App() {
                 <div>
                   <span>Próxima travada</span>
                   <strong>{nextLockedLesson ? nextLockedLesson.title : "Graduação"}</strong>
+                </div>
+              </div>
+            </article>
+
+            <article className="inspector-card">
+              <span className="card-tag">Pulso da trilha</span>
+              <strong>{lastCompletedEntry ? lastCompletedEntry.title : "Primeira conquista pendente"}</strong>
+              <div className="mini-status-list">
+                <div>
+                  <span>Última conquista</span>
+                  <strong>{formatDateTime(lastCompletedEntry?.completedAt)}</strong>
+                </div>
+                <div>
+                  <span>Feitas hoje</span>
+                  <strong>{completedToday}</strong>
+                </div>
+                <div>
+                  <span>Restantes</span>
+                  <strong>{remainingLessons}</strong>
                 </div>
               </div>
             </article>
