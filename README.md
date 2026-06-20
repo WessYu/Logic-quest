@@ -1,23 +1,29 @@
-# Logica Quest
+# Logic Quest
 
-Plataforma de estudo de logica de programacao com visual inspirado em editor, trilha do zero ao profissional e licoes clicaveis com leitura, pratica guiada e checkpoint.
+Plataforma de estudo de lógica de programação com visual inspirado em editor, trilha do zero ao profissional e lições clicáveis com leitura, prática guiada e checkpoint.
+
+## Site publicado
+
+Quando o GitHub Pages terminar o deploy, o projeto ficará em:
+
+https://wessyu.github.io/Logic-quest/
 
 ## O que tem no app
 
-- 7 modulos com 28 licoes.
-- Navegacao por explorer, tabs e painel inspector.
-- Checkpoints corrigidos no proprio app com progresso salvo em `localStorage`.
-- Atalhos de teclado para navegar mais rapido pela trilha.
-- Painel de progresso com XP, rank, licoes restantes e ultima conquista.
+- 7 módulos com 28 lições.
+- Navegação por explorer, tabs e painel inspector.
+- Checkpoints corrigidos no próprio app com progresso salvo em `localStorage`.
+- Atalhos de teclado para navegar mais rápido pela trilha.
+- Painel de progresso com XP, rank, lições restantes e última conquista.
 
 ## Atalhos
 
 - `Ctrl/Cmd + K`: abre a busca do curso.
-- `Ctrl/Cmd + 1`: abre a visao geral da licao.
-- `Ctrl/Cmd + 2`: abre o conteudo da licao.
+- `Ctrl/Cmd + 1`: abre a visão geral da lição.
+- `Ctrl/Cmd + 2`: abre o conteúdo da lição.
 - `Ctrl/Cmd + 3`: abre o checkpoint.
 - `Ctrl/Cmd + Enter`: corrige o checkpoint quando a aba de quiz estiver aberta.
-- `Alt + Left/Right`: volta ou avanca entre licoes.
+- `Alt + Left/Right`: volta ou avança entre lições.
 
 ## Como rodar
 
@@ -26,11 +32,17 @@ npm install
 npm run dev
 ```
 
-## Build de producao
+## Build de produção
 
 ```bash
 npm run build
 ```
+
+## Deploy
+
+O deploy está configurado com GitHub Actions em `.github/workflows/deploy.yml`.
+
+Para publicar no GitHub Pages, use **Settings > Pages > Build and deployment > Source: GitHub Actions**.
 
 ## Stack
 
