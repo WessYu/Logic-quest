@@ -1,4 +1,5 @@
 <img width="1672" height="941" alt="LogicQuest" src="https://github.com/user-attachments/assets/6765b67e-170c-4720-9384-1c5a527a4998" />
+
 # Logic Quest
 
 Plataforma de estudo de lógica de programação com visual inspirado em editor, trilha do zero ao profissional e lições clicáveis com leitura, prática guiada e checkpoint.
