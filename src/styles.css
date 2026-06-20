@@ -1178,3 +1178,212 @@ select {
     padding: 14px;
   }
 }
+
+/* Commercial polish pass */
+:root {
+  --bg: #070b12;
+  --bg-soft: #0d1420;
+  --sidebar: rgba(15, 23, 37, 0.92);
+  --editor: rgba(10, 16, 28, 0.95);
+  --panel: rgba(17, 26, 41, 0.92);
+  --panel-strong: rgba(8, 14, 26, 0.96);
+  --line: rgba(107, 133, 184, 0.22);
+  --line-soft: rgba(140, 168, 217, 0.12);
+  --shadow: 0 32px 90px rgba(0, 0, 0, 0.42);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(94, 162, 255, 0.12), transparent 24%),
+    radial-gradient(circle at 78% 18%, rgba(77, 228, 193, 0.08), transparent 22%),
+    radial-gradient(circle at 50% 100%, rgba(246, 199, 96, 0.05), transparent 26%);
+}
+
+.window-shell {
+  background:
+    linear-gradient(180deg, rgba(13, 20, 31, 0.96), rgba(9, 14, 24, 0.98)),
+    linear-gradient(135deg, rgba(94, 162, 255, 0.04), transparent 30%);
+  border: 1px solid rgba(128, 156, 204, 0.2);
+  box-shadow:
+    var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.titlebar,
+.statusbar,
+.activity-bar,
+.explorer-panel,
+.inspector-panel,
+.editor-panel,
+.tabbar {
+  backdrop-filter: blur(18px);
+}
+
+.hero-card,
+.focus-card,
+.module-card,
+.inspector-card,
+.reading-card,
+.code-card,
+.practice-card,
+.insight-card,
+.checkpoint-panel,
+.question-card,
+.result-banner,
+.step-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before,
+.focus-card::before,
+.module-card::before,
+.reading-card::before,
+.code-card::before,
+.practice-card::before,
+.insight-card::before,
+.checkpoint-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 35%, transparent 70%, rgba(94, 162, 255, 0.05));
+}
+
+.hero-card {
+  background:
+    radial-gradient(circle at top right, rgba(94, 162, 255, 0.14), transparent 28%),
+    linear-gradient(135deg, rgba(10, 17, 29, 0.98), rgba(17, 25, 39, 0.95));
+}
+
+.hero-terminal,
+.focus-meter,
+.inspector-card.primary,
+.result-banner.success {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.module-card {
+  border-color: rgba(94, 162, 255, 0.12);
+}
+
+.module-card.accent-sunrise,
+.hero-terminal.accent-sunrise,
+.accent-sunrise .meter-fill {
+  --accent-glow-local: rgba(246, 199, 96, 0.24);
+}
+
+.module-card.accent-ocean,
+.hero-terminal.accent-ocean,
+.accent-ocean .meter-fill {
+  --accent-glow-local: rgba(94, 162, 255, 0.24);
+}
+
+.module-card.accent-forest,
+.hero-terminal.accent-forest,
+.accent-forest .meter-fill {
+  --accent-glow-local: rgba(78, 201, 176, 0.24);
+}
+
+.module-card.accent-ember,
+.hero-terminal.accent-ember,
+.accent-ember .meter-fill,
+.module-card.accent-violet,
+.hero-terminal.accent-violet,
+.accent-violet .meter-fill,
+.module-card.accent-cobalt,
+.hero-terminal.accent-cobalt,
+.accent-cobalt .meter-fill,
+.module-card.accent-coral,
+.hero-terminal.accent-coral,
+.accent-coral .meter-fill {
+  --accent-glow-local: rgba(255, 125, 149, 0.22);
+}
+
+.hero-terminal,
+.focus-meter,
+.metric-ribbon article,
+.source-item,
+.problem-card,
+.run-action,
+.search-result,
+.outline-item,
+.editor-chip,
+.option-button,
+.tab,
+.lesson-node,
+.activity-button {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+}
+
+.metric-ribbon article,
+.source-item,
+.problem-card,
+.run-action,
+.search-result,
+.outline-item,
+.editor-chip,
+.option-button,
+.lesson-node,
+.step-card,
+.primary-button,
+.secondary-button,
+.ghost-button,
+.activity-button,
+.tab {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.metric-ribbon article:hover,
+.source-item:hover,
+.problem-card:hover,
+.run-action:hover,
+.search-result:hover,
+.outline-item:hover,
+.editor-chip:hover,
+.option-button:hover,
+.lesson-node.unlocked:hover,
+.step-card:hover,
+.primary-button:hover,
+.secondary-button:hover,
+.ghost-button:hover,
+.activity-button:hover,
+.tab:hover {
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+}
+
+.editor-scroll {
+  background:
+    linear-gradient(180deg, rgba(8, 13, 23, 0.9), rgba(11, 18, 31, 0.92)),
+    linear-gradient(90deg, rgba(94, 162, 255, 0.03), transparent 20%);
+}
+
+.breadcrumbs {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(129, 154, 193, 0.12);
+}
+
+pre {
+  background: rgba(4, 9, 17, 0.72);
+  border: 1px solid rgba(122, 149, 195, 0.14);
+}
+
+.result-banner.success {
+  background: linear-gradient(135deg, rgba(17, 51, 41, 0.92), rgba(10, 28, 24, 0.94));
+}
+
+.result-banner.retry,
+.result-banner.warning {
+  background: linear-gradient(135deg, rgba(50, 26, 32, 0.92), rgba(26, 14, 19, 0.94));
+}

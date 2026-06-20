@@ -1,0 +1,13 @@
+﻿{
+  "expo": {
+    "name": "Logic Quest",
+    "slug": "logic-quest-ios",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.logicquest.app"
+    }
+  }
+}
