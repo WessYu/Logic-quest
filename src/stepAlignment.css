@@ -1,0 +1,42 @@
+.step-runway {
+  align-items: stretch;
+}
+
+.step-card {
+  min-height: 240px;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  align-items: start;
+  align-content: start;
+}
+
+.step-card-index {
+  align-self: start;
+  justify-self: start;
+  height: auto;
+  min-height: 0;
+  line-height: 1;
+}
+
+.step-card h3 {
+  align-self: start;
+  margin-top: 4px;
+}
+
+.step-card p {
+  align-self: start;
+  margin: 0;
+  max-width: 34ch;
+  line-height: 1.35;
+}
+
+.step-card small {
+  align-self: end;
+  justify-self: start;
+  margin-top: 20px;
+}
+
+@media (max-width: 1080px) {
+  .step-card {
+    min-height: 190px;
+  }
+}
