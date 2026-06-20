@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { courseModules } from "./courseData";
 
 const storageKey = "logic-quest-progress-v4";
@@ -189,7 +189,6 @@ function normalizeText(value) {
 
   return result;
 }
-
 function normalizeNode(node) {
   if (typeof node === "string") {
     return normalizeText(node);
@@ -358,6 +357,7 @@ export default function App() {
   const [inspectorView, setInspectorView] = useState("outline");
   const [searchTerm, setSearchTerm] = useState("");
   const [collapsedModules, setCollapsedModules] = useState({});
+  const searchInputRef = useRef(null);
   const [sectionOpen, setSectionOpen] = useState({
     openEditors: true,
     modules: true,
@@ -405,6 +405,7 @@ export default function App() {
   const completedModules = normalizedModules.filter((module) =>
     module.lessons.every((lesson) => progress[lesson.id]?.completed),
   ).length;
+  const remainingLessons = Math.max(lessons.length - completedCount, 0);
   const nextLockedLesson = lessons.find((lesson) => !isLessonUnlocked(lesson.id, lessons, progress));
   const lessonState = progress[activeLesson.id] ?? {
     readingDone: false,
@@ -471,6 +472,43 @@ export default function App() {
       ...current,
       [questionId]: optionIndex,
     }));
+  }
+
+  function clearCurrentAnswers() {
+    setSelectedAnswers({});
+    setSubmission(null);
+  }
+
+  function focusSearch() {
+    setActiveSidebar("search");
+    window.requestAnimationFrame(() => {
+      searchInputRef.current?.focus();
+    });
+  }
+
+  function resumeNextPendingLesson() {
+    const target = lessons.find((lesson) => !progress[lesson.id]?.completed) ?? lessons[0];
+    if (target) {
+      openLesson(target.id);
+    }
+  }
+
+  function resetAllProgress() {
+    const shouldReset = window.confirm(
+      "Tem certeza que deseja apagar todo o progresso salvo desta trilha?",
+    );
+
+    if (!shouldReset) {
+      return;
+    }
+
+    setProgress({});
+    setSelectedAnswers({});
+    setSubmission(null);
+    setCelebrationSeed(0);
+    setActiveLessonId(lessons[0]?.id ?? activeLessonId);
+    setActiveTab("overview");
+    setInspectorView("outline");
   }
 
   function submitLesson() {
@@ -570,6 +608,63 @@ export default function App() {
       document.getElementById(`${section}-section`)?.scrollIntoView({ behavior: "smooth" });
     }, 0);
   }
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      const target = event.target;
+      const isEditable =
+        target instanceof HTMLElement &&
+        (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
+      const commandKey = event.ctrlKey || event.metaKey;
+
+      if (commandKey && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        focusSearch();
+        return;
+      }
+
+      if (commandKey && event.key === "1") {
+        event.preventDefault();
+        setActiveTab("overview");
+        return;
+      }
+
+      if (commandKey && event.key === "2") {
+        event.preventDefault();
+        setActiveTab("lesson");
+        return;
+      }
+
+      if (commandKey && event.key === "3") {
+        event.preventDefault();
+        setActiveTab("checkpoint");
+        return;
+      }
+
+      if (commandKey && event.key === "Enter" && activeTab === "checkpoint") {
+        event.preventDefault();
+        submitLesson();
+        return;
+      }
+
+      if (isEditable) {
+        return;
+      }
+
+      if (event.altKey && event.key === "ArrowRight" && nextLesson) {
+        event.preventDefault();
+        jumpToNextLesson();
+      }
+
+      if (event.altKey && event.key === "ArrowLeft" && previousLesson) {
+        event.preventDefault();
+        jumpToPreviousLesson();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeTab, nextLesson, previousLesson, progress, lessons]);
 
   function renderExplorer() {
     return (
@@ -711,6 +806,7 @@ export default function App() {
         <label className="search-field">
           <span className="panel-caption">QUERY</span>
           <input
+            ref={searchInputRef}
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
             placeholder={ui.searchPlaceholder}
@@ -746,7 +842,7 @@ export default function App() {
         <h2>Estado do estudo</h2>
         <p>
           Em vez de arquivos alterados, aqui você acompanha o que já foi consolidado e o que
-          ainda precisa revisão antes de fechar a próxima lição.
+          ainda precisa de revisão antes de fechar a próxima lição.
         </p>
 
         <div className="source-list">
@@ -766,6 +862,22 @@ export default function App() {
             <strong>Checkpoint aprovados</strong>
             <span>{completedCount}/{lessons.length}</span>
           </div>
+          <div className="source-item">
+            <strong>Lições restantes</strong>
+            <span>{remainingLessons}</span>
+          </div>
+        </div>
+
+        <div className="run-actions">
+          <button type="button" className="run-action" onClick={resumeNextPendingLesson}>
+            Retomar próxima lição pendente
+          </button>
+          <button type="button" className="run-action" onClick={clearCurrentAnswers}>
+            Limpar respostas da rodada
+          </button>
+          <button type="button" className="run-action" onClick={resetAllProgress}>
+            Resetar todo o progresso
+          </button>
         </div>
       </>
     );
@@ -797,6 +909,28 @@ export default function App() {
           <button type="button" className="run-action" onClick={() => jumpToSection("checkpoint")}>
             Ir para checkpoint
           </button>
+          <button type="button" className="run-action" onClick={focusSearch}>
+            Abrir busca rápida
+          </button>
+        </div>
+
+        <div className="source-list">
+          <div className="source-item">
+            <strong>Ctrl/Cmd + K</strong>
+            <span>Foca a busca do curso</span>
+          </div>
+          <div className="source-item">
+            <strong>Ctrl/Cmd + 1, 2, 3</strong>
+            <span>Alterna entre overview, lesson e checkpoint</span>
+          </div>
+          <div className="source-item">
+            <strong>Alt + ← / →</strong>
+            <span>Navega para a lição anterior ou próxima</span>
+          </div>
+          <div className="source-item">
+            <strong>Ctrl/Cmd + Enter</strong>
+            <span>Corrige o checkpoint quando a aba de quiz estiver aberta</span>
+          </div>
         </div>
       </>
     );
@@ -1275,7 +1409,7 @@ export default function App() {
             <span className="traffic green" />
           </div>
           <div className="titlebar-center">
-            {ui.workspace} — {activeLesson.title}
+            {ui.workspace} - {activeLesson.title}
           </div>
           <div className="titlebar-right">
             <span>{getRank(totalXp)}</span>
@@ -1385,3 +1519,4 @@ export default function App() {
     </div>
   );
 }
+
