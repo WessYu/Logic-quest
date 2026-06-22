@@ -1,0 +1,93 @@
+@media (max-width: 760px) {
+  html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+  body { background: #070b12; }
+  .app-shell { min-height: 100svh; padding: 0 !important; }
+  .ambient-grid, .ambient-glow { display: none; }
+  .window-shell { min-height: 100svh !important; border: 0; border-radius: 0; box-shadow: none; }
+
+  .titlebar {
+    position: sticky; top: 0; z-index: 30;
+    min-height: 54px; padding: max(10px, env(safe-area-inset-top)) 12px 10px;
+    background: rgba(7, 11, 18, .94); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(132,154,196,.16);
+  }
+  .titlebar-left { display: none; }
+  .titlebar-center { text-align: left; font-size: .7rem; }
+  .titlebar-center::before { content: "Logic Quest"; display: block; color: #e8efff; font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 700; }
+  .titlebar-right span:first-child { display: none; }
+  .titlebar-right span:last-child { padding: 6px 9px; border-radius: 999px; background: rgba(77,228,193,.08); color: #4de4c1; font-size: .72rem; }
+
+  .ide-shell { display: grid !important; grid-template-columns: 1fr !important; grid-template-rows: auto auto auto 1fr auto !important; }
+  .activity-bar {
+    position: sticky; top: 54px; z-index: 25; display: flex !important;
+    width: 100% !important; gap: 8px !important; padding: 9px 10px !important;
+    overflow-x: auto; border-right: 0 !important; border-bottom: 1px solid rgba(132,154,196,.16) !important;
+    background: rgba(8,13,24,.94) !important; backdrop-filter: blur(14px); scrollbar-width: none;
+  }
+  .activity-bar::-webkit-scrollbar, .tabbar::-webkit-scrollbar, .statusbar::-webkit-scrollbar { display: none; }
+  .activity-button { flex: 1 0 68px; width: auto !important; height: 42px !important; border-radius: 14px !important; }
+
+  .explorer-panel { padding: 12px !important; border: 0 !important; background: #0c121d; }
+  .inspector-panel { display: none; }
+  .explorer-panel > p, .explorer-panel > .workspace-badge { display: none; }
+  .explorer-panel h2 { margin: 4px 0 8px; font-size: 1.05rem; }
+  .explorer-section { margin-top: 10px; }
+  .explorer-list, .editor-chip-list, .search-results, .source-list, .run-actions { gap: 8px; }
+  .module-card { padding: 11px; border-radius: 14px; }
+  .module-card p, .module-level { display: none; }
+  .module-heading h3 { margin-top: 3px; font-size: .92rem; }
+  .lesson-tree { gap: 6px; margin-top: 10px; }
+  .lesson-node { min-height: 46px; grid-template-columns: 24px 1fr; padding: 8px 10px; border-radius: 12px; }
+  .node-copy strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .88rem; }
+
+  .editor-panel { grid-template-rows: auto 1fr !important; min-height: auto; }
+  .tabbar {
+    position: sticky; top: 105px; z-index: 22; gap: 6px; padding: 8px 10px;
+    overflow-x: auto; background: rgba(10,15,24,.96); backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(132,154,196,.16); scrollbar-width: none;
+  }
+  .tab { flex: 0 0 auto; max-width: 170px; padding: 9px 11px; border: 1px solid rgba(132,154,196,.14); border-radius: 999px; background: rgba(255,255,255,.025); font-size: .68rem; }
+  .tab.active { border-color: rgba(94,162,255,.42); background: rgba(94,162,255,.11); }
+  .editor-scroll { gap: 10px !important; padding: 12px !important; overflow: visible; }
+  .breadcrumbs, .hero-terminal { display: none; }
+
+  .hero-card, .focus-card, .editor-columns, .editor-columns.secondary, .step-runway, .metric-ribbon, .terminal-stats, .options-grid, .quiz-header { grid-template-columns: 1fr !important; }
+  .hero-card { padding: 16px !important; border-radius: 18px; background: radial-gradient(circle at 100% 0%, rgba(77,228,193,.09), transparent 32%), #111827; }
+  .hero-copy h1 { max-width: 100%; margin: 6px 0; font-size: clamp(1.55rem, 9vw, 2.2rem) !important; line-height: .98; }
+  .hero-copy p, .focus-copy p, .reading-card p, .practice-card p, .explanation { font-size: .94rem; line-height: 1.45 !important; }
+  .metric-ribbon { grid-template-columns: repeat(2, 1fr) !important; margin-top: 12px; }
+  .metric-ribbon article, .terminal-stats div, .mini-status-list div { padding: 10px; }
+  .focus-card { padding: 14px !important; align-items: start !important; }
+  .focus-copy h2, .checkpoint-panel h2 { font-size: 1.2rem !important; }
+  .focus-meter { min-width: 0; width: 100%; }
+  .step-card { min-height: auto !important; padding: 13px !important; border-radius: 16px; }
+  .step-card p { font-size: .9rem; line-height: 1.42; }
+  .reading-card, .code-card, .practice-card, .insight-card, .checkpoint-panel, .question-card { padding: 14px !important; border-radius: 16px; }
+  .card-header, .question-meta, .quiz-header { display: grid !important; gap: 7px; margin-bottom: 10px; }
+  .document-line, .code-block { grid-template-columns: 26px 1fr; gap: 8px; }
+  .line-number { font-size: .68rem; }
+  .concept-pills { gap: 6px; margin-top: 10px; }
+  .concept-pills span { padding: 6px 9px; font-size: .78rem; }
+  .code-card pre { max-height: 280px; overflow: auto; font-size: .78rem !important; line-height: 1.45 !important; }
+  .option-button { min-height: 54px; padding: 11px 12px; border-radius: 13px; }
+  .quiz-actions { display: grid !important; grid-template-columns: 1fr; }
+  .primary-button, .secondary-button, .ghost-button { width: 100%; min-height: 46px; justify-content: center; }
+
+  .statusbar { position: sticky; bottom: 0; z-index: 24; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); overflow-x: auto; background: rgba(8,13,24,.96); backdrop-filter: blur(14px); font-size: .68rem; scrollbar-width: none; }
+  .statusbar-left, .statusbar-right { gap: 8px; white-space: nowrap; }
+  .statusbar-right span:nth-child(1), .statusbar-right span:nth-child(2), .statusbar-right span:nth-child(4) { display: none; }
+
+  .account-widget { top: auto !important; right: 10px !important; left: 10px; bottom: calc(62px + env(safe-area-inset-bottom)) !important; }
+  .account-trigger { max-width: 100%; margin-left: auto; }
+  .account-panel { width: 100% !important; max-height: calc(100svh - 140px); overflow: auto; }
+  .student-profile-trigger { left: 10px; right: auto !important; bottom: calc(62px + env(safe-area-inset-bottom)) !important; max-width: 176px; }
+  .student-profile-trigger strong { font-size: .82rem; }
+  .pwa-install-card { bottom: calc(118px + env(safe-area-inset-bottom)) !important; }
+}
+
+@media (max-width: 420px) {
+  .titlebar-center { max-width: 210px; }
+  .activity-button { flex-basis: 66px; }
+  .tab { max-width: 155px; }
+  .hero-copy h1 { font-size: 1.68rem !important; }
+}
