@@ -6,6 +6,7 @@ import AccountManager from "./AccountManager";
 import PwaInstallPrompt from "./PwaInstallPrompt";
 import StudentProfile from "./StudentProfile";
 import AboutLogicQuest from "./AboutLogicQuest";
+import SplashScreen from "./SplashScreen";
 import RegisterServiceWorker from "./RegisterServiceWorker";
 import "./styles.css";
 import "./stepAlignment.css";
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <PwaInstallPrompt />
     <StudentProfile />
     <AboutLogicQuest />
+    <SplashScreen />
     <RegisterServiceWorker />
   </React.StrictMode>,
 );
