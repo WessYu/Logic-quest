@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import GitHubPresence from "./GitHubPresence";
 import AccountManager from "./AccountManager";
+import PwaInstallPrompt from "./PwaInstallPrompt";
 import "./styles.css";
 import "./stepAlignment.css";
 import "./compactLayout.css";
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <App />
     <GitHubPresence />
     <AccountManager />
+    <PwaInstallPrompt />
   </React.StrictMode>,
 );
 
