@@ -1,0 +1,131 @@
+.admin-dashboard {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-dashboard-trigger {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid rgba(77, 228, 193, 0.34);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(77, 228, 193, 0.16), rgba(94, 162, 255, 0.12));
+  color: #dffdf7;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-dashboard-panel {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(77, 228, 193, 0.2);
+  border-radius: 16px;
+  background: rgba(3, 8, 15, 0.52);
+}
+
+.admin-dashboard-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-dashboard-head strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.admin-dashboard-head button {
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid rgba(107, 133, 184, 0.26);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e9f1ff;
+  cursor: pointer;
+}
+
+.admin-dashboard-message {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid rgba(246, 199, 96, 0.2);
+  border-radius: 12px;
+  background: rgba(246, 199, 96, 0.08);
+  color: #f7d68c;
+  line-height: 1.45;
+}
+
+.admin-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.admin-metrics-grid article,
+.admin-progress-card,
+.admin-recent-card {
+  border: 1px solid rgba(132, 154, 196, 0.14);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-metrics-grid article {
+  padding: 10px;
+}
+
+.admin-metrics-grid span,
+.admin-progress-card span {
+  display: block;
+  color: #9fb0d2;
+  font-size: 0.74rem;
+}
+
+.admin-metrics-grid strong,
+.admin-progress-card strong {
+  display: block;
+  margin-top: 5px;
+  color: #4de4c1;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.admin-progress-card,
+.admin-recent-card {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+}
+
+.admin-meter {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(107, 133, 184, 0.16);
+}
+
+.admin-meter i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #4de4c1, #5ea2ff);
+}
+
+.admin-recent-item {
+  display: grid;
+  gap: 3px;
+  padding: 9px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-recent-item strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-recent-item span,
+.admin-recent-item small {
+  color: #9fb0d2;
+  font-size: 0.76rem;
+}
