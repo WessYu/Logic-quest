@@ -7,19 +7,20 @@
 
   .titlebar {
     position: sticky; top: 0; z-index: 30;
-    min-height: 54px; padding: max(10px, env(safe-area-inset-top)) 12px 10px;
+    min-height: 58px; padding: max(10px, env(safe-area-inset-top)) 10px 10px;
     background: rgba(7, 11, 18, .94); backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(132,154,196,.16);
   }
   .titlebar-left { display: none; }
-  .titlebar-center { text-align: left; font-size: .7rem; }
+  .titlebar-center { text-align: left; font-size: .68rem; min-width: 0; }
   .titlebar-center::before { content: "Logic Quest"; display: block; color: #e8efff; font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 700; }
-  .titlebar-right span:first-child { display: none; }
-  .titlebar-right span:last-child { padding: 6px 9px; border-radius: 999px; background: rgba(77,228,193,.08); color: #4de4c1; font-size: .72rem; }
+  .titlebar-right { gap: 6px; min-width: max-content; }
+  .titlebar-right > span:not(.playground-titlebar-slot) { display: none; }
+  .playground-top-button { height: 30px !important; padding: 0 10px !important; font-size: .68rem !important; }
 
   .ide-shell { display: grid !important; grid-template-columns: 1fr !important; grid-template-rows: auto auto auto 1fr auto !important; }
   .activity-bar {
-    position: sticky; top: 54px; z-index: 25; display: flex !important;
+    position: sticky; top: 58px; z-index: 25; display: flex !important;
     width: 100% !important; gap: 8px !important; padding: 9px 10px !important;
     overflow-x: auto; border-right: 0 !important; border-bottom: 1px solid rgba(132,154,196,.16) !important;
     background: rgba(8,13,24,.94) !important; backdrop-filter: blur(14px); scrollbar-width: none;
@@ -42,13 +43,13 @@
 
   .editor-panel { grid-template-rows: auto 1fr !important; min-height: auto; }
   .tabbar {
-    position: sticky; top: 105px; z-index: 22; gap: 6px; padding: 8px 10px;
+    position: sticky; top: 109px; z-index: 22; gap: 6px; padding: 8px 10px;
     overflow-x: auto; background: rgba(10,15,24,.96); backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(132,154,196,.16); scrollbar-width: none;
   }
   .tab { flex: 0 0 auto; max-width: 170px; padding: 9px 11px; border: 1px solid rgba(132,154,196,.14); border-radius: 999px; background: rgba(255,255,255,.025); font-size: .68rem; }
   .tab.active { border-color: rgba(94,162,255,.42); background: rgba(94,162,255,.11); }
-  .editor-scroll { gap: 10px !important; padding: 12px !important; overflow: visible; }
+  .editor-scroll { gap: 10px !important; padding: 12px 12px 92px !important; overflow: visible; }
   .breadcrumbs, .hero-terminal { display: none; }
 
   .hero-card, .focus-card, .editor-columns, .editor-columns.secondary, .step-runway, .metric-ribbon, .terminal-stats, .options-grid, .quiz-header { grid-template-columns: 1fr !important; }
@@ -77,17 +78,60 @@
   .statusbar-left, .statusbar-right { gap: 8px; white-space: nowrap; }
   .statusbar-right span:nth-child(1), .statusbar-right span:nth-child(2), .statusbar-right span:nth-child(4) { display: none; }
 
-  .account-widget { top: auto !important; right: 10px !important; left: 10px; bottom: calc(62px + env(safe-area-inset-bottom)) !important; }
+  .account-widget,
+  .account-widget[style] {
+    top: auto !important;
+    right: 10px !important;
+    left: auto !important;
+    bottom: calc(74px + env(safe-area-inset-bottom)) !important;
+    width: min(360px, calc(100vw - 20px));
+  }
   .account-trigger { max-width: 100%; margin-left: auto; }
-  .account-panel { width: 100% !important; max-height: calc(100svh - 140px); overflow: auto; }
-  .student-profile-trigger { left: 10px; right: auto !important; bottom: calc(62px + env(safe-area-inset-bottom)) !important; max-width: 176px; }
-  .student-profile-trigger strong { font-size: .82rem; }
-  .pwa-install-card { bottom: calc(118px + env(safe-area-inset-bottom)) !important; }
+  .account-panel { width: 100% !important; max-height: calc(100svh - 150px); overflow: auto; }
+  .account-actions { grid-template-columns: 1fr !important; }
+
+  .student-profile-trigger {
+    left: 10px;
+    right: auto !important;
+    bottom: calc(74px + env(safe-area-inset-bottom)) !important;
+    max-width: 168px;
+    padding-right: 10px;
+  }
+  .student-profile-trigger strong { font-size: .78rem; }
+  .student-profile-overlay, .about-modal-overlay, .playground-overlay, .product-modal-overlay { padding: 10px !important; align-items: start; overflow: auto; }
+  .student-profile-card, .about-modal-card, .playground-window, .product-landing-card, .onboarding-card, .achievement-card, .certificate-card { max-height: calc(100svh - 20px) !important; border-radius: 18px !important; }
+  .student-profile-hero, .student-dashboard-grid, .student-metrics-row, .about-grid, .landing-features, .achievement-grid { grid-template-columns: 1fr !important; }
+  .student-profile-hero { padding: 14px !important; }
+  .student-avatar-wrap, .student-avatar-wrap > img, .student-avatar-wrap > span { width: 72px !important; height: 72px !important; border-radius: 18px !important; }
+  .student-score-card { min-width: 0 !important; text-align: left !important; }
+
+  .playground-layout { grid-template-columns: 1fr !important; min-height: auto !important; max-height: calc(100svh - 86px); overflow: auto; }
+  .playground-sidebar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 10px !important; border-right: 0 !important; border-bottom: 1px solid rgba(107,133,184,.16); }
+  .playground-sidebar .panel-caption { grid-column: 1 / -1; }
+  .playground-sidebar button { margin-top: 0 !important; padding: 9px !important; }
+  .playground-editor { min-height: 320px !important; }
+  .playground-editor textarea { min-height: 320px !important; font-size: .8rem !important; }
+  .playground-lines { font-size: .78rem !important; }
+  .playground-terminal { border-left: 0 !important; border-top: 1px solid rgba(107,133,184,.16); min-height: 220px; }
+
+  .product-floating-actions {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    justify-content: center;
+    z-index: 70;
+  }
+  .product-floating-actions button { flex: 1; min-width: 0; padding: 0 6px; font-size: .72rem; }
+  .product-landing-card h1 { font-size: clamp(2rem, 12vw, 3rem) !important; }
+  .certificate-card { min-height: 360px !important; }
+  .pwa-install-card { bottom: calc(130px + env(safe-area-inset-bottom)) !important; left: 10px !important; right: 10px !important; width: auto !important; }
 }
 
 @media (max-width: 420px) {
-  .titlebar-center { max-width: 210px; }
+  .titlebar-center { max-width: 180px; }
   .activity-button { flex-basis: 66px; }
-  .tab { max-width: 155px; }
-  .hero-copy h1 { font-size: 1.68rem !important; }
+  .tab { max-width: 150px; }
+  .hero-copy h1 { font-size: 1.62rem !important; }
+  .playground-sidebar { grid-template-columns: 1fr !important; }
+  .product-floating-actions { gap: 5px; padding: 6px; }
 }
