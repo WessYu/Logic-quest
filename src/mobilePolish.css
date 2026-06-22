@@ -1,35 +1,45 @@
 @media (max-width: 760px) {
-  html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+  html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
   body { background: #070b12; }
   .app-shell { min-height: 100svh; padding: 0 !important; }
   .ambient-grid, .ambient-glow { display: none; }
   .window-shell { min-height: 100svh !important; border: 0; border-radius: 0; box-shadow: none; }
 
   .titlebar {
-    position: sticky; top: 0; z-index: 30;
+    position: sticky; top: 0; z-index: 45;
     min-height: 58px; padding: max(10px, env(safe-area-inset-top)) 10px 10px;
-    background: rgba(7, 11, 18, .94); backdrop-filter: blur(16px);
+    background: rgba(7, 11, 18, .96); backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(132,154,196,.16);
   }
   .titlebar-left { display: none; }
   .titlebar-center { text-align: left; font-size: .68rem; min-width: 0; }
-  .titlebar-center::before { content: "Logic Quest"; display: block; color: #e8efff; font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 700; }
+  .titlebar-center::before { content: "Logic Quest"; display: block; color: #e8efff; font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 800; }
   .titlebar-right { gap: 6px; min-width: max-content; }
   .titlebar-right > span:not(.playground-titlebar-slot) { display: none; }
-  .playground-top-button { height: 30px !important; padding: 0 10px !important; font-size: .68rem !important; }
+  .playground-top-button { display: none !important; }
 
-  .ide-shell { display: grid !important; grid-template-columns: 1fr !important; grid-template-rows: auto auto auto 1fr auto !important; }
-  .activity-bar {
-    position: sticky; top: 58px; z-index: 25; display: flex !important;
-    width: 100% !important; gap: 8px !important; padding: 9px 10px !important;
-    overflow-x: auto; border-right: 0 !important; border-bottom: 1px solid rgba(132,154,196,.16) !important;
-    background: rgba(8,13,24,.94) !important; backdrop-filter: blur(14px); scrollbar-width: none;
+  .ide-shell { display: block !important; }
+  .activity-bar { display: none !important; }
+  .inspector-panel { display: none !important; }
+
+  .explorer-panel {
+    padding: 14px 12px !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(132,154,196,.16) !important;
+    background: #0c121d;
   }
-  .activity-bar::-webkit-scrollbar, .tabbar::-webkit-scrollbar, .statusbar::-webkit-scrollbar { display: none; }
-  .activity-button { flex: 1 0 68px; width: auto !important; height: 42px !important; border-radius: 14px !important; }
-
-  .explorer-panel { padding: 12px !important; border: 0 !important; background: #0c121d; }
-  .inspector-panel { display: none; }
+  .explorer-panel::before {
+    content: "Escolha uma lição e depois toque em Estudar";
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 11px;
+    border: 1px solid rgba(77,228,193,.18);
+    border-radius: 14px;
+    background: rgba(77,228,193,.055);
+    color: #bff8ed;
+    font-size: .82rem;
+    line-height: 1.35;
+  }
   .explorer-panel > p, .explorer-panel > .workspace-badge { display: none; }
   .explorer-panel h2 { margin: 4px 0 8px; font-size: 1.05rem; }
   .explorer-section { margin-top: 10px; }
@@ -38,15 +48,16 @@
   .module-card p, .module-level { display: none; }
   .module-heading h3 { margin-top: 3px; font-size: .92rem; }
   .lesson-tree { gap: 6px; margin-top: 10px; }
-  .lesson-node { min-height: 46px; grid-template-columns: 24px 1fr; padding: 8px 10px; border-radius: 12px; }
-  .node-copy strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .88rem; }
+  .lesson-node { min-height: 48px; grid-template-columns: 24px 1fr; padding: 9px 10px; border-radius: 13px; }
+  .node-copy strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .9rem; }
 
-  .editor-panel { grid-template-rows: auto 1fr !important; min-height: auto; }
+  .editor-panel { display: block !important; min-height: auto; }
   .tabbar {
-    position: sticky; top: 109px; z-index: 22; gap: 6px; padding: 8px 10px;
-    overflow-x: auto; background: rgba(10,15,24,.96); backdrop-filter: blur(14px);
+    position: sticky; top: 58px; z-index: 35; gap: 6px; padding: 8px 10px;
+    overflow-x: auto; background: rgba(10,15,24,.97); backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(132,154,196,.16); scrollbar-width: none;
   }
+  .activity-bar::-webkit-scrollbar, .tabbar::-webkit-scrollbar, .statusbar::-webkit-scrollbar { display: none; }
   .tab { flex: 0 0 auto; max-width: 170px; padding: 9px 11px; border: 1px solid rgba(132,154,196,.14); border-radius: 999px; background: rgba(255,255,255,.025); font-size: .68rem; }
   .tab.active { border-color: rgba(94,162,255,.42); background: rgba(94,162,255,.11); }
   .editor-scroll { gap: 10px !important; padding: 12px 12px 92px !important; overflow: visible; }
@@ -74,30 +85,24 @@
   .quiz-actions { display: grid !important; grid-template-columns: 1fr; }
   .primary-button, .secondary-button, .ghost-button { width: 100%; min-height: 46px; justify-content: center; }
 
-  .statusbar { position: sticky; bottom: 0; z-index: 24; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); overflow-x: auto; background: rgba(8,13,24,.96); backdrop-filter: blur(14px); font-size: .68rem; scrollbar-width: none; }
-  .statusbar-left, .statusbar-right { gap: 8px; white-space: nowrap; }
-  .statusbar-right span:nth-child(1), .statusbar-right span:nth-child(2), .statusbar-right span:nth-child(4) { display: none; }
+  .statusbar { display: none !important; }
 
   .account-widget,
   .account-widget[style] {
     top: auto !important;
     right: 10px !important;
-    left: auto !important;
-    bottom: calc(74px + env(safe-area-inset-bottom)) !important;
-    width: min(360px, calc(100vw - 20px));
+    left: 10px !important;
+    bottom: calc(68px + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    z-index: 118;
   }
   .account-trigger { max-width: 100%; margin-left: auto; }
-  .account-panel { width: 100% !important; max-height: calc(100svh - 150px); overflow: auto; }
+  .account-panel { width: 100% !important; max-height: calc(100svh - 140px); overflow: auto; }
   .account-actions { grid-template-columns: 1fr !important; }
 
   .student-profile-trigger {
-    left: 10px;
-    right: auto !important;
-    bottom: calc(74px + env(safe-area-inset-bottom)) !important;
-    max-width: 168px;
-    padding-right: 10px;
+    display: none !important;
   }
-  .student-profile-trigger strong { font-size: .78rem; }
   .student-profile-overlay, .about-modal-overlay, .playground-overlay, .product-modal-overlay { padding: 10px !important; align-items: start; overflow: auto; }
   .student-profile-card, .about-modal-card, .playground-window, .product-landing-card, .onboarding-card, .achievement-card, .certificate-card { max-height: calc(100svh - 20px) !important; border-radius: 18px !important; }
   .student-profile-hero, .student-dashboard-grid, .student-metrics-row, .about-grid, .landing-features, .achievement-grid { grid-template-columns: 1fr !important; }
@@ -114,24 +119,13 @@
   .playground-lines { font-size: .78rem !important; }
   .playground-terminal { border-left: 0 !important; border-top: 1px solid rgba(107,133,184,.16); min-height: 220px; }
 
-  .product-floating-actions {
-    left: 10px !important;
-    right: 10px !important;
-    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
-    justify-content: center;
-    z-index: 70;
-  }
-  .product-floating-actions button { flex: 1; min-width: 0; padding: 0 6px; font-size: .72rem; }
-  .product-landing-card h1 { font-size: clamp(2rem, 12vw, 3rem) !important; }
-  .certificate-card { min-height: 360px !important; }
-  .pwa-install-card { bottom: calc(130px + env(safe-area-inset-bottom)) !important; left: 10px !important; right: 10px !important; width: auto !important; }
+  .product-floating-actions { display: none !important; }
+  .pwa-install-card { bottom: calc(126px + env(safe-area-inset-bottom)) !important; left: 10px !important; right: 10px !important; width: auto !important; }
 }
 
 @media (max-width: 420px) {
   .titlebar-center { max-width: 180px; }
-  .activity-button { flex-basis: 66px; }
   .tab { max-width: 150px; }
   .hero-copy h1 { font-size: 1.62rem !important; }
   .playground-sidebar { grid-template-columns: 1fr !important; }
-  .product-floating-actions { gap: 5px; padding: 6px; }
 }
