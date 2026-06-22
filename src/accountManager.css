@@ -6,6 +6,11 @@
   font-family: "Inter", system-ui, sans-serif;
 }
 
+.account-widget.is-dragging {
+  z-index: 90;
+  user-select: none;
+}
+
 .account-trigger {
   display: inline-flex;
   align-items: center;
@@ -41,6 +46,8 @@
 
 .account-panel {
   width: min(392px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  overflow: auto;
   margin-top: 10px;
   padding: 16px;
   border: 1px solid rgba(107, 133, 184, 0.28);
@@ -59,10 +66,24 @@
   margin-bottom: 14px;
 }
 
+.account-panel-header.draggable {
+  cursor: grab;
+  touch-action: none;
+}
+
+.account-widget.is-dragging .account-panel-header.draggable {
+  cursor: grabbing;
+}
+
 .account-panel-header strong {
   display: block;
   margin-top: 4px;
   font-size: 1rem;
+}
+
+.account-panel-tools {
+  display: inline-flex;
+  gap: 6px;
 }
 
 .account-panel-header button {
@@ -73,6 +94,11 @@
   background: rgba(255, 255, 255, 0.04);
   color: #e9f1ff;
   cursor: pointer;
+}
+
+.account-panel-header button:hover {
+  border-color: rgba(77, 228, 193, 0.28);
+  background: rgba(77, 228, 193, 0.08);
 }
 
 .account-eyebrow {
@@ -220,5 +246,9 @@
     top: auto;
     right: 10px;
     bottom: 54px;
+  }
+
+  .account-widget[style] {
+    bottom: auto;
   }
 }
