@@ -17,6 +17,7 @@ import AdminDashboard from "./AdminDashboard";
 import "./accountManager.css";
 
 const openProfileEvent = "logic-quest-open-student-profile";
+const panelPositionKey = "logic-quest-account-panel-position";
 
 function getProgressSignature(progress) {
   try {
@@ -34,6 +35,26 @@ function getUserLabel(session) {
   return session?.user?.email || "Conta conectada";
 }
 
+function readPanelPosition() {
+  try {
+    const raw = window.localStorage.getItem(panelPositionKey);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function clampPanelPosition(x, y) {
+  const margin = 10;
+  const width = Math.min(392, window.innerWidth - 24);
+  const height = Math.min(720, window.innerHeight - 24);
+
+  return {
+    x: Math.max(margin, Math.min(x, window.innerWidth - width - margin)),
+    y: Math.max(margin, Math.min(y, window.innerHeight - height - margin)),
+  };
+}
+
 export default function AccountManager() {
   const configured = isSupabaseConfigured();
   const debugInfo = getSupabaseDebugInfo();
@@ -45,6 +66,10 @@ export default function AccountManager() {
   const [isBusy, setIsBusy] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [lastSync, setLastSync] = useState(null);
+  const [panelPosition, setPanelPosition] = useState(() => readPanelPosition());
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef(null);
+  const widgetRef = useRef(null);
   const lastUploadedRef = useRef(getProgressSignature(readLocalProgress()));
 
   const localProgress = useMemo(() => readLocalProgress(), [lastSync, session]);
@@ -91,6 +116,36 @@ export default function AccountManager() {
 
     return () => window.clearInterval(timer);
   }, [configured, session]);
+
+  useEffect(() => {
+    function handlePointerMove(event) {
+      if (!dragRef.current) return;
+
+      const next = clampPanelPosition(
+        event.clientX - dragRef.current.offsetX,
+        event.clientY - dragRef.current.offsetY,
+      );
+
+      setPanelPosition(next);
+    }
+
+    function handlePointerUp() {
+      if (!dragRef.current) return;
+      dragRef.current = null;
+      setIsDragging(false);
+      window.localStorage.setItem(panelPositionKey, JSON.stringify(panelPosition || {}));
+    }
+
+    if (isDragging) {
+      window.addEventListener("pointermove", handlePointerMove);
+      window.addEventListener("pointerup", handlePointerUp);
+    }
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+  }, [isDragging, panelPosition]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -167,6 +222,26 @@ export default function AccountManager() {
     }
   }
 
+  function startDrag(event) {
+    if (event.target.closest("button")) return;
+
+    const rect = widgetRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    dragRef.current = {
+      offsetX: event.clientX - rect.left,
+      offsetY: event.clientY - rect.top,
+    };
+
+    setPanelPosition({ x: rect.left, y: rect.top });
+    setIsDragging(true);
+  }
+
+  function resetPanelPosition() {
+    window.localStorage.removeItem(panelPositionKey);
+    setPanelPosition(null);
+  }
+
   function openStudentProfile() {
     window.dispatchEvent(new CustomEvent(openProfileEvent));
     setIsOpen(false);
@@ -179,8 +254,12 @@ export default function AccountManager() {
     setMessage("Você saiu da conta. O progresso local continua neste navegador.");
   }
 
+  const widgetStyle = panelPosition
+    ? { left: `${panelPosition.x}px`, top: `${panelPosition.y}px`, right: "auto", bottom: "auto" }
+    : undefined;
+
   return (
-    <div className="account-widget">
+    <div ref={widgetRef} className={`account-widget ${isDragging ? "is-dragging" : ""}`} style={widgetStyle}>
       <button className="account-trigger" type="button" onClick={() => setIsOpen((value) => !value)}>
         <span className={`account-dot ${session ? "online" : "offline"}`} />
         <span>{session ? getUserLabel(session) : "Entrar"}</span>
@@ -188,14 +267,19 @@ export default function AccountManager() {
 
       {isOpen ? (
         <div className="account-panel">
-          <div className="account-panel-header">
+          <div className="account-panel-header draggable" onPointerDown={startDrag} title="Segure e arraste para mover">
             <div>
               <span className="account-eyebrow">Logic Quest Cloud</span>
               <strong>{session ? "Progresso na nuvem" : "Sistema de contas"}</strong>
             </div>
-            <button type="button" onClick={() => setIsOpen(false)} aria-label="Fechar painel">
-              ×
-            </button>
+            <div className="account-panel-tools">
+              <button type="button" onClick={resetPanelPosition} aria-label="Voltar painel para posição original">
+                ↺
+              </button>
+              <button type="button" onClick={() => setIsOpen(false)} aria-label="Fechar painel">
+                ×
+              </button>
+            </div>
           </div>
 
           {!configured ? (
