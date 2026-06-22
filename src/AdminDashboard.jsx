@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { readLocalSession } from "./supabaseRest";
+import { readLocalSession, refreshSession, saveLocalSession } from "./supabaseRest";
 import "./adminDashboard.css";
 
 const rawUrl = import.meta.env.VITE_SUPABASE_URL || "";
@@ -17,6 +17,11 @@ function getUrl() {
 function formatDate(value) {
   if (!value) return "sem data";
   return new Date(value).toLocaleString("pt-BR");
+}
+
+function looksLikeExpiredSession(error) {
+  const text = String(error?.message || "").toLowerCase();
+  return text.includes("expired") || text.includes("sessão venceu") || text.includes("token");
 }
 
 async function loadDashboard(session) {
@@ -39,12 +44,29 @@ async function loadDashboard(session) {
   return data;
 }
 
+async function refreshLocalSession(session) {
+  if (!session?.refresh_token) return session;
+
+  try {
+    const updated = await refreshSession(session.refresh_token);
+    if (updated?.access_token) {
+      saveLocalSession(updated);
+      return updated;
+    }
+  } catch {
+    return session;
+  }
+
+  return session;
+}
+
 export default function AdminDashboard({ session: externalSession }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState(null);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
-  const session = externalSession || readLocalSession();
+  const [sessionOverride, setSessionOverride] = useState(null);
+  const session = sessionOverride || externalSession || readLocalSession();
 
   async function refresh() {
     if (!session?.access_token) {
@@ -56,13 +78,28 @@ export default function AdminDashboard({ session: externalSession }) {
     setMessage("");
 
     try {
-      const dashboard = await loadDashboard(session);
-      setData(dashboard);
+      let activeSession = await refreshLocalSession(session);
+      setSessionOverride(activeSession);
+
+      try {
+        const dashboard = await loadDashboard(activeSession);
+        setData(dashboard);
+        return;
+      } catch (firstError) {
+        if (!looksLikeExpiredSession(firstError)) throw firstError;
+
+        activeSession = await refreshLocalSession(activeSession);
+        setSessionOverride(activeSession);
+        const dashboard = await loadDashboard(activeSession);
+        setData(dashboard);
+      }
     } catch (error) {
       setMessage(
         error.message === "not_authorized"
           ? "Essa conta ainda não está cadastrada como admin no Supabase."
-          : error.message,
+          : looksLikeExpiredSession(error)
+            ? "Sua sessão venceu. Saia da conta e entre novamente."
+            : error.message,
       );
     } finally {
       setBusy(false);
