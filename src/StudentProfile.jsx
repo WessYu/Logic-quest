@@ -3,6 +3,7 @@ import { readLocalProgress, readLocalSession } from "./supabaseRest";
 import "./studentProfile.css";
 
 const profileKey = "logic-quest-student-profile";
+const openProfileEvent = "logic-quest-open-student-profile";
 
 function readProfile() {
   try {
@@ -53,6 +54,12 @@ export default function StudentProfile() {
   useEffect(() => {
     const timer = window.setInterval(() => setStats(getStats()), 2500);
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const openProfile = () => setOpen(true);
+    window.addEventListener(openProfileEvent, openProfile);
+    return () => window.removeEventListener(openProfileEvent, openProfile);
   }, []);
 
   function updateField(field, value) {
