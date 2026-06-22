@@ -5,6 +5,7 @@ import GitHubPresence from "./GitHubPresence";
 import AccountManager from "./AccountManager";
 import PwaInstallPrompt from "./PwaInstallPrompt";
 import StudentProfile from "./StudentProfile";
+import AboutLogicQuest from "./AboutLogicQuest";
 import RegisterServiceWorker from "./RegisterServiceWorker";
 import "./styles.css";
 import "./stepAlignment.css";
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AccountManager />
     <PwaInstallPrompt />
     <StudentProfile />
+    <AboutLogicQuest />
     <RegisterServiceWorker />
   </React.StrictMode>,
 );
