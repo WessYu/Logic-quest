@@ -288,12 +288,6 @@ export default function AccountManager() {
             </div>
           ) : null}
 
-          <div className="account-config-info">
-            <span>Supabase</span>
-            <strong>{debugInfo.urlHost}</strong>
-            <small>chave: {debugInfo.keyType}</small>
-          </div>
-
           {session ? (
             <div className="account-signed">
               <button className="student-area-inline" type="button" onClick={openStudentProfile}>
