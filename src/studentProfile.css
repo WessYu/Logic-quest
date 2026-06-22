@@ -1,0 +1,229 @@
+.student-profile-trigger {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 55;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 260px;
+  padding: 8px 12px 8px 8px;
+  border: 1px solid rgba(77, 228, 193, 0.28);
+  border-radius: 999px;
+  background: rgba(8, 14, 26, 0.88);
+  color: #e9f1ff;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+}
+
+.student-profile-trigger img,
+.student-profile-trigger span {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.student-profile-trigger span {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #5ea2ff, #4de4c1);
+  color: #06101d;
+  font-weight: 900;
+}
+
+.student-profile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 7, 13, 0.74);
+  backdrop-filter: blur(18px);
+}
+
+.student-profile-card {
+  position: relative;
+  width: min(1040px, 100%);
+  max-height: min(780px, calc(100vh - 40px));
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid rgba(107, 133, 184, 0.3);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(94, 162, 255, 0.14), transparent 30%),
+    radial-gradient(circle at 94% 16%, rgba(77, 228, 193, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(13, 19, 31, 0.98), rgba(8, 13, 22, 0.98));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+}
+
+.student-profile-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e9f1ff;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.student-profile-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid rgba(132, 154, 196, 0.18);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.student-profile-hero h2 {
+  margin: 8px 0;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.student-profile-hero p,
+.student-muted {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.student-avatar-wrap {
+  display: grid;
+  gap: 10px;
+  width: 160px;
+}
+
+.student-avatar-wrap > img,
+.student-avatar-wrap > span {
+  width: 140px;
+  height: 140px;
+  border-radius: 28px;
+  border: 1px solid rgba(77, 228, 193, 0.24);
+  object-fit: cover;
+  box-shadow: 0 0 0 6px rgba(77, 228, 193, 0.05);
+}
+
+.student-avatar-wrap > span {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #5ea2ff, #4de4c1);
+  color: #06101d;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.student-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.85fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.student-profile-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(132, 154, 196, 0.18);
+  border-radius: 18px;
+  background: rgba(5, 10, 18, 0.45);
+}
+
+.student-profile-panel.wide {
+  grid-row: span 2;
+}
+
+.student-profile-panel label {
+  display: grid;
+  gap: 7px;
+  color: #9fb0d2;
+  font-size: 0.86rem;
+}
+
+.student-profile-panel input,
+.student-profile-panel textarea,
+.student-avatar-wrap input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid rgba(107, 133, 184, 0.26);
+  border-radius: 12px;
+  background: rgba(3, 8, 15, 0.52);
+  color: #e9f1ff;
+}
+
+.student-profile-panel textarea {
+  min-height: 126px;
+  resize: vertical;
+}
+
+.github-link-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(77, 228, 193, 0.22);
+  border-radius: 16px;
+  background: rgba(77, 228, 193, 0.08);
+  color: #e9f1ff;
+  text-decoration: none;
+}
+
+.github-link-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+}
+
+.github-link-card strong,
+.github-link-card small {
+  display: block;
+}
+
+.github-link-card small {
+  margin-top: 3px;
+  color: var(--muted);
+}
+
+.stats-panel div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.stats-panel strong {
+  color: #4de4c1;
+  font-size: 1.65rem;
+}
+
+.stats-panel span {
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .student-profile-trigger {
+    right: 10px;
+    bottom: 76px;
+  }
+
+  .student-profile-hero,
+  .student-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-avatar-wrap {
+    width: 100%;
+  }
+}
