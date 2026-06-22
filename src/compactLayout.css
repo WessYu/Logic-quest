@@ -6,10 +6,22 @@
   min-height: calc(100vh - 28px);
 }
 
+.ide-shell,
+.editor-panel {
+  align-items: start;
+}
+
+.editor-panel {
+  grid-template-rows: auto minmax(0, auto) !important;
+}
+
 .editor-scroll {
-  gap: 12px;
+  gap: 8px !important;
+  row-gap: 8px !important;
   padding: 14px;
-  align-content: start;
+  align-content: start !important;
+  align-items: start !important;
+  grid-auto-rows: max-content !important;
 }
 
 .editor-scroll > * {
@@ -127,15 +139,17 @@
 }
 
 .github-presence-mount {
-  display: block;
-  height: auto !important;
+  display: contents !important;
+  height: 0 !important;
   min-height: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 .github-presence-card {
-  padding: 14px;
+  padding: 12px 14px !important;
   margin: 0 !important;
+  align-self: start !important;
 }
 
 .github-presence-mount + .focus-card,
@@ -144,21 +158,21 @@
 }
 
 .github-presence-header h2 {
-  margin: 6px 0;
-  font-size: clamp(1.1rem, 1.65vw, 1.35rem);
+  margin: 4px 0;
+  font-size: clamp(1.02rem, 1.45vw, 1.22rem);
 }
 
 .github-presence-header p {
-  line-height: 1.45;
+  line-height: 1.35;
 }
 
 .github-presence-board {
-  margin-top: 14px;
-  padding: 12px;
+  margin-top: 10px !important;
+  padding: 10px !important;
 }
 
 .github-presence-footer {
-  margin-top: 10px;
+  margin-top: 8px !important;
 }
 
 @media (max-width: 1080px) {
