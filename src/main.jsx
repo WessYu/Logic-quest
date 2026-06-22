@@ -4,6 +4,7 @@ import App from "./App";
 import GitHubPresence from "./GitHubPresence";
 import AccountManager from "./AccountManager";
 import PwaInstallPrompt from "./PwaInstallPrompt";
+import StudentProfile from "./StudentProfile";
 import "./styles.css";
 import "./stepAlignment.css";
 import "./compactLayout.css";
@@ -15,11 +16,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <GitHubPresence />
     <AccountManager />
     <PwaInstallPrompt />
+    <StudentProfile />
   </React.StrictMode>,
 );
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {});
-  });
-}
