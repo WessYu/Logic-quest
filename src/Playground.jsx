@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
+import ProductLayer from "./ProductLayer";
 import "./playground.css";
 
 const challenges = [
@@ -137,6 +138,7 @@ export default function Playground() {
 
   return (
     <>
+      <ProductLayer />
       {mountNode ? createPortal(button, mountNode) : null}
 
       {open ? createPortal(
