@@ -132,7 +132,8 @@
 
 .account-tabs button,
 .account-form button,
-.account-actions button {
+.account-actions button,
+.student-area-inline {
   min-height: 40px;
   border: 1px solid rgba(94, 162, 255, 0.26);
   border-radius: 12px;
@@ -140,6 +141,13 @@
   color: #e9f1ff;
   font-weight: 700;
   cursor: pointer;
+}
+
+.student-area-inline {
+  width: 100%;
+  border-color: rgba(77, 228, 193, 0.34);
+  background: linear-gradient(135deg, rgba(77, 228, 193, 0.18), rgba(94, 162, 255, 0.16));
+  color: #dffdf7;
 }
 
 .account-tabs button.active,
