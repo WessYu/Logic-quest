@@ -1,0 +1,201 @@
+@media (max-width: 760px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    background: #07111f !important;
+  }
+
+  .app-shell,
+  .window-shell,
+  .ide-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .window-shell {
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #07111f !important;
+  }
+
+  .titlebar {
+    width: min(100% - 24px, 430px) !important;
+    max-width: 430px !important;
+    margin: 0 auto 12px !important;
+    padding: 18px 0 4px !important;
+    background: transparent !important;
+  }
+
+  .titlebar-right,
+  .titlebar-left,
+  .activity-bar,
+  .statusbar,
+  .inspector-panel,
+  .breadcrumbs,
+  .hero-terminal {
+    display: none !important;
+  }
+
+  .titlebar-center {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+
+  .explorer-panel,
+  .editor-panel {
+    width: min(100% - 24px, 430px) !important;
+    max-width: 430px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: hidden !important;
+  }
+
+  .explorer-panel {
+    padding: 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .explorer-section:first-of-type {
+    display: none !important;
+  }
+
+  .section-toggle {
+    width: 100% !important;
+    min-height: 54px !important;
+    border-radius: 18px !important;
+    justify-content: flex-start !important;
+  }
+
+  .editor-panel {
+    padding-bottom: 104px !important;
+  }
+
+  .tabbar {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    display: flex !important;
+  }
+
+  .tab {
+    flex: 0 0 auto !important;
+    max-width: 160px !important;
+    white-space: nowrap !important;
+  }
+
+  .editor-scroll,
+  .hero-card,
+  .focus-card,
+  .reading-card,
+  .practice-card,
+  .code-card,
+  .insight-card,
+  .checkpoint-panel,
+  .question-card,
+  .step-card,
+  .metric-ribbon,
+  .terminal-stats,
+  .editor-columns,
+  .editor-columns.secondary,
+  .step-runway,
+  .options-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .hero-card,
+  .focus-card,
+  .editor-columns,
+  .editor-columns.secondary,
+  .step-runway,
+  .metric-ribbon,
+  .terminal-stats,
+  .options-grid,
+  .quiz-header {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-copy h1 {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    font-size: clamp(1.5rem, 8vw, 2.05rem) !important;
+  }
+
+  .hero-copy p,
+  .focus-copy p,
+  .reading-card p,
+  .practice-card p,
+  .explanation {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .account-widget,
+  .account-widget[style] {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    top: auto !important;
+    bottom: calc(78px + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+    z-index: 180 !important;
+  }
+
+  .account-trigger {
+    margin-left: auto !important;
+    max-width: 178px !important;
+    min-height: 40px !important;
+  }
+
+  .account-panel {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    top: 96px !important;
+    bottom: calc(88px + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    border-radius: 24px !important;
+    z-index: 220 !important;
+  }
+
+  .mobile-study-dock {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+    z-index: 210 !important;
+  }
+
+  .student-profile-trigger {
+    display: none !important;
+  }
+
+  .playground-overlay,
+  .student-profile-overlay,
+  .about-modal-overlay {
+    z-index: 260 !important;
+  }
+}
