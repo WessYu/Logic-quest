@@ -1,0 +1,162 @@
+.app-shell {
+  padding: 14px;
+}
+
+.window-shell {
+  min-height: calc(100vh - 28px);
+}
+
+.editor-scroll {
+  gap: 12px;
+  padding: 14px;
+}
+
+.hero-card,
+.focus-card,
+.reading-card,
+.code-card,
+.practice-card,
+.insight-card,
+.checkpoint-panel,
+.question-card {
+  padding: 14px;
+}
+
+.hero-card {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.82fr);
+  gap: 12px;
+}
+
+.hero-copy h1 {
+  max-width: 18ch;
+  margin: 6px 0 8px;
+  font-size: clamp(1.75rem, 3vw, 2.55rem);
+}
+
+.hero-copy p,
+.focus-copy p,
+.reading-card p,
+.practice-card p,
+.insight-card p,
+.terminal-body p {
+  line-height: 1.5;
+}
+
+.metric-ribbon {
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.metric-ribbon article,
+.terminal-stats div,
+.mini-status-list div {
+  padding: 9px 10px;
+}
+
+.hero-terminal .terminal-body {
+  gap: 10px;
+  padding: 12px;
+}
+
+.terminal-stats {
+  gap: 8px;
+}
+
+.focus-card {
+  gap: 12px;
+  align-items: center;
+}
+
+.focus-meter {
+  min-width: 220px;
+}
+
+.step-runway {
+  gap: 10px;
+}
+
+.step-card {
+  min-height: 178px;
+  gap: 8px;
+  padding: 14px;
+}
+
+.step-card h3 {
+  font-size: 0.98rem;
+}
+
+.step-card p {
+  font-size: 0.9rem;
+}
+
+.editor-columns,
+.editor-columns.secondary {
+  gap: 12px;
+}
+
+.card-header {
+  margin-bottom: 10px;
+}
+
+.document-lines {
+  gap: 8px;
+}
+
+.concept-pills {
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.concept-pills span {
+  padding: 6px 10px;
+}
+
+.practice-list {
+  margin-top: 10px;
+  line-height: 1.55;
+}
+
+.code-card pre {
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.github-presence-card {
+  padding: 14px;
+}
+
+.github-presence-header h2 {
+  margin: 6px 0;
+  font-size: clamp(1.1rem, 1.65vw, 1.35rem);
+}
+
+.github-presence-header p {
+  line-height: 1.45;
+}
+
+.github-presence-board {
+  margin-top: 14px;
+  padding: 12px;
+}
+
+.github-presence-footer {
+  margin-top: 10px;
+}
+
+@media (max-width: 1080px) {
+  .step-card {
+    min-height: 150px;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 8px;
+  }
+
+  .editor-scroll,
+  .explorer-panel,
+  .inspector-panel {
+    padding: 10px;
+  }
+}
