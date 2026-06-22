@@ -1,5 +1,6 @@
 import "./mobileDock.css";
 import "./mimoMobile.css";
+import "./mobileEmergencyFix.css";
 
 function scrollToSelector(selector) {
   const element = document.querySelector(selector);
