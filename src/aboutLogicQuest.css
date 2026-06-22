@@ -25,10 +25,11 @@
 .about-modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 95;
+  z-index: 999;
   display: grid;
-  place-items: center;
-  padding: 18px;
+  align-items: start;
+  justify-items: center;
+  padding: 42px 18px 18px;
   background: rgba(3, 7, 13, 0.78);
   backdrop-filter: blur(16px);
 }
@@ -36,7 +37,7 @@
 .about-modal-card {
   position: relative;
   width: min(980px, 100%);
-  max-height: min(760px, calc(100vh - 36px));
+  max-height: calc(100vh - 84px);
   overflow: auto;
   padding: 18px;
   border: 1px solid rgba(107, 133, 184, 0.28);
@@ -46,12 +47,13 @@
 }
 
 .about-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
+  position: sticky;
+  top: 0;
+  float: right;
   z-index: 2;
   width: 34px;
   height: 34px;
+  margin: -4px -4px 0 10px;
   border: 1px solid rgba(132, 154, 196, 0.2);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.04);
@@ -181,6 +183,14 @@
 }
 
 @media (max-width: 820px) {
+  .about-modal-overlay {
+    padding-top: 18px;
+  }
+
+  .about-modal-card {
+    max-height: calc(100vh - 36px);
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
   }
