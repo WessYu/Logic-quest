@@ -9,6 +9,11 @@
 .editor-scroll {
   gap: 12px;
   padding: 14px;
+  align-content: start;
+}
+
+.editor-scroll > * {
+  margin-block: 0 !important;
 }
 
 .hero-card,
@@ -121,8 +126,21 @@
   line-height: 1.5;
 }
 
+.github-presence-mount {
+  display: block;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+}
+
 .github-presence-card {
   padding: 14px;
+  margin: 0 !important;
+}
+
+.github-presence-mount + .focus-card,
+.github-presence-card + .focus-card {
+  margin-top: 0 !important;
 }
 
 .github-presence-header h2 {
