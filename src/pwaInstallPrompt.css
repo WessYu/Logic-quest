@@ -1,0 +1,84 @@
+.pwa-install-card {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 60;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: min(520px, calc(100vw - 36px));
+  padding: 12px;
+  border: 1px solid rgba(107, 133, 184, 0.3);
+  border-radius: 18px;
+  background: rgba(8, 14, 26, 0.94);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.44);
+  backdrop-filter: blur(18px);
+  color: #e9f1ff;
+}
+
+.pwa-install-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #5ea2ff, #4de4c1);
+  color: #07101d;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 800;
+  font-size: 0.84rem;
+}
+
+.pwa-install-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.pwa-install-copy strong {
+  font-size: 0.95rem;
+}
+
+.pwa-install-copy span {
+  color: #9fb0d2;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.pwa-install-actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.pwa-install-actions button {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid #5ea2ff;
+  border-radius: 12px;
+  background: #5ea2ff;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pwa-install-actions button.ghost {
+  border-color: rgba(107, 133, 184, 0.26);
+  background: rgba(255, 255, 255, 0.04);
+  color: #c7d6f3;
+}
+
+@media (max-width: 720px) {
+  .pwa-install-card {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .pwa-install-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+}
