@@ -13,6 +13,7 @@ import {
   signUpWithPassword,
   writeLocalProgress,
 } from "./supabaseRest";
+import AdminDashboard from "./AdminDashboard";
 import "./accountManager.css";
 
 const openProfileEvent = "logic-quest-open-student-profile";
@@ -214,6 +215,7 @@ export default function AccountManager() {
               <button className="student-area-inline" type="button" onClick={openStudentProfile}>
                 Abrir área do aluno
               </button>
+              <AdminDashboard session={session} />
               <div className="account-stat">
                 <span>Conta</span>
                 <strong>{getUserLabel(session)}</strong>
