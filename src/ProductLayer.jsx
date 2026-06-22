@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { progressStorageKey, readLocalProgress, readLocalSession } from "./supabaseRest";
+import { readLocalProgress, readLocalSession } from "./supabaseRest";
 import "./productLayer.css";
 
 const onboardingKey = "logic-quest-onboarding-v1";
@@ -13,6 +13,22 @@ const achievementRules = [
   { id: "master", title: "Domínio forte", text: "Média de domínio acima de 80%.", test: (s) => s.mastery >= 80 },
   { id: "finish", title: "Trilha concluída", text: "Finalizou todas as lições disponíveis.", test: (s) => s.completed >= lessonsTotal },
 ];
+
+function safeGetItem(key) {
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeSetItem(key, value) {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // navegador bloqueou armazenamento local
+  }
+}
 
 function getStats() {
   const progress = readLocalProgress();
@@ -123,24 +139,34 @@ function CertificateModal({ stats, onClose }) {
 }
 
 export default function ProductLayer() {
+  const [mounted, setMounted] = useState(false);
   const [statsTick, setStatsTick] = useState(0);
-  const [modal, setModal] = useState(() => (window.localStorage.getItem(onboardingKey) ? null : "landing"));
+  const [modal, setModal] = useState(null);
   const stats = useMemo(() => getStats(), [statsTick]);
 
+  useEffect(() => {
+    setMounted(true);
+    if (!safeGetItem(onboardingKey)) {
+      setModal("landing");
+    }
+  }, []);
+
   function closeIntro() {
-    window.localStorage.setItem(onboardingKey, "true");
+    safeSetItem(onboardingKey, "true");
     setModal(null);
   }
 
   function openPlayground() {
     closeIntro();
-    document.querySelector(".playground-top-button")?.click();
+    window.setTimeout(() => document.querySelector(".playground-top-button")?.click(), 50);
   }
 
   function refreshStatsAndOpen(nextModal) {
     setStatsTick((value) => value + 1);
     setModal(nextModal);
   }
+
+  if (!mounted) return null;
 
   return (
     <>
