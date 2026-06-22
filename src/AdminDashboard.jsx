@@ -60,6 +60,10 @@ async function refreshLocalSession(session) {
   return session;
 }
 
+function getRecentPercent(item) {
+  return Math.min(100, Math.round(((item.completed || 0) / 28) * 100));
+}
+
 export default function AdminDashboard({ session: externalSession }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState(null);
@@ -153,13 +157,20 @@ export default function AdminDashboard({ session: externalSession }) {
                 </div>
               </div>
 
+              <div className="admin-module-card">
+                <span className="account-eyebrow">Retenção rápida</span>
+                <div className="admin-retention-row"><span>Cadastro → progresso</span><strong>{data.total_users ? Math.round(((data.users_with_progress || 0) / data.total_users) * 100) : 0}%</strong></div>
+                <div className="admin-retention-row"><span>Conclusão média</span><strong>{data.avg_completion || 0}%</strong></div>
+                <div className="admin-retention-row"><span>XP médio por conta</span><strong>{data.total_users ? Math.round((data.total_xp || 0) / data.total_users) : 0}</strong></div>
+              </div>
+
               <div className="admin-recent-card">
                 <span className="account-eyebrow">Atividade recente</span>
                 {(data.recent_activity || []).length ? (
                   data.recent_activity.map((item, index) => (
                     <div className="admin-recent-item" key={`${item.email}-${index}`}>
                       <strong>{item.email || "usuário sem email"}</strong>
-                      <span>{item.completed || 0} lições • {item.xp || 0} XP</span>
+                      <span>{item.completed || 0} lições • {item.xp || 0} XP • {getRecentPercent(item)}%</span>
                       <small>{formatDate(item.updated_at)}</small>
                     </div>
                   ))
