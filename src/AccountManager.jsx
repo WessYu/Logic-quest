@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   clearLocalSession,
   fetchCloudProgress,
+  getSupabaseDebugInfo,
   isSupabaseConfigured,
   readLocalProgress,
   readLocalSession,
@@ -32,6 +33,7 @@ function getUserLabel(session) {
 
 export default function AccountManager() {
   const configured = isSupabaseConfigured();
+  const debugInfo = getSupabaseDebugInfo();
   const [session, setSession] = useState(() => readLocalSession());
   const [mode, setMode] = useState("login");
   const [email, setEmail] = useState("");
@@ -193,6 +195,12 @@ export default function AccountManager() {
               Supabase ainda não configurado. Crie o projeto e adicione as variáveis do `.env`.
             </div>
           ) : null}
+
+          <div className="account-config-info">
+            <span>Supabase</span>
+            <strong>{debugInfo.urlHost}</strong>
+            <small>chave: {debugInfo.keyType}</small>
+          </div>
 
           {session ? (
             <div className="account-signed">
