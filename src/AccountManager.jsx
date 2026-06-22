@@ -15,6 +15,8 @@ import {
 } from "./supabaseRest";
 import "./accountManager.css";
 
+const openProfileEvent = "logic-quest-open-student-profile";
+
 function getProgressSignature(progress) {
   try {
     return JSON.stringify(progress || {});
@@ -164,6 +166,11 @@ export default function AccountManager() {
     }
   }
 
+  function openStudentProfile() {
+    window.dispatchEvent(new CustomEvent(openProfileEvent));
+    setIsOpen(false);
+  }
+
   function logout() {
     clearLocalSession();
     setSession(null);
@@ -204,6 +211,9 @@ export default function AccountManager() {
 
           {session ? (
             <div className="account-signed">
+              <button className="student-area-inline" type="button" onClick={openStudentProfile}>
+                Abrir área do aluno
+              </button>
               <div className="account-stat">
                 <span>Conta</span>
                 <strong>{getUserLabel(session)}</strong>
