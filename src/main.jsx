@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import GitHubPresence from "./GitHubPresence";
 import "./styles.css";
 import "./stepAlignment.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
+    <GitHubPresence />
   </React.StrictMode>,
 );
 
