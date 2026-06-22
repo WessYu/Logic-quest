@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import ProductLayer from "./ProductLayer";
 import "./playground.css";
 
 const challenges = [
@@ -93,8 +92,9 @@ export default function Playground() {
 
     attach();
 
+    const root = document.getElementById("root");
     const observer = new MutationObserver(attach);
-    observer.observe(document.getElementById("root"), { childList: true, subtree: true });
+    if (root) observer.observe(root, { childList: true, subtree: true });
 
     return () => {
       observer.disconnect();
@@ -138,7 +138,6 @@ export default function Playground() {
 
   return (
     <>
-      <ProductLayer />
       {mountNode ? createPortal(button, mountNode) : null}
 
       {open ? createPortal(
