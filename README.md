@@ -86,6 +86,8 @@ npm run build
 
 O deploy está configurado com GitHub Actions em `.github/workflows/deploy.yml`.
 
+Deploy disparado novamente após configurar a URL real do Supabase.
+
 Para publicar no GitHub Pages, use **Settings > Pages > Build and deployment > Source: GitHub Actions**.
 
 ## Stack
