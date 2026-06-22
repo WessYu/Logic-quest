@@ -14,9 +14,48 @@ https://wessyu.github.io/Logic-quest/
 
 - 7 módulos com 28 lições.
 - Navegação por explorer, tabs e painel inspector.
-- Checkpoints corrigidos no próprio app com progresso salvo em `localStorage`.
+- Checkpoints corrigidos no próprio app.
+- Sistema de contas com Supabase para salvar e carregar progresso na nuvem.
 - Atalhos de teclado para navegar mais rápido pela trilha.
 - Painel de progresso com XP, rank, lições restantes e última conquista.
+
+## Supabase
+
+O app já tem integração de conta e sincronização de progresso usando Supabase Auth + tabela `user_progress`.
+
+### 1. Criar o banco
+
+No Supabase, abra **SQL Editor > New query** e rode o arquivo:
+
+```txt
+supabase/schema.sql
+```
+
+Esse SQL cria a tabela `user_progress`, ativa RLS e garante que cada usuário só leia e altere o próprio progresso.
+
+### 2. Configurar variáveis locais
+
+Crie um arquivo `.env` com:
+
+```env
+VITE_SUPABASE_URL=https://SEU-PROJETO.supabase.co
+VITE_SUPABASE_ANON_KEY=SUA_ANON_KEY_AQUI
+```
+
+Tem um modelo em `.env.example`.
+
+### 3. Configurar no GitHub Pages
+
+No repositório, adicione as mesmas variáveis em:
+
+`Settings > Secrets and variables > Actions > Variables`
+
+Crie:
+
+```txt
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+```
 
 ## Atalhos
 
@@ -51,3 +90,5 @@ Para publicar no GitHub Pages, use **Settings > Pages > Build and deployment > S
 - React
 - Vite
 - CSS puro
+- Supabase Auth
+- Supabase Database
