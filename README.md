@@ -16,6 +16,7 @@ https://wessyu.github.io/Logic-quest/
 - Navegação por explorer, tabs e painel inspector.
 - Checkpoints corrigidos no próprio app.
 - Sistema de contas com Supabase para salvar e carregar progresso na nuvem.
+- Presença de estudo vinculada à conta, baseada nas lições concluídas por dia.
 - Atalhos de teclado para navegar mais rápido pela trilha.
 - Painel de progresso com XP, rank, lições restantes e última conquista.
 
