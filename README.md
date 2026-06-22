@@ -58,6 +58,8 @@ VITE_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY
 ```
 
+A URL deve ser somente o domínio do projeto, sem `/rest/v1` no final.
+
 ## Atalhos
 
 - `Ctrl/Cmd + K`: abre a busca do curso.
