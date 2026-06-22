@@ -1,15 +1,37 @@
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const RAW_SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const RAW_SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const SUPABASE_URL = normalizeSupabaseUrl(RAW_SUPABASE_URL);
+const SUPABASE_ANON_KEY = normalizeEnvValue(RAW_SUPABASE_ANON_KEY);
 
 export const progressStorageKey = "logic-quest-progress-v4";
 export const authStorageKey = "logic-quest-supabase-session";
+
+function normalizeEnvValue(value) {
+  return String(value || "").trim().replace(/^['\"]|['\"]$/g, "");
+}
+
+function normalizeSupabaseUrl(value) {
+  const clean = normalizeEnvValue(value);
+  if (!clean) return "";
+  const withoutSlash = clean.replace(/\/$/, "");
+  return withoutSlash.startsWith("http") ? withoutSlash : `https://${withoutSlash}`;
+}
 
 export function isSupabaseConfigured() {
   return Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 }
 
+export function getSupabaseDebugInfo() {
+  return {
+    configured: isSupabaseConfigured(),
+    urlHost: SUPABASE_URL ? new URL(SUPABASE_URL).host : "não configurado",
+    keyType: SUPABASE_ANON_KEY.startsWith("sb_publishable_") ? "publishable" : "anon",
+  };
+}
+
 function getBaseUrl() {
-  return String(SUPABASE_URL || "").replace(/\/$/, "");
+  return SUPABASE_URL;
 }
 
 function getHeaders(token) {
@@ -20,21 +42,45 @@ function getHeaders(token) {
   };
 }
 
-async function request(path, options = {}) {
-  if (!isSupabaseConfigured()) {
-    throw new Error("Supabase ainda não foi configurado no .env.");
+function friendlyNetworkError(error) {
+  const info = getSupabaseDebugInfo();
+
+  if (error?.name === "TypeError" || String(error?.message || "").includes("Failed to fetch")) {
+    return new Error(
+      `Não consegui conectar ao Supabase. Confira se a variável VITE_SUPABASE_URL está exatamente como https://seu-projeto.supabase.co e se VITE_SUPABASE_ANON_KEY está correta. URL atual: ${info.urlHost}.`,
+    );
   }
 
-  const response = await fetch(`${getBaseUrl()}${path}`, {
-    ...options,
-    headers: {
-      ...getHeaders(options.token),
-      ...(options.headers || {}),
-    },
-  });
+  return error;
+}
+
+async function request(path, options = {}) {
+  if (!isSupabaseConfigured()) {
+    throw new Error("Supabase ainda não foi configurado no GitHub Actions Variables.");
+  }
+
+  let response;
+
+  try {
+    response = await fetch(`${getBaseUrl()}${path}`, {
+      ...options,
+      headers: {
+        ...getHeaders(options.token),
+        ...(options.headers || {}),
+      },
+    });
+  } catch (error) {
+    throw friendlyNetworkError(error);
+  }
 
   const text = await response.text();
-  const data = text ? JSON.parse(text) : null;
+  let data = null;
+
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = text ? { message: text } : null;
+  }
 
   if (!response.ok) {
     const message = data?.msg || data?.message || data?.error_description || data?.error || "Erro no Supabase.";
