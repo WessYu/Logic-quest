@@ -1,0 +1,1 @@
+export { courseModules } from "./professionalCourseData";
