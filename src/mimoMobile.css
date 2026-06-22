@@ -1,0 +1,211 @@
+@media (max-width: 760px) {
+  body {
+    background: #07111f;
+  }
+
+  .window-shell {
+    background: linear-gradient(180deg, #0c1b30 0%, #07111f 38%, #08101d 100%) !important;
+  }
+
+  .titlebar {
+    min-height: 76px !important;
+    align-items: center !important;
+    border-bottom: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  .titlebar-center {
+    color: #8ea5c8 !important;
+    font-size: 0.72rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .titlebar-center::before {
+    content: "Logic Quest" !important;
+    margin-bottom: 4px;
+    font-size: 1.32rem !important;
+    letter-spacing: -0.04em;
+  }
+
+  .titlebar-center::after {
+    content: "Aprenda lógica em passos curtos";
+    display: block;
+    color: #7f93b3;
+    font-size: 0.72rem;
+  }
+
+  .explorer-panel {
+    margin: 0 10px 12px;
+    padding: 14px !important;
+    border: 1px solid rgba(132, 154, 196, 0.14) !important;
+    border-radius: 26px !important;
+    background: rgba(255, 255, 255, 0.045) !important;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
+  }
+
+  .explorer-panel::before {
+    content: "Seu caminho de hoje" !important;
+    margin-bottom: 12px !important;
+    padding: 14px !important;
+    border: 0 !important;
+    border-radius: 22px !important;
+    background: linear-gradient(135deg, rgba(77, 228, 193, 0.22), rgba(94, 162, 255, 0.16)) !important;
+    color: #efffff !important;
+    font-weight: 900;
+    font-size: 1rem !important;
+  }
+
+  .explorer-panel h2,
+  .section-toggle {
+    font-size: 0.9rem !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+
+  .module-card {
+    border-radius: 22px !important;
+    border: 1px solid rgba(132, 154, 196, 0.12) !important;
+    background: rgba(255, 255, 255, 0.055) !important;
+  }
+
+  .module-card.is-active,
+  .module-card:hover {
+    border-color: rgba(77, 228, 193, 0.34) !important;
+    background: rgba(77, 228, 193, 0.08) !important;
+  }
+
+  .lesson-node {
+    min-height: 58px !important;
+    border-radius: 18px !important;
+    background: rgba(7, 17, 31, 0.62) !important;
+    border: 1px solid rgba(132, 154, 196, 0.12) !important;
+  }
+
+  .lesson-node.is-active {
+    border-color: rgba(77, 228, 193, 0.42) !important;
+    background: linear-gradient(135deg, rgba(77, 228, 193, 0.16), rgba(94, 162, 255, 0.1)) !important;
+  }
+
+  .node-status {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 12px !important;
+  }
+
+  .node-copy strong {
+    font-size: 0.95rem !important;
+  }
+
+  .node-copy span {
+    display: block !important;
+    margin-top: 3px;
+    color: #7f93b3 !important;
+    font-size: 0.72rem !important;
+  }
+
+  .editor-panel {
+    margin: 0 10px;
+  }
+
+  .tabbar {
+    top: 0 !important;
+    margin: 0 0 10px;
+    padding: 8px !important;
+    border: 1px solid rgba(132, 154, 196, 0.12) !important;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.055) !important;
+  }
+
+  .tab {
+    min-height: 38px;
+    border-radius: 999px !important;
+    background: transparent !important;
+    border: 0 !important;
+    color: #91a5c4 !important;
+  }
+
+  .tab.active {
+    color: #07111f !important;
+    background: #4de4c1 !important;
+    box-shadow: 0 8px 20px rgba(77, 228, 193, 0.22);
+  }
+
+  .editor-scroll {
+    padding: 0 0 98px !important;
+  }
+
+  .hero-card,
+  .focus-card,
+  .reading-card,
+  .practice-card,
+  .code-card,
+  .insight-card,
+  .checkpoint-panel,
+  .question-card,
+  .step-card {
+    border: 1px solid rgba(132, 154, 196, 0.13) !important;
+    border-radius: 26px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.22);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.85rem, 10vw, 2.65rem) !important;
+    letter-spacing: -0.06em !important;
+  }
+
+  .metric-ribbon article,
+  .terminal-stats div,
+  .mini-status-list div {
+    border-radius: 18px !important;
+    background: rgba(7, 17, 31, 0.55) !important;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .ghost-button,
+  .option-button {
+    border-radius: 18px !important;
+  }
+
+  .primary-button {
+    background: #4de4c1 !important;
+    color: #06111f !important;
+    border-color: #4de4c1 !important;
+    font-weight: 900 !important;
+  }
+
+  .mobile-study-dock {
+    border-radius: 26px !important;
+    background: rgba(7, 14, 25, 0.96) !important;
+  }
+
+  .mobile-study-dock button {
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    min-height: 48px !important;
+    border-radius: 18px !important;
+    font-size: 0.69rem !important;
+  }
+
+  .mobile-study-dock button::before {
+    display: block;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .mobile-study-dock button:nth-child(1)::before { content: "⌂"; }
+  .mobile-study-dock button:nth-child(2)::before { content: "◎"; }
+  .mobile-study-dock button:nth-child(3)::before { content: "</>"; font-size: .78rem; }
+  .mobile-study-dock button:nth-child(4)::before { content: "◌"; }
+
+  .playground-window,
+  .account-panel,
+  .student-profile-card,
+  .about-modal-card {
+    border-radius: 26px !important;
+    background: #0b1728 !important;
+  }
+}
