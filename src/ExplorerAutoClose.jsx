@@ -2,21 +2,27 @@ import { useEffect } from "react";
 
 export default function ExplorerAutoClose() {
   useEffect(() => {
-    const closeOpenEditors = () => {
-      const buttons = Array.from(document.querySelectorAll(".section-toggle"));
-      const openEditorsButton = buttons.find((button) => button.textContent?.includes("OPEN EDITORS"));
+    const closeInitialExplorerState = () => {
+      const sectionButtons = Array.from(document.querySelectorAll(".section-toggle"));
+      const openEditorsButton = sectionButtons.find((button) => button.textContent?.includes("OPEN EDITORS"));
 
-      if (!openEditorsButton) return;
-      const isExpanded = openEditorsButton.textContent?.includes("▾");
-
-      if (isExpanded && !openEditorsButton.dataset.autoClosed) {
+      if (openEditorsButton?.textContent?.includes("▾") && !openEditorsButton.dataset.autoClosed) {
         openEditorsButton.dataset.autoClosed = "true";
         openEditorsButton.click();
       }
+
+      const moduleButtons = Array.from(document.querySelectorAll(".module-heading"));
+      moduleButtons.forEach((button) => {
+        const isExpanded = button.textContent?.includes("▾");
+        if (isExpanded && !button.dataset.autoCollapsed) {
+          button.dataset.autoCollapsed = "true";
+          button.click();
+        }
+      });
     };
 
-    const timeout = window.setTimeout(closeOpenEditors, 250);
-    return () => window.clearTimeout(timeout);
+    const timers = [120, 420, 900].map((delay) => window.setTimeout(closeInitialExplorerState, delay));
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
   }, []);
 
   return null;
