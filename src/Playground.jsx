@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
+import MobileDock from "./MobileDock";
 import "./playground.css";
 
 const challenges = [
@@ -138,6 +139,7 @@ export default function Playground() {
 
   return (
     <>
+      <MobileDock />
       {mountNode ? createPortal(button, mountNode) : null}
 
       {open ? createPortal(
