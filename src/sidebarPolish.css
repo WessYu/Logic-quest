@@ -1,3 +1,7 @@
+.ide-shell {
+  grid-template-columns: 72px 340px minmax(0, 1fr) 320px;
+}
+
 .activity-bar {
   width: 72px;
   gap: 8px;
@@ -29,7 +33,6 @@
 .activity-button:nth-child(4)::before { content: "▶"; }
 
 .activity-button::after {
-  content: attr(data-label);
   position: absolute;
   left: calc(100% + 10px);
   top: 50%;
@@ -47,12 +50,21 @@
   transition: opacity 140ms ease, transform 140ms ease;
 }
 
+.activity-button:nth-child(1)::after { content: "Arquivos"; }
+.activity-button:nth-child(2)::after { content: "Busca"; }
+.activity-button:nth-child(3)::after { content: "Progresso"; }
+.activity-button:nth-child(4)::after { content: "Executar"; }
+
 .activity-button:hover::after {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
 }
 
 @media (max-width: 1180px) {
+  .ide-shell {
+    grid-template-columns: 1fr;
+  }
+
   .activity-bar {
     width: auto;
     grid-auto-flow: column;
