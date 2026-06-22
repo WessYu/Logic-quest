@@ -40,7 +40,7 @@
 }
 
 .account-panel {
-  width: min(360px, calc(100vw - 24px));
+  width: min(392px, calc(100vw - 24px));
   margin-top: 10px;
   padding: 16px;
   border: 1px solid rgba(107, 133, 184, 0.28);
@@ -92,6 +92,30 @@
   border: 1px solid rgba(246, 199, 96, 0.22);
   color: #f7d68c;
   line-height: 1.45;
+}
+
+.account-config-info {
+  display: grid;
+  gap: 3px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(77, 228, 193, 0.18);
+  border-radius: 12px;
+  background: rgba(77, 228, 193, 0.055);
+}
+
+.account-config-info span,
+.account-config-info small {
+  color: #9fb0d2;
+  font-size: 0.76rem;
+}
+
+.account-config-info strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #e9f1ff;
+  font-size: 0.86rem;
 }
 
 .account-form,
