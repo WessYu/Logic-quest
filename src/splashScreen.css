@@ -7,123 +7,55 @@
   overflow: hidden;
   background: #060b14;
   color: #e9f1ff;
-  animation: splash-enter 420ms ease both;
+  animation: splash-enter 180ms ease-out both;
+  will-change: opacity;
 }
 
 .splash-screen.is-leaving {
   pointer-events: none;
-  animation: splash-leave 520ms ease forwards;
-}
-
-.splash-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.35;
-  background-image:
-    linear-gradient(rgba(107, 133, 184, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(107, 133, 184, 0.06) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(circle at center, #000 0%, transparent 68%);
-}
-
-.splash-orb {
-  position: absolute;
-  width: 360px;
-  height: 360px;
-  border-radius: 999px;
-  filter: blur(70px);
-  opacity: 0.24;
-}
-
-.splash-orb-a {
-  top: 16%;
-  left: 18%;
-  background: #5ea2ff;
-}
-
-.splash-orb-b {
-  right: 16%;
-  bottom: 14%;
-  background: #4de4c1;
+  animation: splash-leave 260ms ease-in forwards;
 }
 
 .splash-brand {
   position: relative;
   display: grid;
   justify-items: center;
-  gap: 18px;
-  width: min(420px, calc(100vw - 48px));
-  transform: translateY(8px);
-  animation: splash-brand-rise 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  gap: 12px;
+  width: min(320px, calc(100vw - 48px));
+  animation: splash-brand-rise 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
 }
 
 .splash-mark {
   position: relative;
   display: grid;
   place-items: center;
-  width: 112px;
-  height: 112px;
-  border: 1px solid rgba(77, 228, 193, 0.28);
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(94, 162, 255, 0.22), transparent 58%),
-    rgba(9, 17, 31, 0.82);
+  width: 88px;
+  height: 88px;
+  border: 1px solid rgba(77, 228, 193, 0.24);
+  border-radius: 24px;
+  background: rgba(9, 17, 31, 0.9);
   box-shadow:
-    0 0 0 8px rgba(77, 228, 193, 0.035),
-    0 28px 70px rgba(0, 0, 0, 0.5),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    0 0 0 6px rgba(77, 228, 193, 0.035),
+    0 20px 48px rgba(0, 0, 0, 0.42);
 }
 
 .splash-mark strong {
   color: #eaf2ff;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 2.1rem;
+  font-size: 1.8rem;
   letter-spacing: -0.08em;
-  text-shadow: 0 0 22px rgba(77, 228, 193, 0.42);
 }
 
 .splash-cursor {
   position: absolute;
-  right: 26px;
-  bottom: 30px;
-  width: 8px;
-  height: 24px;
+  right: 22px;
+  bottom: 25px;
+  width: 6px;
+  height: 18px;
   border-radius: 999px;
   background: #4de4c1;
-  box-shadow: 0 0 18px rgba(77, 228, 193, 0.74);
-  animation: splash-cursor-blink 640ms steps(2, end) infinite;
-}
-
-.splash-corner {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-color: rgba(77, 228, 193, 0.75);
-  border-style: solid;
-}
-
-.splash-corner.top-left {
-  top: 14px;
-  left: 14px;
-  border-width: 1px 0 0 1px;
-}
-
-.splash-corner.top-right {
-  top: 14px;
-  right: 14px;
-  border-width: 1px 1px 0 0;
-}
-
-.splash-corner.bottom-left {
-  bottom: 14px;
-  left: 14px;
-  border-width: 0 0 1px 1px;
-}
-
-.splash-corner.bottom-right {
-  right: 14px;
-  bottom: 14px;
-  border-width: 0 1px 1px 0;
+  opacity: 0.9;
 }
 
 .splash-copy {
@@ -132,43 +64,20 @@
 
 .splash-copy span {
   display: block;
-  color: #4de4c1;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  animation: splash-text-scan 920ms ease both;
-}
-
-.splash-copy h1 {
-  margin: 8px 0 5px;
   color: #f3f7ff;
-  font-size: clamp(2.15rem, 6vw, 4rem);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  font-weight: 800;
   line-height: 0.95;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.06em;
 }
 
 .splash-copy p {
-  margin: 0;
+  margin: 7px 0 0;
   color: #9fb0d2;
-  font-size: 0.95rem;
-}
-
-.splash-loader {
-  width: 180px;
-  height: 3px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(107, 133, 184, 0.16);
-}
-
-.splash-loader i {
-  display: block;
-  width: 42%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, transparent, #4de4c1, #5ea2ff);
-  animation: splash-loader-run 1100ms cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 @keyframes splash-enter {
@@ -177,49 +86,23 @@
 }
 
 @keyframes splash-leave {
-  to {
-    opacity: 0;
-    transform: scale(1.012);
-  }
+  to { opacity: 0; }
 }
 
 @keyframes splash-brand-rise {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.98);
+    transform: translate3d(0, 10px, 0) scale(0.985);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
-}
-
-@keyframes splash-cursor-blink {
-  50% { opacity: 0; }
-}
-
-@keyframes splash-text-scan {
-  from {
-    opacity: 0;
-    letter-spacing: 0.24em;
-  }
-  to {
-    opacity: 1;
-    letter-spacing: 0.16em;
-  }
-}
-
-@keyframes splash-loader-run {
-  from { transform: translateX(-105%); }
-  to { transform: translateX(245%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .splash-screen,
-  .splash-brand,
-  .splash-copy span,
-  .splash-loader i,
-  .splash-cursor {
+  .splash-brand {
     animation: none;
   }
 }
