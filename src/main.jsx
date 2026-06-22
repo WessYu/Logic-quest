@@ -5,6 +5,7 @@ import GitHubPresence from "./GitHubPresence";
 import "./styles.css";
 import "./stepAlignment.css";
 import "./compactLayout.css";
+import "./lessonReadability.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
