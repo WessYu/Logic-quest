@@ -11,6 +11,7 @@ import ExplorerAutoClose from "./ExplorerAutoClose";
 import SplashScreen from "./SplashScreen";
 import RegisterServiceWorker from "./RegisterServiceWorker";
 import MobileDock from "./MobileDock";
+import LogicQuestEnhancements from "./LogicQuestEnhancements";
 import "./styles.css";
 import "./stepAlignment.css";
 import "./compactLayout.css";
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ExplorerAutoClose />
     <SplashScreen />
     <RegisterServiceWorker />
+    <LogicQuestEnhancements />
     <MobileDock />
   </React.StrictMode>,
 );
