@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import MobileDock from "./MobileDock";
 import "./playground.css";
 
 const challenges = [
@@ -9,6 +8,11 @@ const challenges = [
     label: "Condição",
     file: "condicao.js",
     description: "Crie uma variável idade. Se idade for maior ou igual a 18, mostre Pode entrar.",
+    blocks: [
+      { label: "Variável", snippet: "const idade = 18;" },
+      { label: "If / else", snippet: "if (idade >= 18) {\n  console.log(\"Pode entrar\");\n} else {\n  console.log(\"Entrada negada\");\n}" },
+      { label: "Saída", snippet: "console.log(\"Pode entrar\");" },
+    ],
     code: `const idade = 18;
 
 if (idade >= 18) {
@@ -27,6 +31,11 @@ if (idade >= 18) {
     label: "Repetição",
     file: "repeticao.js",
     description: "Use uma repetição para mostrar Passo 1 até Passo 5 no terminal.",
+    blocks: [
+      { label: "For", snippet: "for (let passo = 1; passo <= 5; passo++) {\n  console.log(\"Passo \" + passo);\n}" },
+      { label: "Contador", snippet: "let passo = 1;" },
+      { label: "Console", snippet: "console.log(\"Passo \" + passo);" },
+    ],
     code: `for (let passo = 1; passo <= 5; passo++) {
   console.log("Passo " + passo);
 }`,
@@ -41,6 +50,11 @@ if (idade >= 18) {
     label: "Função",
     file: "funcao.js",
     description: "Crie uma função calcularDobro que receba um número e retorne o dobro.",
+    blocks: [
+      { label: "Função", snippet: "function calcularDobro(numero) {\n  return numero * 2;\n}" },
+      { label: "Return", snippet: "return numero * 2;" },
+      { label: "Chamada", snippet: "console.log(calcularDobro(6));" },
+    ],
     code: `function calcularDobro(numero) {
   return numero * 2;
 }
@@ -70,6 +84,14 @@ function runUserCode(source) {
   }
 
   return logs;
+}
+
+function getFeedback(checks) {
+  if (!checks.length) return "Execute o código para receber feedback.";
+  const done = checks.filter((check) => check.ok).length;
+  if (done === checks.length) return "Perfeito. Você montou a lógica esperada.";
+  if (done >= Math.ceil(checks.length / 2)) return "Quase lá. Falta ajustar poucos detalhes.";
+  return "Comece pelos blocos sugeridos e rode novamente.";
 }
 
 export default function Playground() {
@@ -104,11 +126,22 @@ export default function Playground() {
   }, []);
 
   const lineNumbers = useMemo(() => code.split("\n").map((_, index) => index + 1), [code]);
+  const passedChecks = result.checks.filter((check) => check.ok).length;
+  const score = result.checks.length ? Math.round((passedChecks / result.checks.length) * 100) : 0;
 
   function selectChallenge(challenge) {
     setActiveChallengeId(challenge.id);
     setCode(challenge.code);
     setResult({ status: "idle", lines: [`Desafio carregado: ${challenge.label}`], checks: [] });
+  }
+
+  function insertBlock(snippet) {
+    setCode((current) => `${current.trim()}\n\n${snippet}`.trim());
+  }
+
+  function resetChallenge() {
+    setCode(activeChallenge.code);
+    setResult({ status: "idle", lines: ["Código restaurado. Execute quando estiver pronto."], checks: [] });
   }
 
   function executeCode() {
@@ -139,7 +172,6 @@ export default function Playground() {
 
   return (
     <>
-      <MobileDock />
       {mountNode ? createPortal(button, mountNode) : null}
 
       {open ? createPortal(
@@ -153,7 +185,7 @@ export default function Playground() {
               </div>
               <div>
                 <span className="panel-caption">LOGIC QUEST PLAYGROUND</span>
-                <h2>Teste códigos simples do curso</h2>
+                <h2>Monte, execute e valide sua lógica</h2>
               </div>
               <button type="button" onClick={() => setOpen(false)} aria-label="Fechar playground">×</button>
             </header>
@@ -172,17 +204,35 @@ export default function Playground() {
                     <small>{challenge.file}</small>
                   </button>
                 ))}
+
+                <div className="playground-score-card">
+                  <span>Score</span>
+                  <strong>{score}%</strong>
+                  <small>{getFeedback(result.checks)}</small>
+                </div>
               </aside>
 
               <main className="playground-editor-shell">
                 <div className="playground-tabs">
                   <span className="active">{activeChallenge.file}</span>
+                  <button type="button" onClick={resetChallenge}>Resetar</button>
                   <button type="button" onClick={executeCode}>Executar</button>
                 </div>
 
                 <div className="playground-challenge">
                   <strong>Desafio atual</strong>
                   <span>{activeChallenge.description}</span>
+                </div>
+
+                <div className="logic-block-builder">
+                  <span className="panel-caption">BLOCOS DE LÓGICA</span>
+                  <div>
+                    {activeChallenge.blocks.map((block) => (
+                      <button key={block.label} type="button" onClick={() => insertBlock(block.snippet)}>
+                        + {block.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="playground-editor">
