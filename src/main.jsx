@@ -18,6 +18,7 @@ import "./compactLayout.css";
 import "./lessonReadability.css";
 import "./sidebarPolish.css";
 import "./mobilePolish.css";
+import "./finalMobilePolish.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
