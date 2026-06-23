@@ -1,0 +1,236 @@
+.lq-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.lq-start-cta,
+.lq-onboarding-actions button:first-child {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #4de4c1, #5ea2ff);
+  color: #061019;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  box-shadow: 0 18px 42px rgba(77, 228, 193, 0.18);
+}
+
+.lq-home-actions span {
+  max-width: 280px;
+  color: #98a9c8;
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.lq-portfolio-case {
+  padding: 18px;
+  border: 1px solid rgba(126, 149, 196, 0.18);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(8, 12, 22, 0.92));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+}
+
+.lq-case-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.lq-case-grid article {
+  padding: 14px;
+  border: 1px solid rgba(126, 149, 196, 0.14);
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+}
+
+.lq-case-grid strong {
+  display: block;
+  color: #f3f7ff;
+  margin-bottom: 6px;
+}
+
+.lq-case-grid p {
+  margin: 0;
+  color: #9fb0cf;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.lq-onboarding {
+  position: fixed;
+  inset: 0;
+  z-index: 240;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(3, 6, 12, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.lq-onboarding-card {
+  width: min(560px, 100%);
+  padding: 26px;
+  border: 1px solid rgba(126, 149, 196, 0.22);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(77, 228, 193, 0.18), transparent 38%),
+    radial-gradient(circle at 100% 10%, rgba(94, 162, 255, 0.2), transparent 36%),
+    #0b1120;
+  box-shadow: 0 36px 120px rgba(0,0,0,.55);
+}
+
+.lq-onboarding-card h2 {
+  margin: 12px 0;
+  max-width: 460px;
+  color: #f3f7ff;
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.lq-onboarding-card p {
+  color: #a7b5d4;
+  line-height: 1.55;
+}
+
+.lq-onboarding-steps {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.lq-onboarding-steps span {
+  padding: 11px 12px;
+  border: 1px solid rgba(126, 149, 196, 0.14);
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+  color: #dfe9ff;
+  font-weight: 800;
+}
+
+.lq-onboarding-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.lq-onboarding-actions button:last-child {
+  border: 1px solid rgba(126, 149, 196, 0.24);
+  border-radius: 999px;
+  padding: 13px 18px;
+  background: rgba(255,255,255,.035);
+  color: #dfe9ff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lq-gamification-panel {
+  position: fixed;
+  right: 18px;
+  bottom: 112px;
+  z-index: 70;
+  width: min(310px, calc(100vw - 36px));
+  padding: 14px;
+  border: 1px solid rgba(126, 149, 196, 0.18);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(77, 228, 193, 0.12), transparent 44%),
+    rgba(7, 11, 18, 0.88);
+  backdrop-filter: blur(18px) saturate(1.2);
+  box-shadow: 0 20px 70px rgba(0,0,0,.35);
+}
+
+.lq-level-row,
+.lq-xp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lq-level-row span,
+.lq-xp-row span,
+.lq-gamification-panel small {
+  color: #96a6c5;
+  font-size: .76rem;
+}
+
+.lq-level-row strong,
+.lq-xp-row strong {
+  color: #f3f7ff;
+}
+
+.lq-progress-track {
+  height: 9px;
+  margin: 12px 0 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(126, 149, 196, 0.13);
+}
+
+.lq-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #4de4c1, #5ea2ff);
+  transition: width 420ms ease;
+}
+
+.lq-achievements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.lq-achievements span {
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+.lq-achievements .unlocked {
+  background: rgba(77, 228, 193, 0.13);
+  color: #cffff6;
+}
+
+.lq-achievements .locked {
+  background: rgba(126, 149, 196, 0.09);
+  color: #7886a3;
+}
+
+@media (max-width: 900px) {
+  .lq-case-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .lq-gamification-panel {
+    position: static;
+    width: auto;
+    margin: 10px 12px 0;
+    border-radius: 18px;
+  }
+
+  .lq-portfolio-case {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .lq-case-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lq-onboarding-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+}
