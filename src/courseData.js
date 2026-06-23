@@ -1,1 +1,1 @@
-export { courseModules } from "./professionalCourseData";
+export { courseModules } from "./seniorCourseData";
