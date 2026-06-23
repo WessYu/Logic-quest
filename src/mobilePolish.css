@@ -129,3 +129,113 @@
   .hero-copy h1 { font-size: 1.62rem !important; }
   .playground-sidebar { grid-template-columns: 1fr !important; }
 }
+
+@media (max-width: 760px) {
+  body {
+    padding-bottom: calc(128px + env(safe-area-inset-bottom)) !important;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .window-shell,
+  .ide-shell,
+  .explorer-panel,
+  .editor-panel,
+  .editor-scroll,
+  .hero-card,
+  .focus-card,
+  .reading-card,
+  .practice-card,
+  .checkpoint-panel,
+  .question-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .tabbar,
+  .editor-chip-list,
+  .concept-pills,
+  .source-list,
+  .run-actions,
+  .module-tabs,
+  .lesson-tabs,
+  .category-tabs,
+  .chips,
+  .chip-list {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    scrollbar-width: none;
+  }
+
+  .tabbar::-webkit-scrollbar,
+  .editor-chip-list::-webkit-scrollbar,
+  .concept-pills::-webkit-scrollbar,
+  .source-list::-webkit-scrollbar,
+  .run-actions::-webkit-scrollbar,
+  .module-tabs::-webkit-scrollbar,
+  .lesson-tabs::-webkit-scrollbar,
+  .category-tabs::-webkit-scrollbar,
+  .chips::-webkit-scrollbar,
+  .chip-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab,
+  .editor-chip,
+  .concept-pills span,
+  .source-item,
+  .module-pill,
+  .chip {
+    flex: 0 0 auto !important;
+    max-width: min(78vw, 320px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .editor-scroll {
+    padding-bottom: calc(156px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .mobile-dock,
+  .study-dock,
+  .bottom-nav,
+  .mobile-nav,
+  .dock {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    transform: translateX(-50%) !important;
+    width: calc(100vw - 24px) !important;
+    max-width: 430px !important;
+    z-index: 90 !important;
+  }
+
+  .account-widget,
+  .account-widget[style],
+  .login-floating,
+  .floating-login,
+  .github-login,
+  .signin-floating {
+    max-width: calc(100vw - 24px) !important;
+    z-index: 95 !important;
+  }
+
+  .login-floating,
+  .floating-login,
+  .github-login,
+  .signin-floating {
+    position: static !important;
+    transform: none !important;
+    margin: 12px 0 !important;
+  }
+}
