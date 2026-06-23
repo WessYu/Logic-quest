@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import "./playground.css";
+import "./playgroundEnhancements.css";
 
 const challenges = [
   {
