@@ -1,0 +1,74 @@
+@media (max-width: 760px) {
+  .hero-card,
+  .focus-card,
+  .reading-card,
+  .code-card,
+  .practice-card,
+  .insight-card,
+  .checkpoint-panel,
+  .question-card,
+  .lq-portfolio-case {
+    margin-inline: 0 !important;
+  }
+
+  .editor-scroll {
+    gap: 14px !important;
+    padding-inline: 12px !important;
+    padding-bottom: calc(176px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .hero-card,
+  .focus-card {
+    padding: 14px !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.42rem, 7.8vw, 1.95rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .focus-copy h2,
+  .checkpoint-panel h2,
+  .card-header strong {
+    font-size: 1.04rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .step-runway,
+  .editor-columns,
+  .editor-columns.secondary {
+    gap: 12px !important;
+  }
+
+  .step-card,
+  .reading-card,
+  .code-card,
+  .practice-card,
+  .insight-card,
+  .checkpoint-panel,
+  .question-card {
+    padding: 12px !important;
+    border-radius: 15px !important;
+  }
+
+  .mobile-study-dock.motion-tabs {
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .motion-tab-popup {
+    min-height: 58px !important;
+  }
+
+  .motion-tab {
+    min-height: 54px !important;
+  }
+
+  .lq-home-actions {
+    margin-top: 16px;
+  }
+
+  .lq-start-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
