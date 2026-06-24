@@ -8,7 +8,6 @@ import StudentProfile from "./StudentProfile";
 import AboutLogicQuest from "./AboutLogicQuest";
 import Playground from "./Playground";
 import ExplorerAutoClose from "./ExplorerAutoClose";
-import SplashScreen from "./SplashScreen";
 import RegisterServiceWorker from "./RegisterServiceWorker";
 import MobileDock from "./MobileDock";
 import LogicQuestEnhancements from "./LogicQuestEnhancements";
@@ -30,7 +29,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AboutLogicQuest />
     <Playground />
     <ExplorerAutoClose />
-    <SplashScreen />
     <RegisterServiceWorker />
     <LogicQuestEnhancements />
     <MobileDock />
