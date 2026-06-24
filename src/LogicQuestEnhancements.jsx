@@ -94,8 +94,35 @@ function buildStats(progress, lessons) {
   };
 }
 
-function scrollToStart() {
-  document.querySelector(".explorer-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+function focusLessonTab() {
+  const lessonTab = Array.from(document.querySelectorAll(".tab")).find((button) =>
+    button.textContent?.includes(".module"),
+  );
+
+  lessonTab?.click();
+}
+
+function scrollToLessonContent() {
+  const destination =
+    document.querySelector("#steps-section") ||
+    document.querySelector(".editor-panel") ||
+    document.querySelector(".explorer-panel");
+
+  destination?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function startFirstAvailableLesson() {
+  const lessonNode =
+    document.querySelector(".lesson-node.unlocked:not(.done)") ||
+    document.querySelector(".lesson-node.unlocked") ||
+    document.querySelector(".lesson-node");
+
+  lessonNode?.click();
+
+  window.setTimeout(() => {
+    focusLessonTab();
+    scrollToLessonContent();
+  }, 90);
 }
 
 function installHomeCta() {
@@ -109,7 +136,7 @@ function installHomeCta() {
   start.type = "button";
   start.className = "lq-start-cta";
   start.textContent = "Começar agora";
-  start.addEventListener("click", scrollToStart);
+  start.addEventListener("click", startFirstAvailableLesson);
 
   const hint = document.createElement("span");
   hint.textContent = "Escolha uma lição, pratique e passe pelo checkpoint.";
@@ -179,7 +206,7 @@ export default function LogicQuestEnhancements() {
 
   function startTrail() {
     closeOnboarding();
-    window.setTimeout(scrollToStart, 80);
+    window.setTimeout(startFirstAvailableLesson, 120);
   }
 
   return (
@@ -205,32 +232,6 @@ export default function LogicQuestEnhancements() {
           </div>
         </section>
       ) : null}
-
-      <aside className="lq-gamification-panel" aria-label="Gamificação Logic Quest">
-        <div className="lq-level-row">
-          <span>Nível</span>
-          <strong>{stats.rank}</strong>
-        </div>
-        <div className="lq-xp-row">
-          <strong>{stats.totalXp} XP</strong>
-          <span>{stats.streak} dia(s) de streak</span>
-        </div>
-        <div className="lq-progress-track" aria-label={`Progresso da trilha ${stats.completion}%`}>
-          <span style={{ width: `${stats.completion}%` }} />
-        </div>
-        <small>{stats.completed}/{stats.total} lições concluídas</small>
-        <div className="lq-achievements">
-          {stats.achievements.map((achievement) => (
-            <span
-              key={achievement.id}
-              className={achievement.unlocked ? "unlocked" : "locked"}
-              title={achievement.description}
-            >
-              {achievement.title}
-            </span>
-          ))}
-        </div>
-      </aside>
     </>
   );
 }
