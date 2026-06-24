@@ -219,9 +219,9 @@ export default function StudentProfile() {
               </div>
 
               <div className="student-score-card">
-                <small>Score</small>
-                <strong>{stats.score}</strong>
-                <span>{completionRate}% da trilha</span>
+                <small>XP no perfil</small>
+                <strong>{stats.xp}</strong>
+                <span>{stats.rank} • {completionRate}% da trilha</span>
               </div>
             </header>
 
