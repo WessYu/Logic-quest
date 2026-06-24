@@ -6,7 +6,7 @@ const rawUrl = import.meta.env.VITE_SUPABASE_URL || "";
 const rawKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
 
 function clean(value) {
-  return String(value || "").trim().replace(/^['\"]|['\"]$/g, "");
+  return String(value || "").trim().replace(/^[\'\"]|[\'\"]$/g, "");
 }
 
 function getUrl() {
@@ -64,22 +64,39 @@ function getRecentPercent(item) {
   return Math.min(100, Math.round(((item.completed || 0) / 28) * 100));
 }
 
+function getDashboardErrorMessage(error) {
+  if (error.message === "not_authorized") {
+    return "Essa conta ainda não está cadastrada como admin no Supabase.";
+  }
+
+  if (looksLikeExpiredSession(error)) {
+    return "Sua sessão venceu. Saia da conta e entre novamente.";
+  }
+
+  return error.message;
+}
+
 export default function AdminDashboard({ session: externalSession }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState(null);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+  const [checkingAccess, setCheckingAccess] = useState(true);
+  const [canAccess, setCanAccess] = useState(false);
   const [sessionOverride, setSessionOverride] = useState(null);
   const session = sessionOverride || externalSession || readLocalSession();
 
-  async function refresh() {
+  async function fetchDashboard({ silent = false } = {}) {
     if (!session?.access_token) {
-      setMessage("Entre na sua conta de criador para carregar o painel.");
-      return;
+      if (!silent) setMessage("Entre na sua conta de criador para carregar o painel.");
+      setCanAccess(false);
+      return null;
     }
 
-    setBusy(true);
-    setMessage("");
+    if (!silent) {
+      setBusy(true);
+      setMessage("");
+    }
 
     try {
       let activeSession = await refreshLocalSession(session);
@@ -88,7 +105,8 @@ export default function AdminDashboard({ session: externalSession }) {
       try {
         const dashboard = await loadDashboard(activeSession);
         setData(dashboard);
-        return;
+        setCanAccess(true);
+        return dashboard;
       } catch (firstError) {
         if (!looksLikeExpiredSession(firstError)) throw firstError;
 
@@ -96,25 +114,86 @@ export default function AdminDashboard({ session: externalSession }) {
         setSessionOverride(activeSession);
         const dashboard = await loadDashboard(activeSession);
         setData(dashboard);
+        setCanAccess(true);
+        return dashboard;
       }
     } catch (error) {
-      setMessage(
-        error.message === "not_authorized"
-          ? "Essa conta ainda não está cadastrada como admin no Supabase."
-          : looksLikeExpiredSession(error)
-            ? "Sua sessão venceu. Saia da conta e entre novamente."
-            : error.message,
-      );
+      if (error.message === "not_authorized") {
+        setCanAccess(false);
+        setOpen(false);
+      }
+
+      if (!silent) {
+        setMessage(getDashboardErrorMessage(error));
+      }
+
+      return null;
     } finally {
-      setBusy(false);
+      if (!silent) setBusy(false);
     }
   }
+
+  async function refresh() {
+    await fetchDashboard();
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function verifyCreatorAccess() {
+      if (!session?.access_token) {
+        setCanAccess(false);
+        setCheckingAccess(false);
+        return;
+      }
+
+      setCheckingAccess(true);
+
+      try {
+        let activeSession = await refreshLocalSession(session);
+        if (cancelled) return;
+        setSessionOverride(activeSession);
+
+        try {
+          const dashboard = await loadDashboard(activeSession);
+          if (cancelled) return;
+          setData(dashboard);
+          setCanAccess(true);
+          setMessage("");
+        } catch (firstError) {
+          if (!looksLikeExpiredSession(firstError)) throw firstError;
+
+          activeSession = await refreshLocalSession(activeSession);
+          if (cancelled) return;
+          setSessionOverride(activeSession);
+          const dashboard = await loadDashboard(activeSession);
+          if (cancelled) return;
+          setData(dashboard);
+          setCanAccess(true);
+          setMessage("");
+        }
+      } catch {
+        if (cancelled) return;
+        setCanAccess(false);
+        setOpen(false);
+        setMessage("");
+      } finally {
+        if (!cancelled) setCheckingAccess(false);
+      }
+    }
+
+    verifyCreatorAccess();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [externalSession?.access_token]);
 
   useEffect(() => {
     if (open && !data && !busy) refresh();
   }, [open]);
 
-  if (!session) return null;
+  if (!session || checkingAccess || !canAccess) return null;
 
   return (
     <section className="admin-dashboard">
