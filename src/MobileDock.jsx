@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import "./mobileDock.css";
 import "./mimoMobile.css";
 import "./mobileEmergencyFix.css";
+import "./mimoAppLayout.css";
 
 function scrollToSelector(selector) {
   const element = document.querySelector(selector);
