@@ -16,7 +16,7 @@ function flattenLessons(modules) {
 
 function getLessonState(index) {
   if (index === 0) return "active";
-  if (index < 3) return "open";
+  if (index < 4) return "open";
   return "locked";
 }
 
@@ -32,7 +32,7 @@ export default function MimoMobileExperience() {
   const lessons = useMemo(() => flattenLessons(modules), [modules]);
   const [activeTab, setActiveTab] = useState("learn");
   const activeLesson = lessons[0];
-  const nextLessons = lessons.slice(0, 5);
+  const nextLessons = lessons.slice(0, 4);
   const firstModule = modules[0];
 
   function renderLearn() {
@@ -101,6 +101,28 @@ export default function MimoMobileExperience() {
                 <p>{lesson.time}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="mimo-section-block no-gap-fix">
+          <div className="mimo-section-heading compact">
+            <div>
+              <span>Próximos passos</span>
+              <h2>Continue sem perder ritmo</h2>
+            </div>
+          </div>
+
+          <div className="mimo-action-grid">
+            <button type="button" onClick={() => setActiveTab("practice")}>
+              <span>✦</span>
+              <strong>Praticar agora</strong>
+              <small>1 desafio rápido</small>
+            </button>
+            <button type="button" onClick={() => setActiveTab("path")}>
+              <span>▥</span>
+              <strong>Ver trilha</strong>
+              <small>{firstModule.lessons.length} aulas no módulo</small>
+            </button>
           </div>
         </section>
       </>
@@ -187,10 +209,12 @@ export default function MimoMobileExperience() {
         <button type="button" className="mimo-profile-button" onClick={() => setActiveTab("profile")}>WY</button>
       </header>
 
-      {activeTab === "learn" && renderLearn()}
-      {activeTab === "practice" && renderPractice()}
-      {activeTab === "path" && renderPath()}
-      {activeTab === "profile" && renderProfile()}
+      <div className="mimo-mobile-content">
+        {activeTab === "learn" && renderLearn()}
+        {activeTab === "practice" && renderPractice()}
+        {activeTab === "path" && renderPath()}
+        {activeTab === "profile" && renderProfile()}
+      </div>
 
       <nav className="mimo-app-tabbar" aria-label="Navegação do app">
         {tabs.map((tab) => (
