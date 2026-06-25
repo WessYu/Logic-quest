@@ -9,12 +9,12 @@
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
-    background: #0b0618 !important;
+    background: #07111f !important;
   }
 
   body {
     margin: 0;
-    padding-bottom: calc(118px + env(safe-area-inset-bottom)) !important;
+    padding-bottom: calc(150px + env(safe-area-inset-bottom)) !important;
   }
 
   .window-shell,
@@ -29,12 +29,12 @@
   .mimo-mobile-root {
     display: block;
     min-height: 100svh;
-    padding: calc(16px + env(safe-area-inset-top)) 14px calc(118px + env(safe-area-inset-bottom));
-    color: #f8f4ff;
+    padding: calc(12px + env(safe-area-inset-top)) 14px calc(168px + env(safe-area-inset-bottom));
+    color: #e8efff;
     background:
-      radial-gradient(circle at 12% -4%, rgba(194, 140, 255, 0.34), transparent 30%),
-      radial-gradient(circle at 100% 8%, rgba(77, 228, 193, 0.15), transparent 26%),
-      linear-gradient(180deg, #170a2b 0%, #0d071b 42%, #090713 100%);
+      radial-gradient(circle at 8% 0%, rgba(94, 162, 255, 0.13), transparent 28%),
+      radial-gradient(circle at 96% 6%, rgba(77, 228, 193, 0.09), transparent 24%),
+      linear-gradient(180deg, #07111f 0%, #0b1019 48%, #070b12 100%);
     font-family: "Space Grotesk", system-ui, sans-serif;
   }
 
@@ -43,29 +43,29 @@
     top: 0;
     z-index: 50;
     display: grid;
-    grid-template-columns: 60px minmax(0, 1fr) auto;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
     align-items: center;
-    gap: 13px;
-    padding: 4px 0 14px;
-    background: linear-gradient(180deg, rgba(23, 10, 43, 0.98), rgba(23, 10, 43, 0.76), transparent);
-    backdrop-filter: blur(18px) saturate(1.25);
+    gap: 11px;
+    padding: 4px 0 12px;
+    background: linear-gradient(180deg, rgba(7, 17, 31, 0.98), rgba(7, 17, 31, 0.76), transparent);
+    backdrop-filter: blur(16px) saturate(1.2);
   }
 
   .mimo-logo {
     display: grid;
     place-items: center;
-    width: 58px;
-    height: 58px;
-    border: 1px solid rgba(220, 205, 255, 0.22);
-    border-radius: 21px;
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(132, 154, 196, 0.22);
+    border-radius: 18px;
     background:
-      radial-gradient(circle at 28% 24%, rgba(255,255,255,.22), transparent 17%),
-      linear-gradient(145deg, #3a2365, #181129 56%, #0c0917);
+      radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.16), transparent 18%),
+      linear-gradient(145deg, #1c2a44, #0f1725 58%, #090f19);
     color: #4de4c1;
     font-family: "IBM Plex Mono", monospace;
-    font-weight: 950;
-    letter-spacing: -0.08em;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 16px 34px rgba(77,29,150,.42);
+    font-size: 0.82rem;
+    font-weight: 900;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 26px rgba(0, 0, 0, 0.28);
   }
 
   .mimo-app-header h1,
@@ -76,39 +76,40 @@
   .mimo-lesson-hero h1,
   .mimo-content-card h2 {
     margin: 0;
-    letter-spacing: -0.065em;
-    line-height: 0.98;
+    letter-spacing: -0.055em;
+    line-height: 1;
   }
 
   .mimo-app-header h1 {
-    font-size: clamp(1.35rem, 6.6vw, 1.8rem);
+    font-size: clamp(1.22rem, 5.7vw, 1.56rem);
   }
 
   .mimo-app-header p {
-    margin: 5px 0 0;
-    color: #aaa0bd;
-    font-size: .82rem;
+    margin: 4px 0 0;
+    color: #8ea2c6;
+    font-size: 0.78rem;
     font-weight: 650;
+    line-height: 1.2;
   }
 
   .mimo-app-header > span {
     display: inline-flex;
-    min-height: 34px;
+    min-height: 31px;
     align-items: center;
-    padding: 0 10px;
-    border: 1px solid rgba(77, 228, 193, .26);
+    padding: 0 9px;
+    border: 1px solid rgba(77, 228, 193, 0.25);
     border-radius: 999px;
-    background: rgba(77, 228, 193, .1);
-    color: #e0fff9;
-    font-weight: 950;
-    font-size: .78rem;
+    background: rgba(77, 228, 193, 0.08);
+    color: #d9fff8;
+    font-weight: 900;
+    font-size: 0.74rem;
   }
 
   .mimo-stats-row {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin: 4px 0 14px;
+    gap: 8px;
+    margin: 0 0 12px;
   }
 
   .mimo-stats-row article,
@@ -118,72 +119,73 @@
   .mimo-code-card,
   .mimo-lesson-hero,
   .mimo-result {
-    border: 1px solid rgba(220, 205, 255, .15);
-    background: rgba(255, 255, 255, .075);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 18px 40px rgba(0,0,0,.2);
+    border: 1px solid rgba(132, 154, 196, 0.16);
+    background: rgba(17, 24, 39, 0.72);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 14px 30px rgba(0, 0, 0, 0.2);
   }
 
   .mimo-stats-row article {
-    padding: 12px;
-    border-radius: 21px;
+    padding: 10px;
+    border-radius: 18px;
   }
 
   .mimo-stats-row strong {
     display: block;
-    color: #f8f4ff;
-    font-size: 1.15rem;
-    font-weight: 950;
+    color: #e8efff;
+    font-size: 1.02rem;
+    font-weight: 900;
   }
 
   .mimo-stats-row span,
   .mimo-eyebrow,
   .mimo-module-top,
   .mimo-lesson-meta span {
-    color: #aaa0bd;
-    font-size: .72rem;
-    font-weight: 900;
-    letter-spacing: .07em;
+    color: #8ea2c6;
+    font-size: 0.66rem;
+    font-weight: 850;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
   }
 
   .mimo-hero {
     position: relative;
-    min-height: 250px;
+    min-height: 178px;
     overflow: hidden;
-    padding: 22px 18px;
-    border-radius: 32px;
+    padding: 18px 16px;
+    border-radius: 26px;
     background:
-      radial-gradient(circle at 84% 18%, rgba(77, 228, 193, .36), transparent 18%),
-      radial-gradient(circle at 76% 82%, rgba(255, 214, 107, .16), transparent 20%),
-      linear-gradient(145deg, #3a176a 0%, #1c1237 52%, #111024 100%);
-    box-shadow: 0 24px 56px rgba(0,0,0,.28);
+      radial-gradient(circle at 86% 16%, rgba(77, 228, 193, 0.2), transparent 20%),
+      radial-gradient(circle at 82% 86%, rgba(94, 162, 255, 0.12), transparent 22%),
+      linear-gradient(145deg, #142037 0%, #111827 58%, #0b111b 100%);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
   }
 
   .mimo-hero::after {
     content: "JS";
     position: absolute;
-    right: 18px;
-    bottom: 18px;
+    right: 16px;
+    bottom: 16px;
     display: grid;
     place-items: center;
-    width: 82px;
-    height: 82px;
-    border: 1px solid rgba(220, 205, 255, .22);
-    border-radius: 30px;
+    width: 58px;
+    height: 58px;
+    border: 1px solid rgba(132, 154, 196, 0.24);
+    border-radius: 20px;
     background:
-      radial-gradient(circle at 32% 32%, #4de4c1 0 4px, transparent 5px),
-      radial-gradient(circle at 68% 32%, #4de4c1 0 4px, transparent 5px),
-      linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+      radial-gradient(circle at 32% 32%, #4de4c1 0 3px, transparent 4px),
+      radial-gradient(circle at 68% 32%, #4de4c1 0 3px, transparent 4px),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
     color: #4de4c1;
     font-family: "IBM Plex Mono", monospace;
-    font-weight: 950;
+    font-size: 0.78rem;
+    font-weight: 900;
   }
 
   .mimo-hero h1 {
-    max-width: 9ch;
-    margin-top: 8px;
-    font-size: clamp(2.1rem, 11vw, 3rem);
-    color: #fff;
+    max-width: 9.5ch;
+    margin-top: 7px;
+    color: #f4f8ff;
+    font-size: clamp(1.72rem, 8.5vw, 2.34rem);
   }
 
   .mimo-hero p,
@@ -192,16 +194,21 @@
   .mimo-content-card p,
   .mimo-step-strip p,
   .mimo-lesson-hero p {
-    color: #aaa0bd;
-    font-size: .95rem;
-    line-height: 1.48;
+    color: #8ea2c6;
+    font-size: 0.9rem;
+    line-height: 1.43;
+  }
+
+  .mimo-hero p {
+    max-width: calc(100% - 62px);
+    margin: 12px 0 10px;
   }
 
   .mimo-tags {
     display: flex;
-    gap: 8px;
+    gap: 7px;
     overflow-x: auto;
-    padding: 6px 0 2px;
+    padding: 3px 0 2px;
     scrollbar-width: none;
   }
 
@@ -212,38 +219,38 @@
 
   .mimo-tags span {
     flex: 0 0 auto;
-    padding: 8px 11px;
-    border: 1px solid rgba(77, 228, 193, .17);
+    padding: 7px 10px;
+    border: 1px solid rgba(77, 228, 193, 0.18);
     border-radius: 999px;
-    background: rgba(77, 228, 193, .08);
+    background: rgba(77, 228, 193, 0.07);
     color: #d7fff8;
-    font-size: .78rem;
+    font-size: 0.76rem;
     font-weight: 800;
   }
 
   .mimo-continue-card {
     display: grid;
-    gap: 14px;
-    margin-top: 14px;
-    padding: 16px;
-    border-radius: 28px;
-    background: linear-gradient(135deg, rgba(77,228,193,.12), rgba(255,255,255,.065));
+    gap: 12px;
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(77, 228, 193, 0.09), rgba(17, 24, 39, 0.78));
   }
 
   .mimo-continue-card h2 {
-    margin-top: 6px;
-    font-size: 1.35rem;
+    margin-top: 5px;
+    font-size: 1.2rem;
   }
 
   .mimo-continue-card button,
   .mimo-primary {
-    min-height: 52px;
+    min-height: 48px;
     border: 0;
-    border-radius: 20px;
+    border-radius: 17px;
     background: #4de4c1;
-    color: #07111d;
-    font-weight: 950;
-    box-shadow: 0 14px 26px rgba(77,228,193,.2);
+    color: #06111f;
+    font-weight: 900;
+    box-shadow: 0 12px 22px rgba(77, 228, 193, 0.16);
   }
 
   .mimo-section-head {
@@ -251,18 +258,18 @@
     align-items: end;
     justify-content: space-between;
     gap: 12px;
-    margin: 22px 0 12px;
+    margin: 18px 0 10px;
   }
 
   .mimo-section-head h2 {
     margin-top: 5px;
-    font-size: 1.35rem;
+    font-size: 1.22rem;
   }
 
   .mimo-section-head > span {
     flex: 0 0 auto;
-    color: #aaa0bd;
-    font-size: .82rem;
+    color: #8ea2c6;
+    font-size: 0.78rem;
     font-weight: 800;
   }
 
@@ -270,21 +277,21 @@
   .mimo-lesson-screen,
   .mimo-quiz-stack {
     display: grid;
-    gap: 14px;
+    gap: 12px;
   }
 
   .mimo-module-card {
-    padding: 16px;
-    border-radius: 30px;
+    padding: 14px;
+    border-radius: 24px;
     background:
-      radial-gradient(circle at 96% 0%, rgba(77,228,193,.08), transparent 32%),
-      linear-gradient(145deg, rgba(255,255,255,.105), rgba(255,255,255,.052));
+      radial-gradient(circle at 96% 0%, rgba(77, 228, 193, 0.07), transparent 32%),
+      linear-gradient(145deg, rgba(17, 24, 39, 0.82), rgba(12, 18, 32, 0.82));
   }
 
   .mimo-module-card:nth-child(2n) {
     background:
-      radial-gradient(circle at 92% 0%, rgba(255,214,107,.1), transparent 32%),
-      linear-gradient(145deg, rgba(118,82,218,.16), rgba(255,255,255,.052));
+      radial-gradient(circle at 92% 0%, rgba(94, 162, 255, 0.09), transparent 32%),
+      linear-gradient(145deg, rgba(17, 24, 39, 0.82), rgba(12, 18, 32, 0.82));
   }
 
   .mimo-module-top,
@@ -297,162 +304,165 @@
 
   .mimo-module-top strong,
   .mimo-lesson-meta span {
-    padding: 6px 9px;
-    border: 1px solid rgba(77,228,193,.22);
+    padding: 5px 8px;
+    border: 1px solid rgba(77, 228, 193, 0.2);
     border-radius: 999px;
-    background: rgba(77,228,193,.08);
+    background: rgba(77, 228, 193, 0.07);
     color: #d2fff8;
-    font-size: .64rem;
+    font-size: 0.62rem;
   }
 
   .mimo-module-card h3 {
-    margin-top: 10px;
-    font-size: 1.18rem;
+    margin-top: 9px;
+    color: #e8efff;
+    font-size: 1.08rem;
   }
 
   .mimo-lesson-list {
     display: grid;
-    gap: 10px;
-    margin-top: 12px;
+    gap: 9px;
+    margin-top: 11px;
   }
 
   .mimo-lesson-list button {
     display: grid;
-    grid-template-columns: 40px minmax(0, 1fr);
-    gap: 11px;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px;
     align-items: center;
-    min-height: 62px;
-    padding: 10px 11px;
-    border: 1px solid rgba(220,205,255,.12);
-    border-radius: 21px;
-    background: rgba(9,7,19,.58);
-    color: #f8f4ff;
+    min-height: 58px;
+    padding: 9px 10px;
+    border: 1px solid rgba(132, 154, 196, 0.14);
+    border-radius: 18px;
+    background: rgba(7, 17, 31, 0.62);
+    color: #e8efff;
     text-align: left;
   }
 
   .mimo-lesson-list button > span {
     display: grid;
     place-items: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 16px;
-    background: linear-gradient(145deg, rgba(143,92,255,.38), rgba(77,228,193,.14));
+    width: 36px;
+    height: 36px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(94, 162, 255, 0.26), rgba(77, 228, 193, 0.12));
     color: white;
-    font-weight: 950;
+    font-weight: 900;
   }
 
   .mimo-lesson-list button.done {
-    border-color: rgba(77,228,193,.32);
+    border-color: rgba(77, 228, 193, 0.32);
   }
 
   .mimo-lesson-list button.locked {
-    opacity: .48;
+    opacity: 0.48;
   }
 
   .mimo-lesson-list strong,
   .mimo-question h3 {
     display: block;
-    font-size: .94rem;
-    font-weight: 950;
-    letter-spacing: -.025em;
+    color: #e8efff;
+    font-size: 0.91rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
   }
 
   .mimo-lesson-list small {
     display: block;
     margin-top: 3px;
-    color: #aaa0bd;
-    font-size: .76rem;
+    color: #8ea2c6;
+    font-size: 0.74rem;
   }
 
   .mimo-back {
     width: fit-content;
-    min-height: 42px;
-    padding: 0 14px;
-    border: 1px solid rgba(220,205,255,.14);
+    min-height: 40px;
+    padding: 0 13px;
+    border: 1px solid rgba(132, 154, 196, 0.16);
     border-radius: 999px;
-    background: rgba(255,255,255,.06);
-    color: #f8f4ff;
-    font-weight: 850;
+    background: rgba(17, 24, 39, 0.72);
+    color: #e8efff;
+    font-weight: 800;
   }
 
   .mimo-lesson-hero,
   .mimo-content-card,
   .mimo-code-card {
-    padding: 16px;
-    border-radius: 28px;
+    padding: 14px;
+    border-radius: 24px;
   }
 
   .mimo-lesson-hero {
     background:
-      radial-gradient(circle at 88% 18%, rgba(77,228,193,.22), transparent 21%),
-      linear-gradient(145deg, #3a176a, #141023);
+      radial-gradient(circle at 88% 18%, rgba(77, 228, 193, 0.16), transparent 21%),
+      linear-gradient(145deg, #142037, #101622);
   }
 
   .mimo-lesson-hero h1 {
     margin-top: 8px;
-    font-size: clamp(1.9rem, 9vw, 2.5rem);
+    font-size: clamp(1.62rem, 7.8vw, 2.08rem);
   }
 
   .mimo-content-card h2 {
-    margin-bottom: 12px;
-    font-size: 1.28rem;
+    margin-bottom: 10px;
+    font-size: 1.18rem;
   }
 
   .mimo-step-strip {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
 
   .mimo-step-strip article {
-    flex: 0 0 min(82%, 330px);
-    min-height: 150px;
-    padding: 16px;
-    border: 1px solid rgba(220,205,255,.14);
-    border-radius: 28px;
-    background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.045));
+    flex: 0 0 min(78%, 300px);
+    min-height: 132px;
+    padding: 14px;
+    border: 1px solid rgba(132, 154, 196, 0.14);
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.82), rgba(12, 18, 32, 0.82));
     scroll-snap-align: start;
   }
 
   .mimo-step-strip span,
   .mimo-code-card span,
   .mimo-question > strong {
-    color: #decfff;
-    font-size: .72rem;
-    font-weight: 950;
-    letter-spacing: .07em;
+    color: #8ea2c6;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
   }
 
   .mimo-step-strip h3 {
-    margin: 10px 0 0;
-    font-size: 1.05rem;
-    letter-spacing: -.04em;
+    margin: 9px 0 0;
+    color: #e8efff;
+    font-size: 1rem;
+    letter-spacing: -0.035em;
   }
 
   .mimo-code-card {
-    background: #100a20;
+    background: #0c1220;
   }
 
   .mimo-code-card pre {
     overflow: auto;
-    max-height: 300px;
+    max-height: 280px;
     margin: 12px 0 0;
-    color: #ffe9a6;
+    color: #f4e39a;
     font-family: "IBM Plex Mono", monospace;
-    font-size: .8rem;
-    line-height: 1.55;
+    font-size: 0.78rem;
+    line-height: 1.5;
     white-space: pre-wrap;
   }
 
   .mimo-question {
     display: grid;
     gap: 10px;
-    padding: 14px;
-    border-radius: 22px;
-    background: rgba(9,7,19,.48);
+    padding: 13px;
+    border-radius: 20px;
+    background: rgba(7, 17, 31, 0.58);
   }
 
   .mimo-options {
@@ -461,104 +471,112 @@
   }
 
   .mimo-options button {
-    min-height: 54px;
+    min-height: 52px;
     padding: 12px 13px;
-    border: 1px solid rgba(220,205,255,.14);
-    border-radius: 18px;
-    background: rgba(255,255,255,.045);
-    color: #f8f4ff;
+    border: 1px solid rgba(132, 154, 196, 0.14);
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.035);
+    color: #e8efff;
     text-align: left;
     font-weight: 800;
   }
 
   .mimo-options button.selected {
-    border-color: rgba(143,92,255,.52);
-    background: rgba(143,92,255,.18);
+    border-color: rgba(94, 162, 255, 0.48);
+    background: rgba(94, 162, 255, 0.12);
   }
 
   .mimo-result {
-    padding: 14px;
-    border-radius: 20px;
-    color: #f8f4ff;
-    font-weight: 850;
+    padding: 13px;
+    border-radius: 18px;
+    color: #e8efff;
+    font-weight: 800;
   }
 
   .mimo-result.success {
-    border-color: rgba(77,228,193,.34);
-    background: rgba(77,228,193,.12);
+    border-color: rgba(77, 228, 193, 0.32);
+    background: rgba(77, 228, 193, 0.1);
   }
 
   .mimo-result.retry,
   .mimo-result.warning {
-    border-color: rgba(255,214,107,.34);
-    background: rgba(255,214,107,.1);
+    border-color: rgba(246, 199, 96, 0.32);
+    background: rgba(246, 199, 96, 0.08);
   }
 
   .mimo-bottom-nav {
     position: fixed;
     left: 50%;
     right: auto;
-    bottom: calc(10px + env(safe-area-inset-bottom));
+    bottom: calc(78px + env(safe-area-inset-bottom));
     z-index: 80;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 7px;
-    width: min(calc(100vw - 20px), 430px);
-    padding: 8px;
-    border: 1px solid rgba(220,205,255,.18);
-    border-radius: 30px;
-    background: rgba(12,8,27,.92);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 22px 58px rgba(0,0,0,.44);
-    backdrop-filter: blur(22px) saturate(1.25);
+    gap: 6px;
+    width: min(calc(100vw - 28px), 410px);
+    padding: 7px;
+    border: 1px solid rgba(132, 154, 196, 0.18);
+    border-radius: 26px;
+    background: rgba(7, 11, 18, 0.94);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045), 0 18px 48px rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(20px) saturate(1.22);
     transform: translateX(-50%);
+  }
+
+  @supports (height: 100dvh) {
+    .mimo-bottom-nav {
+      bottom: max(14px, env(safe-area-inset-bottom));
+    }
   }
 
   .mimo-bottom-nav button {
     display: grid;
     place-items: center;
     gap: 4px;
-    min-height: 58px;
+    min-height: 52px;
     border: 0;
-    border-radius: 22px;
+    border-radius: 19px;
     background: transparent;
-    color: #aaa0bd;
-    font-weight: 950;
-    font-size: .68rem;
+    color: #8ea2c6;
+    font-weight: 900;
+    font-size: 0.66rem;
   }
 
   .mimo-bottom-nav button span {
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1;
   }
 
   .mimo-bottom-nav button.active {
-    background:
-      radial-gradient(circle at 50% 0%, rgba(77,228,193,.34), transparent 58%),
-      linear-gradient(145deg, rgba(77,228,193,.2), rgba(143,92,255,.2));
-    color: #f8f4ff;
+    background: linear-gradient(145deg, rgba(77, 228, 193, 0.18), rgba(94, 162, 255, 0.12));
+    color: #e8efff;
   }
 }
 
 @media (max-width: 380px) {
   .mimo-app-header {
-    grid-template-columns: 54px minmax(0, 1fr) auto;
-    gap: 10px;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    gap: 9px;
   }
 
   .mimo-logo {
-    width: 52px;
-    height: 52px;
-    border-radius: 19px;
-    font-size: .8rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 17px;
+    font-size: 0.76rem;
+  }
+
+  .mimo-hero h1 {
+    font-size: clamp(1.58rem, 8vw, 2.05rem);
   }
 
   .mimo-hero::after {
-    width: 62px;
-    height: 62px;
-    border-radius: 22px;
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
   }
 
   .mimo-bottom-nav button {
-    font-size: .62rem;
+    font-size: 0.6rem;
   }
 }
