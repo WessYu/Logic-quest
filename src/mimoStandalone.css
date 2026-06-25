@@ -6,14 +6,13 @@
   :root {
     --mq-bg: #07111f;
     --mq-bg-2: #0b1019;
-    --mq-panel: rgba(17, 24, 39, 0.82);
-    --mq-panel-2: rgba(12, 18, 32, 0.86);
+    --mq-card: rgba(17, 24, 39, 0.86);
+    --mq-card-2: rgba(12, 18, 32, 0.88);
     --mq-line: rgba(132, 154, 196, 0.16);
     --mq-text: #e8efff;
     --mq-muted: #8ea2c6;
     --mq-cyan: #4de4c1;
     --mq-blue: #5ea2ff;
-    --mq-amber: #f6c760;
   }
 
   html,
@@ -42,13 +41,18 @@
   .mimo-mobile-root {
     display: block;
     min-height: 100svh;
-    padding: calc(14px + env(safe-area-inset-top)) 14px calc(112px + env(safe-area-inset-bottom));
+    padding: calc(12px + env(safe-area-inset-top)) 14px calc(96px + env(safe-area-inset-bottom));
     color: var(--mq-text);
     background:
-      radial-gradient(circle at 12% -4%, rgba(94, 162, 255, 0.16), transparent 28%),
-      radial-gradient(circle at 100% 12%, rgba(77, 228, 193, 0.1), transparent 24%),
+      radial-gradient(circle at 10% -6%, rgba(94, 162, 255, 0.16), transparent 28%),
+      radial-gradient(circle at 100% 10%, rgba(77, 228, 193, 0.1), transparent 24%),
       linear-gradient(180deg, var(--mq-bg) 0%, var(--mq-bg-2) 48%, #070b12 100%);
     font-family: "Space Grotesk", system-ui, sans-serif;
+  }
+
+  .mimo-mobile-content {
+    display: grid;
+    gap: 14px;
   }
 
   .mimo-app-topbar {
@@ -59,8 +63,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 2px 0 14px;
-    background: linear-gradient(180deg, rgba(7, 17, 31, 0.98), rgba(7, 17, 31, 0.76), transparent);
+    padding: 2px 0 12px;
+    background: linear-gradient(180deg, rgba(7, 17, 31, 0.98), rgba(7, 17, 31, 0.8), transparent);
     backdrop-filter: blur(16px) saturate(1.2);
   }
 
@@ -69,7 +73,7 @@
   .mimo-path-node span {
     display: block;
     color: var(--mq-muted);
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 900;
     letter-spacing: 0.07em;
     text-transform: uppercase;
@@ -82,55 +86,62 @@
   .mimo-horizontal-lessons h3,
   .mimo-practice-card h3,
   .mimo-path-node h3,
-  .mimo-profile-card h2 {
+  .mimo-profile-card h2,
+  .mimo-action-grid strong {
     margin: 0;
     color: var(--mq-text);
     line-height: 1;
-    letter-spacing: -0.055em;
+    letter-spacing: -0.05em;
   }
 
   .mimo-app-topbar h1 {
     margin-top: 5px;
-    font-size: clamp(1.55rem, 7vw, 2rem);
+    font-size: clamp(1.48rem, 6.6vw, 1.92rem);
   }
 
   .mimo-profile-button {
     display: grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     border: 1px solid rgba(77, 228, 193, 0.24);
-    border-radius: 18px;
+    border-radius: 17px;
     background: linear-gradient(145deg, rgba(77, 228, 193, 0.18), rgba(94, 162, 255, 0.12));
     color: #dffff9;
     font-weight: 950;
   }
 
-  .mimo-hero-card {
-    position: relative;
-    min-height: 198px;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 88px;
-    gap: 12px;
-    padding: 18px;
-    border: 1px solid rgba(132, 154, 196, 0.18);
-    border-radius: 30px;
-    background:
-      radial-gradient(circle at 84% 20%, rgba(77, 228, 193, 0.22), transparent 22%),
-      radial-gradient(circle at 88% 88%, rgba(94, 162, 255, 0.16), transparent 25%),
-      linear-gradient(145deg, #142037 0%, #111827 58%, #0b111b 100%);
-    box-shadow: 0 20px 46px rgba(0, 0, 0, 0.26);
+  .mimo-hero-card,
+  .mimo-daily-row article,
+  .mimo-course-card,
+  .mimo-horizontal-lessons article,
+  .mimo-practice-card,
+  .mimo-path-node,
+  .mimo-profile-card,
+  .mimo-action-grid button {
+    border: 1px solid var(--mq-line);
+    background: var(--mq-card);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 14px 30px rgba(0, 0, 0, 0.2);
   }
 
-  .mimo-hero-copy {
+  .mimo-hero-card {
     position: relative;
-    z-index: 2;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 78px;
+    gap: 10px;
+    min-height: 178px;
+    padding: 16px;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 86% 20%, rgba(77, 228, 193, 0.22), transparent 22%),
+      radial-gradient(circle at 92% 90%, rgba(94, 162, 255, 0.15), transparent 25%),
+      linear-gradient(145deg, #142037 0%, #111827 58%, #0b111b 100%);
   }
 
   .mimo-hero-copy span {
     color: var(--mq-cyan);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 950;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -139,7 +150,7 @@
   .mimo-hero-card h2 {
     max-width: 12ch;
     margin-top: 8px;
-    font-size: clamp(1.72rem, 8.8vw, 2.35rem);
+    font-size: clamp(1.58rem, 8vw, 2.14rem);
   }
 
   .mimo-hero-card p,
@@ -148,39 +159,35 @@
   .mimo-practice-card p,
   .mimo-path-node p,
   .mimo-profile-card p {
-    margin: 10px 0 0;
+    margin: 9px 0 0;
     color: var(--mq-muted);
-    font-size: 0.9rem;
-    line-height: 1.43;
+    font-size: 0.88rem;
+    line-height: 1.4;
   }
 
   .mimo-hero-card button,
-  .mimo-course-card button,
-  .mimo-practice-card button,
-  .mimo-path-card button {
-    min-height: 46px;
-    margin-top: 16px;
-    padding: 0 16px;
+  .mimo-practice-card button {
+    min-height: 44px;
+    margin-top: 14px;
+    padding: 0 15px;
     border: 0;
-    border-radius: 17px;
+    border-radius: 16px;
     background: var(--mq-cyan);
     color: #06111f;
     font-weight: 950;
-    box-shadow: 0 12px 24px rgba(77, 228, 193, 0.16);
   }
 
   .mimo-hero-bot {
-    position: relative;
     align-self: end;
     display: grid;
     place-items: center;
-    width: 88px;
-    height: 88px;
+    width: 78px;
+    height: 78px;
     border: 1px solid rgba(132, 154, 196, 0.22);
-    border-radius: 30px;
+    border-radius: 26px;
     background:
-      radial-gradient(circle at 34% 34%, var(--mq-cyan) 0 5px, transparent 6px),
-      radial-gradient(circle at 66% 34%, var(--mq-cyan) 0 5px, transparent 6px),
+      radial-gradient(circle at 34% 34%, var(--mq-cyan) 0 4px, transparent 5px),
+      radial-gradient(circle at 66% 34%, var(--mq-cyan) 0 4px, transparent 5px),
       linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
     color: var(--mq-cyan);
     font-family: "IBM Plex Mono", monospace;
@@ -190,21 +197,18 @@
   .mimo-daily-row {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 9px;
-    margin: 14px 0;
+    gap: 8px;
   }
 
   .mimo-daily-row article {
-    padding: 13px 12px;
-    border: 1px solid var(--mq-line);
-    border-radius: 22px;
-    background: rgba(17, 24, 39, 0.72);
+    padding: 12px;
+    border-radius: 20px;
   }
 
   .mimo-daily-row strong {
     display: block;
     color: var(--mq-text);
-    font-size: 1.18rem;
+    font-size: 1.12rem;
     font-weight: 950;
   }
 
@@ -212,12 +216,17 @@
     display: block;
     margin-top: 4px;
     color: var(--mq-muted);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 800;
   }
 
   .mimo-section-block {
-    margin-top: 18px;
+    margin-top: 2px;
+  }
+
+  .mimo-section-block.no-gap-fix {
+    margin-top: -2px;
+    margin-bottom: 6px;
   }
 
   .mimo-section-heading {
@@ -225,12 +234,16 @@
     align-items: end;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+  }
+
+  .mimo-section-heading.compact {
+    margin-bottom: 9px;
   }
 
   .mimo-section-heading h2 {
     margin-top: 5px;
-    font-size: 1.28rem;
+    font-size: 1.2rem;
   }
 
   .mimo-section-heading button,
@@ -239,33 +252,25 @@
     border: 0;
     background: transparent;
     color: var(--mq-cyan);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 900;
-  }
-
-  .mimo-course-card,
-  .mimo-practice-card,
-  .mimo-profile-card {
-    border: 1px solid var(--mq-line);
-    border-radius: 28px;
-    background: var(--mq-panel);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 16px 34px rgba(0, 0, 0, 0.22);
   }
 
   .mimo-course-card.large {
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr);
-    gap: 13px;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px;
     align-items: center;
-    padding: 15px;
+    padding: 14px;
+    border-radius: 24px;
   }
 
   .mimo-course-icon {
     display: grid;
     place-items: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
     background: linear-gradient(145deg, rgba(77, 228, 193, 0.18), rgba(94, 162, 255, 0.16));
     color: var(--mq-cyan);
     font-family: "IBM Plex Mono", monospace;
@@ -273,12 +278,12 @@
   }
 
   .mimo-course-card h3 {
-    font-size: 1.02rem;
+    font-size: 1rem;
   }
 
   .mimo-progress-track {
-    height: 10px;
-    margin-top: 12px;
+    height: 9px;
+    margin-top: 11px;
     overflow: hidden;
     border-radius: 999px;
     background: rgba(7, 17, 31, 0.72);
@@ -294,9 +299,9 @@
 
   .mimo-horizontal-lessons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     overflow-x: auto;
-    padding: 2px 0 6px;
+    padding: 1px 0 4px;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
@@ -306,11 +311,10 @@
   }
 
   .mimo-horizontal-lessons article {
-    flex: 0 0 min(72%, 290px);
-    min-height: 138px;
-    padding: 15px;
-    border: 1px solid var(--mq-line);
-    border-radius: 26px;
+    flex: 0 0 min(68%, 270px);
+    min-height: 112px;
+    padding: 13px;
+    border-radius: 22px;
     background: linear-gradient(145deg, rgba(17, 24, 39, 0.86), rgba(12, 18, 32, 0.84));
     scroll-snap-align: start;
   }
@@ -318,21 +322,56 @@
   .mimo-horizontal-lessons article > span {
     display: grid;
     place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 13px;
+    width: 30px;
+    height: 30px;
+    border-radius: 12px;
     background: rgba(77, 228, 193, 0.12);
     color: var(--mq-cyan);
     font-weight: 950;
   }
 
   .mimo-horizontal-lessons h3 {
-    margin-top: 14px;
-    font-size: 1.05rem;
+    margin-top: 12px;
+    font-size: 1rem;
   }
 
-  .mimo-practice-card {
+  .mimo-action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .mimo-action-grid button {
+    display: grid;
+    gap: 6px;
+    min-height: 116px;
+    padding: 14px;
+    border-radius: 24px;
+    color: var(--mq-text);
+    text-align: left;
+  }
+
+  .mimo-action-grid button > span {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 13px;
+    background: rgba(77, 228, 193, 0.12);
+    color: var(--mq-cyan);
+    font-weight: 950;
+  }
+
+  .mimo-action-grid small {
+    color: var(--mq-muted);
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+
+  .mimo-practice-card,
+  .mimo-profile-card {
     padding: 16px;
+    border-radius: 26px;
   }
 
   .mimo-code-editor {
@@ -371,14 +410,14 @@
   .mimo-path-map {
     position: relative;
     display: grid;
-    gap: 12px;
-    padding: 2px 0 0;
+    gap: 10px;
+    padding-top: 2px;
   }
 
   .mimo-path-map::before {
     content: "";
     position: absolute;
-    left: 25px;
+    left: 24px;
     top: 18px;
     bottom: 18px;
     width: 3px;
@@ -390,13 +429,12 @@
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 54px minmax(0, 1fr);
+    grid-template-columns: 50px minmax(0, 1fr);
     gap: 12px;
     align-items: center;
-    min-height: 82px;
-    padding: 12px;
-    border: 1px solid var(--mq-line);
-    border-radius: 26px;
+    min-height: 76px;
+    padding: 11px;
+    border-radius: 23px;
     background: rgba(17, 24, 39, 0.84);
   }
 
@@ -412,9 +450,9 @@
   .mimo-node-circle {
     display: grid;
     place-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 19px;
+    width: 48px;
+    height: 48px;
+    border-radius: 18px;
     background: linear-gradient(145deg, rgba(77, 228, 193, 0.2), rgba(94, 162, 255, 0.15));
     color: var(--mq-text);
     font-weight: 950;
@@ -422,7 +460,7 @@
 
   .mimo-path-node h3 {
     margin-top: 5px;
-    font-size: 1rem;
+    font-size: 0.96rem;
   }
 
   .mimo-path-node p {
@@ -433,15 +471,14 @@
     display: grid;
     place-items: center;
     text-align: center;
-    padding: 22px 16px;
   }
 
   .mimo-profile-avatar {
     display: grid;
     place-items: center;
-    width: 76px;
-    height: 76px;
-    border-radius: 28px;
+    width: 72px;
+    height: 72px;
+    border-radius: 26px;
     background: linear-gradient(145deg, rgba(77, 228, 193, 0.2), rgba(94, 162, 255, 0.14));
     color: var(--mq-cyan);
     font-weight: 950;
@@ -449,7 +486,7 @@
 
   .mimo-profile-card h2 {
     margin-top: 12px;
-    font-size: 1.42rem;
+    font-size: 1.36rem;
   }
 
   .mimo-profile-grid {
@@ -461,9 +498,9 @@
   }
 
   .mimo-profile-grid article {
-    padding: 14px;
+    padding: 13px;
     border: 1px solid var(--mq-line);
-    border-radius: 20px;
+    border-radius: 18px;
     background: rgba(7, 17, 31, 0.48);
   }
 
@@ -474,13 +511,13 @@
 
   .mimo-profile-grid strong {
     color: var(--mq-text);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .mimo-profile-grid span {
     margin-top: 4px;
     color: var(--mq-muted);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
   }
 
   .mimo-app-tabbar {
@@ -492,11 +529,11 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 6px;
     width: min(calc(100vw - 20px), 430px);
-    padding: 8px;
+    padding: 7px;
     border: 1px solid rgba(132, 154, 196, 0.18);
-    border-radius: 30px;
+    border-radius: 28px;
     background: rgba(7, 11, 18, 0.94);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045), 0 22px 58px rgba(0, 0, 0, 0.44);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045), 0 18px 48px rgba(0, 0, 0, 0.42);
     backdrop-filter: blur(22px) saturate(1.25);
     transform: translateX(-50%);
   }
@@ -505,17 +542,17 @@
     display: grid;
     place-items: center;
     gap: 4px;
-    min-height: 56px;
+    min-height: 52px;
     border: 0;
-    border-radius: 22px;
+    border-radius: 20px;
     background: transparent;
     color: var(--mq-muted);
-    font-size: 0.66rem;
+    font-size: 0.64rem;
     font-weight: 900;
   }
 
   .mimo-app-tabbar button span {
-    font-size: 1.02rem;
+    font-size: 1rem;
     line-height: 1;
   }
 
@@ -527,17 +564,21 @@
 
 @media (max-width: 380px) {
   .mimo-hero-card {
-    grid-template-columns: minmax(0, 1fr) 70px;
-    padding: 16px;
+    grid-template-columns: minmax(0, 1fr) 64px;
+    padding: 15px;
   }
 
   .mimo-hero-bot {
-    width: 70px;
-    height: 70px;
-    border-radius: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 22px;
+  }
+
+  .mimo-action-grid {
+    grid-template-columns: 1fr;
   }
 
   .mimo-app-tabbar button {
-    font-size: 0.6rem;
+    font-size: 0.58rem;
   }
 }
