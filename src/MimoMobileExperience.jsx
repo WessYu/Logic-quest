@@ -1,213 +1,210 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { courseModules } from "./courseData";
 import "./mimoStandalone.css";
 
 function flattenLessons(modules) {
-  return modules.flatMap((module) => module.lessons);
-}
-
-const previewCards = [
-  {
-    eyebrow: "Editors' Choice",
-    title: "Aprender lógica",
-    type: "phone-code",
-  },
-  {
-    eyebrow: "Trilhas práticas",
-    title: "Code JavaScript, CSS e React",
-    type: "tech-stack",
-  },
-  {
-    eyebrow: "Projetos reais",
-    title: "De lições curtas a projetos completos",
-    type: "lesson-phone",
-  },
-  {
-    eyebrow: "Aprendizado guiado",
-    title: "Explore um caminho personalizado",
-    type: "path-phone",
-  },
-  {
-    eyebrow: "Prática diária",
-    title: "Dê impulso à sua carreira em poucos minutos",
-    type: "career-path",
-  },
-];
-
-function PreviewVisual({ type }) {
-  if (type === "tech-stack") {
-    return (
-      <div className="mimo-preview-stack" aria-hidden="true">
-        {["JavaScript", "HTML", "CSS", "TypeScript", "React", "Node.js", "Express", "SQL"].map((tech) => (
-          <span key={tech}>{tech}</span>
-        ))}
-        <div className="mimo-keyboard-phone">
-          <div className="mimo-keyboard-screen" />
-          <div className="mimo-key-row" />
-          <div className="mimo-key-row short" />
-          <div className="mimo-mini-bot">LQ</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "lesson-phone") {
-    return (
-      <div className="mimo-phone-wrap lesson" aria-hidden="true">
-        <div className="mimo-floating-tag html">&lt;html&gt;</div>
-        <div className="mimo-floating-tag head">&lt;head&gt;</div>
-        <div className="mimo-floating-tag close">&lt;/html&gt;</div>
-        <div className="mimo-phone-frame">
-          <div className="mimo-phone-pill" />
-          <div className="mimo-code-lines">
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="mimo-keyboard-grid" />
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "path-phone") {
-    return (
-      <div className="mimo-phone-wrap path" aria-hidden="true">
-        <div className="mimo-phone-frame">
-          <div className="mimo-phone-pill" />
-          <div className="mimo-path-progress">Intro to JS <span>75%</span></div>
-          <div className="mimo-path-map">
-            <b />
-            <b />
-            <b />
-            <b />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "career-path") {
-    return (
-      <div className="mimo-phone-wrap career" aria-hidden="true">
-        <div className="mimo-badge-row"><span>JS</span><span>CSS</span><span>API</span></div>
-        <div className="mimo-phone-frame">
-          <div className="mimo-phone-pill" />
-          <div className="mimo-career-card"><strong>Front-End</strong><em /></div>
-          <div className="mimo-career-card"><strong>JavaScript</strong><em /></div>
-          <div className="mimo-career-card"><strong>React</strong><em /></div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="mimo-phone-wrap code" aria-hidden="true">
-      <div className="mimo-phone-frame tilted">
-        <div className="mimo-phone-pill" />
-        <div className="mimo-code-lines">
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-      </div>
-    </div>
+  return modules.flatMap((module, moduleIndex) =>
+    module.lessons.map((lesson, lessonIndex) => ({
+      ...lesson,
+      moduleTitle: module.title,
+      moduleLevel: module.level,
+      moduleIndex,
+      lessonIndex,
+    })),
   );
 }
+
+function getLessonState(index) {
+  if (index === 0) return "active";
+  if (index < 3) return "open";
+  return "locked";
+}
+
+const tabs = [
+  { id: "learn", label: "Aprender", icon: "▣" },
+  { id: "practice", label: "Prática", icon: "✦" },
+  { id: "path", label: "Trilha", icon: "▥" },
+  { id: "profile", label: "Perfil", icon: "○" },
+];
 
 export default function MimoMobileExperience() {
   const modules = useMemo(() => courseModules, []);
   const lessons = useMemo(() => flattenLessons(modules), [modules]);
-  const firstLesson = lessons[0];
+  const [activeTab, setActiveTab] = useState("learn");
+  const activeLesson = lessons[0];
+  const nextLessons = lessons.slice(0, 5);
+  const firstModule = modules[0];
 
-  function scrollToPath() {
-    document.querySelector("#logic-path")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  function renderLearn() {
+    return (
+      <>
+        <section className="mimo-hero-card">
+          <div className="mimo-hero-copy">
+            <span>Continue aprendendo</span>
+            <h2>{activeLesson.title}</h2>
+            <p>{activeLesson.objective}</p>
+            <button type="button" onClick={() => setActiveTab("path")}>Continuar</button>
+          </div>
+
+          <div className="mimo-hero-bot" aria-hidden="true">
+            <span>LQ</span>
+          </div>
+        </section>
+
+        <section className="mimo-daily-row" aria-label="Resumo do estudo">
+          <article>
+            <strong>0</strong>
+            <span>dias</span>
+          </article>
+          <article>
+            <strong>{lessons.length}</strong>
+            <span>lições</span>
+          </article>
+          <article>
+            <strong>120</strong>
+            <span>XP por aula</span>
+          </article>
+        </section>
+
+        <section className="mimo-section-block">
+          <div className="mimo-section-heading">
+            <div>
+              <span>Hoje</span>
+              <h2>Plano de aprendizado</h2>
+            </div>
+            <button type="button" onClick={() => setActiveTab("path")}>Ver tudo</button>
+          </div>
+
+          <div className="mimo-course-card large">
+            <div className="mimo-course-icon">JS</div>
+            <div>
+              <h3>Fundamentos da lógica</h3>
+              <p>Entrada, processamento, saída e decisões em JavaScript.</p>
+              <div className="mimo-progress-track"><span style={{ width: "18%" }} /></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mimo-section-block">
+          <div className="mimo-section-heading">
+            <div>
+              <span>Recomendado</span>
+              <h2>Lições curtas</h2>
+            </div>
+          </div>
+
+          <div className="mimo-horizontal-lessons">
+            {nextLessons.map((lesson, index) => (
+              <article key={lesson.id}>
+                <span>{index + 1}</span>
+                <h3>{lesson.title}</h3>
+                <p>{lesson.time}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  function renderPractice() {
+    return (
+      <section className="mimo-section-block">
+        <div className="mimo-section-heading">
+          <div>
+            <span>Prática</span>
+            <h2>Treine como no Mimo</h2>
+          </div>
+        </div>
+
+        <div className="mimo-practice-card">
+          <div className="mimo-code-editor">
+            <div><i /> <i /> <i /></div>
+            <pre>{`const nome = "Wess";\nconst foco = true;\nconsole.log(nome);`}</pre>
+          </div>
+          <h3>Complete o desafio</h3>
+          <p>Resolva um exercício rápido e destrave a próxima lição.</p>
+          <button type="button">Iniciar prática</button>
+        </div>
+      </section>
+    );
+  }
+
+  function renderPath() {
+    return (
+      <section className="mimo-section-block path-view">
+        <div className="mimo-section-heading">
+          <div>
+            <span>Trilha</span>
+            <h2>{firstModule.title}</h2>
+          </div>
+          <strong>{firstModule.level}</strong>
+        </div>
+
+        <div className="mimo-path-map">
+          {lessons.slice(0, 9).map((lesson, index) => {
+            const state = getLessonState(index);
+            return (
+              <article className={`mimo-path-node ${state}`} key={lesson.id}>
+                <div className="mimo-node-circle">{state === "locked" ? "•" : index + 1}</div>
+                <div>
+                  <span>{lesson.difficulty}</span>
+                  <h3>{lesson.title}</h3>
+                  <p>{state === "locked" ? "Bloqueada" : lesson.time}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
+
+  function renderProfile() {
+    return (
+      <section className="mimo-section-block">
+        <div className="mimo-profile-card">
+          <div className="mimo-profile-avatar">WY</div>
+          <h2>WessYu</h2>
+          <p>Trilha de lógica em andamento.</p>
+
+          <div className="mimo-profile-grid">
+            <article><strong>0</strong><span>concluídas</span></article>
+            <article><strong>{lessons.length}</strong><span>lições</span></article>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
     <main className="mimo-mobile-root">
-      <section className="mimo-store-header" aria-label="Logic Quest">
-        <div className="mimo-store-icon">LQ</div>
-
-        <div className="mimo-store-title">
+      <header className="mimo-app-topbar">
+        <div>
+          <span>Bom estudo, Wess</span>
           <h1>Logic Quest</h1>
-          <p>Code JavaScript, CSS e lógica</p>
         </div>
+        <button type="button" className="mimo-profile-button" onClick={() => setActiveTab("profile")}>WY</button>
+      </header>
 
-        <button type="button" className="mimo-store-download" onClick={scrollToPath}>
-          Abrir
-        </button>
-      </section>
+      {activeTab === "learn" && renderLearn()}
+      {activeTab === "practice" && renderPractice()}
+      {activeTab === "path" && renderPath()}
+      {activeTab === "profile" && renderProfile()}
 
-      <section className="mimo-store-meta" aria-label="Informações do app">
-        <div>
-          <strong>★★★★★</strong>
-          <span>Projeto dev</span>
-        </div>
-        <div>
-          <strong>WessYu</strong>
-          <span>Criador</span>
-        </div>
-        <div>
-          <strong>Educação</strong>
-          <span>Categoria</span>
-        </div>
-      </section>
-
-      <section className="mimo-store-summary">
-        <p>
-          Aprenda lógica de programação com lições curtas, prática real e uma trilha feita para evoluir do zero ao código.
-        </p>
-      </section>
-
-      <section className="mimo-preview-section" aria-label="Prévia do Logic Quest">
-        <h2>Prévia</h2>
-
-        <div className="mimo-preview-rail">
-          {previewCards.map((card) => (
-            <article className="mimo-preview-card" key={card.title}>
-              <div className="mimo-preview-copy">
-                <span>{card.eyebrow}</span>
-                <h3>{card.title}</h3>
-              </div>
-              <PreviewVisual type={card.type} />
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="mimo-store-description">
-        <h2>Por que usar?</h2>
-        <p>
-          O Logic Quest transforma lógica, sequência, condições e prática em passos visuais. Você aprende lendo, testando e desbloqueando lições.
-        </p>
-      </section>
-
-      <section className="mimo-path-section" id="logic-path">
-        <div className="mimo-section-title">
-          <div>
-            <span>Trilha</span>
-            <h2>Comece por aqui</h2>
-          </div>
-          <strong>{lessons.length} lições</strong>
-        </div>
-
-        <div className="mimo-path-card">
-          <span>Módulo 1</span>
-          <h3>{modules[0]?.title}</h3>
-          <p>{firstLesson?.objective}</p>
-          <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            Ver prévias
+      <nav className="mimo-app-tabbar" aria-label="Navegação do app">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            className={activeTab === tab.id ? "active" : ""}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            <span>{tab.icon}</span>
+            {tab.label}
           </button>
-        </div>
-      </section>
+        ))}
+      </nav>
     </main>
   );
 }
