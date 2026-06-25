@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import MimoMobileExperience from "./MimoMobileExperience";
 import App from "./App";
 import GitHubPresence from "./GitHubPresence";
 import AccountManager from "./AccountManager";
@@ -21,6 +22,7 @@ import "./finalMobilePolish.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <MimoMobileExperience />
     <App />
     <GitHubPresence />
     <AccountManager />
