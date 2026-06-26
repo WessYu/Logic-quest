@@ -1,4 +1,4 @@
-const CACHE_NAME = "logic-quest-v11";
+const CACHE_NAME = "logic-quest-v12";
 const BASE_PATH = "/Logic-quest/";
 const STATIC_ASSETS = [
   BASE_PATH,
