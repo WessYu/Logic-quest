@@ -1,10 +1,10 @@
 .robot-mascot {
   position: fixed;
-  left: 16px;
+  left: 18px;
   bottom: 18px;
   z-index: 58;
-  width: 132px;
-  height: 132px;
+  width: 170px;
+  height: 170px;
   pointer-events: none;
 }
 
@@ -16,7 +16,9 @@
   height: 100%;
   padding: 0;
   border: 0;
-  background: transparent;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none;
   cursor: grab;
   pointer-events: auto;
 }
@@ -29,48 +31,24 @@
   content: "";
   position: absolute;
   left: 50%;
-  bottom: 4px;
-  width: 72px;
-  height: 18px;
+  bottom: 10px;
+  width: 92px;
+  height: 24px;
   border-radius: 999px;
-  background: rgba(77, 228, 193, 0.22);
-  filter: blur(12px);
+  background: rgba(77, 228, 193, 0.18);
+  filter: blur(14px);
   transform: translateX(-50%);
   pointer-events: none;
 }
 
 .robot-mascot .logic-bot-3d {
-  --bot-size: 132px;
-  filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.46));
+  --bot-size: 170px;
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.48));
 }
 
 .robot-mascot .logic-bot-3d::after {
-  content: "Clique para girar";
-  position: absolute;
-  left: 50%;
-  bottom: -4px;
-  z-index: 4;
-  width: max-content;
-  max-width: 128px;
-  padding: 6px 9px;
-  border: 1px solid rgba(77, 228, 193, 0.2);
-  border-radius: 999px;
-  background: rgba(7, 11, 18, 0.78);
-  color: #aeefff;
-  font-family: "Space Grotesk", system-ui, sans-serif;
-  font-size: 0.68rem;
-  font-weight: 800;
-  opacity: 0;
-  transform: translate(-50%, 10px);
-  transition: opacity 200ms ease, transform 200ms ease;
-  pointer-events: none;
-  backdrop-filter: blur(12px);
-}
-
-.robot-mascot:hover .logic-bot-3d::after,
-.robot-mascot.active .logic-bot-3d::after {
-  opacity: 1;
-  transform: translate(-50%, 0);
+  display: none !important;
+  content: none !important;
 }
 
 .robot-mascot.active .logic-bot-3d {
@@ -93,27 +71,23 @@
 
 @media (max-width: 760px) {
   .robot-mascot {
-    top: calc(12px + env(safe-area-inset-top));
-    right: 64px;
+    top: calc(10px + env(safe-area-inset-top));
+    right: 58px;
     bottom: auto;
     left: auto;
     z-index: 88;
-    width: 86px;
-    height: 86px;
+    width: 104px;
+    height: 104px;
   }
 
   .robot-mascot::before {
-    bottom: 2px;
-    width: 50px;
-    height: 12px;
-    filter: blur(9px);
+    bottom: 6px;
+    width: 58px;
+    height: 14px;
+    filter: blur(10px);
   }
 
   .robot-mascot .logic-bot-3d {
-    --bot-size: 86px;
-  }
-
-  .robot-mascot .logic-bot-3d::after {
-    display: none;
+    --bot-size: 104px;
   }
 }
