@@ -1,5 +1,21 @@
 .logic-bot-3d {
   --bot-size: 168px;
+  --bot-base-turn: -16deg;
+  --bot-rotate-x: 8deg;
+  --bot-rotate-y: 0deg;
+  --bot-roll: 0deg;
+  --bot-lift: 0px;
+  --head-rotate-x: 0deg;
+  --head-rotate-y: 0deg;
+  --head-tilt: 0deg;
+  --eye-x: 0px;
+  --eye-y: 0px;
+  --smile-x: 0px;
+  --smile-y: 0px;
+  --glow-x: 0px;
+  --glow-y: 0px;
+  --arm-sway: 0deg;
+  --curiosity: 0;
   position: relative;
   display: grid;
   place-items: center;
@@ -11,7 +27,7 @@
   background: transparent;
   cursor: grab;
   touch-action: manipulation;
-  perspective: 720px;
+  perspective: 760px;
   isolation: isolate;
 }
 
@@ -23,6 +39,10 @@
   --bot-size: 112px;
 }
 
+.logic-bot-3d.turned {
+  --bot-base-turn: 198deg;
+}
+
 .logic-bot-glow {
   position: absolute;
   inset: 15% 10% 5%;
@@ -31,9 +51,10 @@
   background:
     radial-gradient(circle at 50% 70%, rgba(77, 228, 193, 0.34), transparent 36%),
     radial-gradient(circle at 50% 44%, rgba(94, 162, 255, 0.22), transparent 48%);
-  filter: blur(10px);
-  opacity: 0.92;
-  transform: translateY(12%);
+  filter: blur(calc(10px + (var(--curiosity) * 5px)));
+  opacity: calc(0.82 + (var(--curiosity) * 0.18));
+  transform: translate3d(var(--glow-x), calc(12% + var(--glow-y)), 0) scale(calc(1 + (var(--curiosity) * 0.08)));
+  transition: opacity 220ms ease;
 }
 
 .logic-bot-scene {
@@ -51,14 +72,15 @@
   top: 50%;
   width: 72%;
   height: 82%;
-  transform: translate(-50%, -50%) rotateX(8deg) rotateY(-16deg);
+  transform:
+    translate(-50%, -50%)
+    translateY(var(--bot-lift))
+    rotateX(var(--bot-rotate-x))
+    rotateY(calc(var(--bot-base-turn) + var(--bot-rotate-y)))
+    rotateZ(var(--bot-roll));
   transform-style: preserve-3d;
-  animation: logic-bot-float 4.8s ease-in-out infinite;
-  transition: transform 650ms cubic-bezier(0.2, 0.85, 0.2, 1);
-}
-
-.logic-bot-3d.turned .logic-bot-model {
-  transform: translate(-50%, -50%) rotateX(8deg) rotateY(198deg);
+  animation: logic-bot-float 4.2s ease-in-out infinite;
+  will-change: transform;
 }
 
 .logic-bot-head {
@@ -76,7 +98,15 @@
     inset -16px -10px 24px rgba(0, 0, 0, 0.28),
     0 18px 34px rgba(0, 0, 0, 0.3),
     0 0 34px rgba(77, 228, 193, 0.16);
-  transform: translateX(-50%) translateZ(34px);
+  transform:
+    translateX(-50%)
+    translateZ(34px)
+    rotateX(var(--head-rotate-x))
+    rotateY(var(--head-rotate-y))
+    rotateZ(var(--head-tilt));
+  transform-style: preserve-3d;
+  transform-origin: 50% 72%;
+  will-change: transform;
 }
 
 .logic-bot-head::before {
@@ -110,6 +140,7 @@
 .logic-bot-face {
   inset: 9%;
   z-index: 2;
+  transform: translateZ(2px);
 }
 
 .logic-bot-eye {
@@ -118,8 +149,9 @@
   height: 28%;
   border-radius: 999px;
   background: #4de4c1;
-  box-shadow: 0 0 14px rgba(77, 228, 193, 0.86);
-  transform: translateY(-50%);
+  box-shadow: 0 0 calc(14px + (var(--curiosity) * 8px)) rgba(77, 228, 193, 0.86);
+  transform: translate3d(var(--eye-x), calc(-50% + var(--eye-y)), 0) scaleY(calc(1 + (var(--curiosity) * 0.08)));
+  will-change: transform;
 }
 
 .logic-bot-eye.left {
@@ -138,7 +170,8 @@
   border-bottom: 4px solid #4de4c1;
   border-radius: 0 0 999px 999px;
   filter: drop-shadow(0 0 7px rgba(77, 228, 193, 0.9));
-  transform: translateX(-50%);
+  transform: translate3d(calc(-50% + var(--smile-x)), var(--smile-y), 0) scaleX(calc(1 + (var(--curiosity) * 0.18)));
+  will-change: transform;
 }
 
 .logic-bot-corner {
@@ -208,7 +241,8 @@
   border-radius: 999px;
   background: linear-gradient(180deg, #4de4c1, #24344f);
   box-shadow: 0 0 12px rgba(77, 228, 193, 0.5);
-  transform: translateX(-50%) translateZ(44px);
+  transform: translateX(-50%) translateZ(44px) rotateZ(calc(var(--head-tilt) * -0.6));
+  transform-origin: 50% 100%;
 }
 
 .logic-bot-antenna span {
@@ -219,8 +253,8 @@
   height: 18px;
   border-radius: 999px;
   background: radial-gradient(circle at 32% 28%, #dffff9, #4de4c1 42%, #0a7a88 100%);
-  box-shadow: 0 0 18px rgba(77, 228, 193, 0.9);
-  transform: translateX(-50%);
+  box-shadow: 0 0 calc(18px + (var(--curiosity) * 10px)) rgba(77, 228, 193, 0.9);
+  transform: translateX(-50%) scale(calc(1 + (var(--curiosity) * 0.1)));
 }
 
 .logic-bot-body {
@@ -236,7 +270,8 @@
     inset 0 2px 0 rgba(255, 255, 255, 0.1),
     inset -12px -10px 18px rgba(0, 0, 0, 0.28),
     0 14px 26px rgba(0, 0, 0, 0.28);
-  transform: translateX(-50%) translateZ(24px);
+  transform: translateX(-50%) translateZ(24px) rotateZ(calc(var(--head-tilt) * 0.22));
+  transform-origin: 50% 0%;
 }
 
 .logic-bot-chest {
@@ -254,7 +289,7 @@
   font-weight: 950;
   box-shadow:
     inset 0 0 0 2px rgba(77, 228, 193, 0.42),
-    0 0 12px rgba(77, 228, 193, 0.35);
+    0 0 calc(12px + (var(--curiosity) * 8px)) rgba(77, 228, 193, 0.35);
   transform: translateX(-50%);
 }
 
@@ -270,12 +305,12 @@
 
 .logic-bot-arm.left {
   left: 17%;
-  transform: rotate(20deg) translateZ(14px);
+  transform: rotate(calc(20deg + var(--arm-sway))) translateZ(14px);
 }
 
 .logic-bot-arm.right {
   right: 17%;
-  transform: rotate(-20deg) translateZ(14px);
+  transform: rotate(calc(-20deg + var(--arm-sway))) translateZ(14px);
 }
 
 .logic-bot-arm span {
@@ -319,7 +354,13 @@
   }
 
   50% {
-    margin-top: -7px;
+    margin-top: -9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logic-bot-model {
+    animation: none;
   }
 }
 
