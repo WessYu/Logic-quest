@@ -12,6 +12,7 @@ import ExplorerAutoClose from "./ExplorerAutoClose";
 import RegisterServiceWorker from "./RegisterServiceWorker";
 import MobileDock from "./MobileDock";
 import LogicQuestEnhancements from "./LogicQuestEnhancements";
+import RobotMascot from "./RobotMascot";
 import "./styles.css";
 import "./stepAlignment.css";
 import "./compactLayout.css";
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ExplorerAutoClose />
     <RegisterServiceWorker />
     <LogicQuestEnhancements />
+    <RobotMascot />
     <MobileDock />
   </React.StrictMode>,
 );

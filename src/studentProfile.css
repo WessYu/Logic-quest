@@ -176,7 +176,8 @@
 
 .student-profile-panel,
 .student-frequency-card,
-.student-activity-card {
+.student-activity-card,
+.student-next-focus-card {
   border: 1px solid rgba(132, 154, 196, 0.16);
   border-radius: 18px;
   background: rgba(5, 10, 18, 0.68);
@@ -275,8 +276,49 @@
 }
 
 .student-frequency-card,
-.student-activity-card {
+.student-activity-card,
+.student-next-focus-card {
   padding: 14px;
+}
+
+.student-next-focus-card {
+  border-color: rgba(77, 228, 193, 0.18);
+  background: linear-gradient(135deg, rgba(77, 228, 193, 0.08), rgba(94, 162, 255, 0.06));
+}
+
+.student-next-focus-card p {
+  margin: 0;
+  color: #d8e5ff;
+  line-height: 1.55;
+}
+
+.student-focus-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.student-focus-actions button,
+.student-focus-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(77, 228, 193, 0.28);
+  border-radius: 12px;
+  background: rgba(77, 228, 193, 0.1);
+  color: #dffff8;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.student-focus-actions button:hover,
+.student-focus-actions a:hover {
+  border-color: rgba(77, 228, 193, 0.5);
+  background: rgba(77, 228, 193, 0.16);
 }
 
 .student-section-heading {

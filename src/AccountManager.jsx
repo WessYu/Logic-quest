@@ -35,6 +35,16 @@ function getUserLabel(session) {
   return session?.user?.email || "Conta conectada";
 }
 
+function getSyncLabel(lastSync, session) {
+  if (!session) return "Visitante";
+  if (!lastSync) return "Pronto para sincronizar";
+
+  return `Salvo ${new Date(lastSync).toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })}`;
+}
+
 function readPanelPosition() {
   try {
     const raw = window.localStorage.getItem(panelPositionKey);
@@ -262,7 +272,7 @@ export default function AccountManager() {
     <div ref={widgetRef} className={`account-widget ${isDragging ? "is-dragging" : ""}`} style={widgetStyle}>
       <button className="account-trigger" type="button" onClick={() => setIsOpen((value) => !value)}>
         <span className={`account-dot ${session ? "online" : "offline"}`} />
-        <span>{session ? getUserLabel(session) : "Entrar"}</span>
+        <span>{session ? getSyncLabel(lastSync, session) : "Entrar ou salvar progresso"}</span>
       </button>
 
       {isOpen ? (
@@ -290,8 +300,26 @@ export default function AccountManager() {
 
           {session ? (
             <div className="account-signed">
+              <div className="account-user-card">
+                <div className="account-user-avatar">{getUserLabel(session).slice(0, 2).toUpperCase()}</div>
+                <div>
+                  <span>Conta ativa</span>
+                  <strong>{getUserLabel(session)}</strong>
+                  <small>{getSyncLabel(lastSync, session)}</small>
+                </div>
+              </div>
+              <div className="account-progress-grid">
+                <article>
+                  <strong>{completedCount}</strong>
+                  <span>lições feitas</span>
+                </article>
+                <article>
+                  <strong>Cloud</strong>
+                  <span>progresso salvo</span>
+                </article>
+              </div>
               <button className="student-area-inline" type="button" onClick={openStudentProfile}>
-                Abrir área do aluno
+                Abrir perfil e conquistas
               </button>
               <AdminDashboard session={session} />
               <div className="account-stat">
@@ -317,6 +345,10 @@ export default function AccountManager() {
             </div>
           ) : (
             <form className="account-form" onSubmit={handleSubmit}>
+              <div className="account-auth-copy">
+                <strong>Continue de onde parou</strong>
+                <span>Entre para guardar XP, lições concluídas, frequência e perfil de estudante.</span>
+              </div>
               <div className="account-tabs">
                 <button type="button" className={mode === "login" ? "active" : ""} onClick={() => setMode("login")}>
                   Entrar
@@ -337,6 +369,11 @@ export default function AccountManager() {
               <button type="submit" disabled={isBusy || !configured}>
                 {isBusy ? "Processando..." : mode === "login" ? "Entrar e carregar trilha" : "Criar conta"}
               </button>
+              <div className="account-benefits" aria-label="Benefícios da conta">
+                <span>Sincroniza progresso</span>
+                <span>Libera perfil</span>
+                <span>Mostra evolução</span>
+              </div>
             </form>
           )}
 

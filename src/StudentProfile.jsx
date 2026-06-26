@@ -53,6 +53,17 @@ function getRank(score) {
   return "Aprendiz Lógico";
 }
 
+function getNextProfileFocus(completed) {
+  if (completed >= 28) return "Monte e publique seu mini app final.";
+  if (completed >= 24) return "Transforme a lógica em componentes e estado.";
+  if (completed >= 20) return "Pratique DOM, eventos e formulários.";
+  if (completed >= 16) return "Crie funções menores para organizar regras.";
+  if (completed >= 12) return "Resolva problemas com arrays e listas.";
+  if (completed >= 8) return "Domine condições, validações e mensagens.";
+  if (completed >= 4) return "Pratique variáveis, tipos e cálculos.";
+  return "Complete as bases de entrada, regra e saída.";
+}
+
 function buildActivity(progress) {
   const activity = {};
   const events = [];
@@ -168,6 +179,7 @@ export default function StudentProfile() {
   const fallbackInitial = displayName.slice(0, 2).toUpperCase();
   const githubUrl = useMemo(() => getGithubUrl(githubUsername), [githubUsername]);
   const completionRate = Math.min(100, Math.round((stats.completed / 28) * 100));
+  const nextFocus = getNextProfileFocus(stats.completed);
 
   useEffect(() => {
     const timer = window.setInterval(() => setStats(getStats()), 2500);
@@ -215,6 +227,7 @@ export default function StudentProfile() {
                   <span>{stats.rank}</span>
                   {githubUsername ? <span>@{githubUsername}</span> : <span>GitHub não vinculado</span>}
                   <span>{stats.streak} dia(s) de sequência</span>
+                  <span>{nextFocus}</span>
                 </div>
               </div>
 
@@ -250,6 +263,14 @@ export default function StudentProfile() {
                     value={profile.avatarUrl || ""}
                     onChange={(event) => updateField("avatarUrl", event.target.value)}
                     placeholder="Cole a URL da imagem"
+                  />
+                </label>
+                <label>
+                  Objetivo atual
+                  <input
+                    value={profile.goal || ""}
+                    onChange={(event) => updateField("goal", event.target.value)}
+                    placeholder="Ex: criar meu primeiro app em JS"
                   />
                 </label>
                 <label>
@@ -296,6 +317,27 @@ export default function StudentProfile() {
                   </div>
                 </section>
 
+                <section className="student-next-focus-card">
+                  <div className="student-section-heading">
+                    <div>
+                      <span className="panel-caption">FOCO</span>
+                      <h3>Próximo passo prático</h3>
+                    </div>
+                    <strong>{completionRate}%</strong>
+                  </div>
+                  <p>{profile.goal || nextFocus}</p>
+                  <div className="student-focus-actions">
+                    <button type="button" onClick={() => setOpen(false)}>
+                      Continuar estudando
+                    </button>
+                    {githubUsername ? (
+                      <a href={githubUrl} target="_blank" rel="noreferrer">
+                        Abrir GitHub
+                      </a>
+                    ) : null}
+                  </div>
+                </section>
+
                 <section className="student-frequency-card">
                   <div className="student-section-heading">
                     <div>
@@ -332,11 +374,11 @@ export default function StudentProfile() {
                   <div className="student-frequency-footer">
                     <span>{stats.activeDays} dias ativos nos últimos meses</span>
                     <div className="student-frequency-legend">
-                      <span>Less</span>
+                      <span>Menos</span>
                       {[0, 1, 2, 3, 4].map((level) => (
                         <i key={level} className={`student-frequency-cell level-${level}`} />
                       ))}
-                      <span>More</span>
+                      <span>Mais</span>
                     </div>
                   </div>
                 </section>
