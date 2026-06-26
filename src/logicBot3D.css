@@ -1,0 +1,334 @@
+.logic-bot-3d {
+  --bot-size: 168px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--bot-size);
+  height: var(--bot-size);
+  padding: 0;
+  border: 0;
+  border-radius: 32px;
+  background: transparent;
+  cursor: grab;
+  touch-action: manipulation;
+  perspective: 720px;
+  isolation: isolate;
+}
+
+.logic-bot-3d:active {
+  cursor: grabbing;
+}
+
+.logic-bot-3d.compact {
+  --bot-size: 112px;
+}
+
+.logic-bot-glow {
+  position: absolute;
+  inset: 15% 10% 5%;
+  z-index: 0;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 70%, rgba(77, 228, 193, 0.34), transparent 36%),
+    radial-gradient(circle at 50% 44%, rgba(94, 162, 255, 0.22), transparent 48%);
+  filter: blur(10px);
+  opacity: 0.92;
+  transform: translateY(12%);
+}
+
+.logic-bot-scene {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.logic-bot-model {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72%;
+  height: 82%;
+  transform: translate(-50%, -50%) rotateX(8deg) rotateY(-16deg);
+  transform-style: preserve-3d;
+  animation: logic-bot-float 4.8s ease-in-out infinite;
+  transition: transform 650ms cubic-bezier(0.2, 0.85, 0.2, 1);
+}
+
+.logic-bot-3d.turned .logic-bot-model {
+  transform: translate(-50%, -50%) rotateX(8deg) rotateY(198deg);
+}
+
+.logic-bot-head {
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  width: 78%;
+  height: 48%;
+  border-radius: 28% 28% 26% 26%;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.16), transparent 22%),
+    linear-gradient(135deg, #273755 0%, #111827 58%, #090f19 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.14),
+    inset -16px -10px 24px rgba(0, 0, 0, 0.28),
+    0 18px 34px rgba(0, 0, 0, 0.3),
+    0 0 34px rgba(77, 228, 193, 0.16);
+  transform: translateX(-50%) translateZ(34px);
+}
+
+.logic-bot-head::before {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border-radius: 24% 24% 22% 22%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.12), transparent 18%),
+    linear-gradient(160deg, #020713, #09111f 60%, #030710);
+  box-shadow:
+    inset 0 0 0 2px rgba(77, 228, 193, 0.18),
+    inset 0 0 26px rgba(94, 162, 255, 0.13);
+}
+
+.logic-bot-face,
+.logic-bot-eye,
+.logic-bot-smile,
+.logic-bot-corner,
+.logic-bot-side,
+.logic-bot-antenna,
+.logic-bot-body,
+.logic-bot-chest,
+.logic-bot-arm,
+.logic-bot-arm span,
+.logic-bot-leg {
+  position: absolute;
+  display: block;
+}
+
+.logic-bot-face {
+  inset: 9%;
+  z-index: 2;
+}
+
+.logic-bot-eye {
+  top: 42%;
+  width: 15%;
+  height: 28%;
+  border-radius: 999px;
+  background: #4de4c1;
+  box-shadow: 0 0 14px rgba(77, 228, 193, 0.86);
+  transform: translateY(-50%);
+}
+
+.logic-bot-eye.left {
+  left: 27%;
+}
+
+.logic-bot-eye.right {
+  right: 27%;
+}
+
+.logic-bot-smile {
+  left: 50%;
+  top: 59%;
+  width: 22%;
+  height: 13%;
+  border-bottom: 4px solid #4de4c1;
+  border-radius: 0 0 999px 999px;
+  filter: drop-shadow(0 0 7px rgba(77, 228, 193, 0.9));
+  transform: translateX(-50%);
+}
+
+.logic-bot-corner {
+  width: 10%;
+  height: 10%;
+  border-color: rgba(77, 228, 193, 0.75);
+  filter: drop-shadow(0 0 6px rgba(77, 228, 193, 0.55));
+}
+
+.logic-bot-corner.top-left {
+  left: 12%;
+  top: 14%;
+  border-left: 3px solid;
+  border-top: 3px solid;
+  border-radius: 6px 0 0 0;
+}
+
+.logic-bot-corner.top-right {
+  right: 12%;
+  top: 14%;
+  border-right: 3px solid;
+  border-top: 3px solid;
+  border-radius: 0 6px 0 0;
+}
+
+.logic-bot-corner.bottom-left {
+  left: 12%;
+  bottom: 13%;
+  border-left: 3px solid;
+  border-bottom: 3px solid;
+  border-radius: 0 0 0 6px;
+}
+
+.logic-bot-corner.bottom-right {
+  right: 12%;
+  bottom: 13%;
+  border-right: 3px solid;
+  border-bottom: 3px solid;
+  border-radius: 0 0 6px 0;
+}
+
+.logic-bot-side {
+  top: 34%;
+  width: 14%;
+  height: 34%;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #263755, #09101d);
+  box-shadow:
+    inset 0 0 0 3px rgba(77, 228, 193, 0.25),
+    0 0 18px rgba(77, 228, 193, 0.18);
+}
+
+.logic-bot-side.left {
+  left: -8%;
+}
+
+.logic-bot-side.right {
+  right: -8%;
+}
+
+.logic-bot-antenna {
+  left: 50%;
+  top: -3%;
+  z-index: 4;
+  width: 5px;
+  height: 18%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #4de4c1, #24344f);
+  box-shadow: 0 0 12px rgba(77, 228, 193, 0.5);
+  transform: translateX(-50%) translateZ(44px);
+}
+
+.logic-bot-antenna span {
+  position: absolute;
+  left: 50%;
+  top: -12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 32% 28%, #dffff9, #4de4c1 42%, #0a7a88 100%);
+  box-shadow: 0 0 18px rgba(77, 228, 193, 0.9);
+  transform: translateX(-50%);
+}
+
+.logic-bot-body {
+  left: 50%;
+  top: 54%;
+  width: 46%;
+  height: 28%;
+  border-radius: 34% 34% 28% 28%;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.14), transparent 22%),
+    linear-gradient(145deg, #243550, #0b111d 68%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    inset -12px -10px 18px rgba(0, 0, 0, 0.28),
+    0 14px 26px rgba(0, 0, 0, 0.28);
+  transform: translateX(-50%) translateZ(24px);
+}
+
+.logic-bot-chest {
+  left: 50%;
+  top: 34%;
+  display: grid;
+  place-items: center;
+  width: 58%;
+  height: 36%;
+  border-radius: 13px;
+  background: #07111f;
+  color: #4de4c1;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 950;
+  box-shadow:
+    inset 0 0 0 2px rgba(77, 228, 193, 0.42),
+    0 0 12px rgba(77, 228, 193, 0.35);
+  transform: translateX(-50%);
+}
+
+.logic-bot-arm {
+  top: 59%;
+  width: 16%;
+  height: 23%;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #263755, #0a111e);
+  box-shadow: inset 0 0 0 2px rgba(77, 228, 193, 0.15);
+  transform-origin: top center;
+}
+
+.logic-bot-arm.left {
+  left: 17%;
+  transform: rotate(20deg) translateZ(14px);
+}
+
+.logic-bot-arm.right {
+  right: 17%;
+  transform: rotate(-20deg) translateZ(14px);
+}
+
+.logic-bot-arm span {
+  left: 50%;
+  bottom: -15%;
+  width: 82%;
+  height: 42%;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #1c2b45, #070c15);
+  box-shadow: inset 0 0 0 2px rgba(77, 228, 193, 0.12);
+  transform: translateX(-50%);
+}
+
+.logic-bot-leg {
+  top: 77%;
+  width: 18%;
+  height: 19%;
+  border-radius: 40% 40% 34% 34%;
+  background:
+    linear-gradient(180deg, #263755, #090f19 70%),
+    #111827;
+  box-shadow:
+    inset 0 -4px 0 rgba(77, 228, 193, 0.45),
+    0 10px 18px rgba(0, 0, 0, 0.26);
+}
+
+.logic-bot-leg.left {
+  left: 32%;
+  transform: translateZ(18px);
+}
+
+.logic-bot-leg.right {
+  right: 32%;
+  transform: translateZ(18px);
+}
+
+@keyframes logic-bot-float {
+  0%,
+  100% {
+    margin-top: 0;
+  }
+
+  50% {
+    margin-top: -7px;
+  }
+}
+
+@media (max-width: 760px) {
+  .logic-bot-3d {
+    --bot-size: 124px;
+  }
+
+  .logic-bot-3d.compact {
+    --bot-size: 92px;
+  }
+}
