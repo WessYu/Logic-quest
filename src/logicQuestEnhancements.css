@@ -213,6 +213,12 @@
 }
 
 @media (max-width: 760px) {
+  .lq-onboarding,
+  .lq-gamification-panel,
+  .lq-portfolio-case {
+    display: none !important;
+  }
+
   .lq-gamification-panel {
     position: static;
     width: auto;

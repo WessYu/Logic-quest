@@ -19,6 +19,7 @@ import "./lessonReadability.css";
 import "./sidebarPolish.css";
 import "./mobilePolish.css";
 import "./finalMobilePolish.css";
+import "./mimoStandalone.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
