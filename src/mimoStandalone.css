@@ -177,6 +177,9 @@
 
   .mimo-continue-card,
   .mimo-stat-grid article,
+  .mimo-builder-card,
+  .mimo-build-card,
+  .mimo-practice-plan,
   .mimo-course-card,
   .mimo-lesson-rail button,
   .mimo-path-header,
@@ -214,6 +217,9 @@
 
   .mimo-continue-card,
   .mimo-stat-grid,
+  .mimo-builder-card,
+  .mimo-build-card,
+  .mimo-practice-plan,
   .mimo-course-card,
   .mimo-path-header,
   .mimo-path-module,
@@ -329,6 +335,92 @@
     color: var(--mimo-muted);
     font-size: 0.72rem;
     font-weight: 700;
+  }
+
+  .mimo-builder-card,
+  .mimo-build-card,
+  .mimo-practice-plan {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 26px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(77, 228, 193, 0.12), transparent 34%),
+      var(--mimo-panel);
+  }
+
+  .mimo-milestone-current,
+  .mimo-next-target {
+    display: grid;
+    gap: 5px;
+    padding: 13px;
+    border: 1px solid rgba(77, 228, 193, 0.18);
+    border-radius: 20px;
+    background: rgba(77, 228, 193, 0.08);
+  }
+
+  .mimo-next-target {
+    border-color: rgba(94, 162, 255, 0.22);
+    background: rgba(94, 162, 255, 0.08);
+  }
+
+  .mimo-next-target.ready {
+    border-color: rgba(246, 199, 96, 0.28);
+    background: rgba(246, 199, 96, 0.08);
+  }
+
+  .mimo-milestone-current span,
+  .mimo-next-target span,
+  .mimo-capstone-strip > span {
+    color: var(--mimo-cyan);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mimo-milestone-current strong,
+  .mimo-next-target strong {
+    color: var(--mimo-text);
+    font-size: 1rem;
+    font-weight: 900;
+  }
+
+  .mimo-milestone-current p,
+  .mimo-next-target small,
+  .mimo-build-card p {
+    margin: 0;
+    color: var(--mimo-muted);
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .mimo-project-pills,
+  .mimo-capstone-strip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: none;
+  }
+
+  .mimo-project-pills::-webkit-scrollbar,
+  .mimo-capstone-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mimo-project-pills button,
+  .mimo-capstone-strip button {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid rgba(132, 154, 196, 0.16);
+    border-radius: 999px;
+    background: rgba(10, 16, 28, 0.72);
+    color: var(--mimo-text);
+    font-size: 0.76rem;
+    font-weight: 800;
   }
 
   .mimo-block {
@@ -766,6 +858,86 @@
     margin-top: 4px;
   }
 
+  .mimo-code-checklist,
+  .mimo-practice-steps,
+  .mimo-skill-map {
+    display: grid;
+    gap: 9px;
+  }
+
+  .mimo-code-checklist span,
+  .mimo-practice-steps article,
+  .mimo-skill-map article {
+    border: 1px solid rgba(132, 154, 196, 0.15);
+    border-radius: 18px;
+    background: rgba(7, 17, 31, 0.46);
+  }
+
+  .mimo-code-checklist span {
+    display: grid;
+    min-height: 46px;
+    align-items: center;
+    padding: 10px 12px;
+    color: var(--mimo-text);
+    font-size: 0.84rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .mimo-code-checklist span::before {
+    content: "check";
+    width: fit-content;
+    margin-bottom: 4px;
+    color: var(--mimo-cyan);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mimo-practice-steps article {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    min-height: 58px;
+    padding: 10px;
+  }
+
+  .mimo-practice-steps strong {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 14px;
+    background: rgba(77, 228, 193, 0.12);
+    color: var(--mimo-cyan);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82rem;
+  }
+
+  .mimo-practice-steps span {
+    color: var(--mimo-text);
+    font-size: 0.86rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .mimo-capstone-strip {
+    display: grid;
+    overflow: visible;
+    padding: 12px;
+    border: 1px solid rgba(246, 199, 96, 0.18);
+    border-radius: 20px;
+    background: rgba(246, 199, 96, 0.07);
+  }
+
+  .mimo-capstone-strip button {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
   .mimo-profile-panel {
     display: grid;
     justify-items: center;
@@ -798,6 +970,45 @@
     border: 1px solid var(--mimo-line);
     border-radius: 18px;
     background: rgba(7, 17, 31, 0.48);
+  }
+
+  .mimo-skill-map {
+    width: 100%;
+    margin: 4px 0 16px;
+    text-align: left;
+  }
+
+  .mimo-skill-map article {
+    display: grid;
+    gap: 4px;
+    padding: 12px;
+  }
+
+  .mimo-skill-map article.unlocked {
+    border-color: rgba(77, 228, 193, 0.32);
+    background: rgba(77, 228, 193, 0.08);
+  }
+
+  .mimo-skill-map strong {
+    color: var(--mimo-text);
+    font-size: 0.92rem;
+    font-weight: 900;
+  }
+
+  .mimo-skill-map span {
+    color: var(--mimo-cyan);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .mimo-skill-map p {
+    margin: 0;
+    color: var(--mimo-muted);
+    font-size: 0.82rem;
+    line-height: 1.42;
   }
 
   .mimo-tabbar {

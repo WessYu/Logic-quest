@@ -4,10 +4,56 @@ import { courseModules } from "./courseData";
 const mobileStorageKey = "logic-quest-mimo-mobile-v1";
 
 const tabs = [
-  { id: "learn", label: "Inicio", icon: "⌂" },
-  { id: "path", label: "Trilha", icon: "◇" },
+  { id: "learn", label: "Inicio", icon: "01" },
+  { id: "path", label: "Trilha", icon: "02" },
   { id: "practice", label: "Pratica", icon: "</>" },
   { id: "profile", label: "Perfil", icon: "ID" },
+];
+
+const codingMilestones = [
+  {
+    lessons: 4,
+    label: "Escrever algoritmos",
+    description: "Transforma um problema em entrada, regra e saida.",
+  },
+  {
+    lessons: 8,
+    label: "Criar regras em JS",
+    description: "Usa variaveis, calculos, comparacoes e booleanos.",
+  },
+  {
+    lessons: 12,
+    label: "Controlar decisoes",
+    description: "Monta validacoes, mensagens e fluxos com if e switch.",
+  },
+  {
+    lessons: 16,
+    label: "Trabalhar com listas",
+    description: "Percorre, filtra, soma e transforma arrays reais.",
+  },
+  {
+    lessons: 20,
+    label: "Organizar funcoes",
+    description: "Quebra regras em funcoes pequenas e reutilizaveis.",
+  },
+  {
+    lessons: 24,
+    label: "Construir no navegador",
+    description: "Liga DOM, eventos, formularios e renderizacao.",
+  },
+  {
+    lessons: 28,
+    label: "Entregar um mini app",
+    description: "Planeja, implementa, testa e melhora um projeto completo.",
+  },
+];
+
+const capstoneProjects = [
+  "To-do list com tarefas concluidas",
+  "Calculadora de IMC com validacao",
+  "Controle de gastos com total por categoria",
+  "Quiz com pontuacao e feedback",
+  "Carrinho simples com total e desconto",
 ];
 
 const textReplacements = [
@@ -185,6 +231,27 @@ function isSameDay(dateValue, referenceDate) {
   );
 }
 
+function getCurrentMilestone(completedCount) {
+  return (
+    [...codingMilestones]
+      .reverse()
+      .find((milestone) => completedCount >= milestone.lessons) ?? codingMilestones[0]
+  );
+}
+
+function getNextMilestone(completedCount) {
+  return codingMilestones.find((milestone) => completedCount < milestone.lessons) ?? null;
+}
+
+function getCodingChecklist(lesson) {
+  return [
+    `Reproduza o exemplo: ${lesson.example.label}.`,
+    "Altere pelo menos dois valores e rode novamente.",
+    `Resolva: ${lesson.drill.prompt}`,
+    "Teste um caso normal, um caso vazio e um caso limite.",
+  ];
+}
+
 export default function MimoMobileExperience() {
   const modules = useMemo(() => normalizeNode(courseModules), []);
   const lessons = useMemo(() => flattenLessons(modules), [modules]);
@@ -219,6 +286,10 @@ export default function MimoMobileExperience() {
   const recommendedLessons = lessons
     .slice(Math.max(activeLessonIndex, 0), Math.max(activeLessonIndex, 0) + 4)
     .filter(Boolean);
+  const currentMilestone = getCurrentMilestone(completedCount);
+  const nextMilestone = getNextMilestone(completedCount);
+  const codingChecklist = getCodingChecklist(activeLesson);
+  const capstoneLesson = lessons.find((lesson) => lesson.id === "projeto-final") ?? lessons[lessons.length - 1];
 
   function isLessonUnlocked(lessonId) {
     const lessonIndex = lessons.findIndex((lesson) => lesson.id === lessonId);
@@ -332,6 +403,46 @@ export default function MimoMobileExperience() {
             <strong>{totalXp}</strong>
             <span>XP</span>
           </article>
+        </section>
+
+        <section className="mimo-builder-card">
+          <div className="mimo-block-title compact">
+            <div>
+              <span>Objetivo real</span>
+              <h2>Sair programando</h2>
+            </div>
+            <strong>{overallProgress}%</strong>
+          </div>
+
+          <article className="mimo-milestone-current">
+            <span>Você já consegue</span>
+            <strong>{currentMilestone.label}</strong>
+            <p>{currentMilestone.description}</p>
+          </article>
+
+          {nextMilestone ? (
+            <div className="mimo-next-target">
+              <span>Próximo marco</span>
+              <strong>{nextMilestone.label}</strong>
+              <small>
+                Faltam {Math.max(nextMilestone.lessons - completedCount, 0)} lições para liberar esta habilidade.
+              </small>
+            </div>
+          ) : (
+            <div className="mimo-next-target ready">
+              <span>Pronto para projeto</span>
+              <strong>{capstoneLesson.title}</strong>
+              <small>Agora é hora de abrir o editor e entregar um mini app completo.</small>
+            </div>
+          )}
+
+          <div className="mimo-project-pills">
+            {capstoneProjects.slice(0, 3).map((project) => (
+              <button key={project} type="button" onClick={() => openLesson(capstoneLesson.id, "practice")}>
+                {project}
+              </button>
+            ))}
+          </div>
         </section>
 
         <section className="mimo-block">
@@ -471,6 +582,24 @@ export default function MimoMobileExperience() {
           ))}
         </section>
 
+        <section className="mimo-build-card">
+          <div className="mimo-block-title compact">
+            <div>
+              <span>Agora codifique</span>
+              <h2>Transforme a ideia em JavaScript</h2>
+            </div>
+          </div>
+          <p>{activeLesson.drill.prompt}</p>
+          <div className="mimo-code-checklist">
+            {codingChecklist.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+          <button type="button" className="mimo-secondary-action" onClick={() => setActiveTab("practice")}>
+            Abrir prática guiada
+          </button>
+        </section>
+
         <section className="mimo-code-card">
           <div>
             <span>{activeLesson.example.label}</span>
@@ -554,6 +683,29 @@ export default function MimoMobileExperience() {
           <p>{activeLesson.drill.prompt}</p>
         </section>
 
+        <section className="mimo-practice-plan">
+          <div className="mimo-block-title compact">
+            <div>
+              <span>Plano de execução</span>
+              <h2>Escreva, rode, ajuste</h2>
+            </div>
+          </div>
+          <div className="mimo-practice-steps">
+            <article>
+              <strong>1</strong>
+              <span>Copie o exemplo e rode no console.</span>
+            </article>
+            <article>
+              <strong>2</strong>
+              <span>Altere dados e crie uma variação própria.</span>
+            </article>
+            <article>
+              <strong>3</strong>
+              <span>Teste erro, vazio e limite antes de avançar.</span>
+            </article>
+          </div>
+        </section>
+
         <section className="mimo-code-card practice">
           <div>
             <span>Desafio</span>
@@ -573,6 +725,14 @@ export default function MimoMobileExperience() {
           <div className="mimo-warning-list">
             {activeLesson.drill.pitfalls.map((pitfall) => (
               <span key={pitfall}>{pitfall}</span>
+            ))}
+          </div>
+          <div className="mimo-capstone-strip">
+            <span>Projetos para provar domínio</span>
+            {capstoneProjects.map((project) => (
+              <button key={project} type="button" onClick={() => openLesson(capstoneLesson.id, "lesson")}>
+                {project}
+              </button>
             ))}
           </div>
           <button type="button" className="mimo-primary-action" onClick={() => setActiveTab("lesson")}>
@@ -607,6 +767,18 @@ export default function MimoMobileExperience() {
               <strong>{completedToday}</strong>
               <span>hoje</span>
             </article>
+          </div>
+          <div className="mimo-skill-map">
+            {codingMilestones.map((milestone) => {
+              const unlocked = completedCount >= milestone.lessons;
+              return (
+                <article key={milestone.label} className={unlocked ? "unlocked" : ""}>
+                  <strong>{milestone.label}</strong>
+                  <span>{unlocked ? "Liberado" : `${milestone.lessons} lições`}</span>
+                  <p>{milestone.description}</p>
+                </article>
+              );
+            })}
           </div>
           <button
             type="button"
