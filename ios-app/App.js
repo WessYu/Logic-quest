@@ -12,10 +12,10 @@ import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { courseModules } from './src/courseData';
 
 const tabs = [
-  { id: 'learn', label: 'Inicio', icon: 'home' },
-  { id: 'path', label: 'Trilha', icon: 'map' },
-  { id: 'practice', label: 'Pratica', icon: 'code' },
-  { id: 'profile', label: 'Perfil', icon: 'me' },
+  { id: 'learn', label: 'Inicio', icon: '⌂' },
+  { id: 'path', label: 'Trilha', icon: '◇' },
+  { id: 'practice', label: 'Pratica', icon: '</>' },
+  { id: 'profile', label: 'Perfil', icon: 'ID' },
 ];
 
 const textReplacements = [
